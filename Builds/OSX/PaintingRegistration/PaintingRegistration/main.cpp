@@ -1,92 +1,145 @@
+/**
+ * This file is part of PaintingRegistration.
+ *
+ * Created by Jonathan Hook (jonathan.hook@ncl.ac.uk)
+ * Copyright (c) 2012 Jonathan Hook. All rights reserved.
+ *
+ * PaintingRegistration is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * PaintingRegistration is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include <assert.h>
 #include <stdio.h>
-#include <opencv2/calib3d/calib3d.hpp>
-#include <opencv2/features2d/features2d.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/nonfree/nonfree.hpp>
+#include <GLUT/glut.h>
+#include <JDHUtility/CrossPlatformTime.h>
+#include <JDHUtility/FileLocationUtility.h>
+#include <JDHUtility/GLTexture.h>
+#include <JDHUtility/OpenGL.h>
+#include "PaintingTracker.h"
+#include "Renderer.h"
 
-int main(int argc, const char *argv[])
+using namespace PaintingRegistration;
+using namespace JDHUtility;
+
+const unsigned int DEFAULT_HEIGHT = 768;
+const unsigned int DEFAULT_WIDTH = 1024;
+const char *WINDOW_TITLE = "PaintingTracker";
+const unsigned int UPDATE_RATE = 16;
+
+void idle(void);
+void init(void);
+void render(void);
+void resize(int width, int height);
+void setupProjection(unsigned int width, unsigned int height);
+void update(void);
+
+PaintingTracker *p;
+Renderer *r;
+GLTexture *texture;
+unsigned int lastUpdated= 0;
+int now	= 0;
+int elapsed	= 0;
+
+void idle(void)
 {
-    cv::namedWindow("window");
+	update();
     
-    cv::VideoCapture cap(0);
-    cv::Mat frame;
-    cv::Mat gray;
-    cv::Mat target;
+	now	= CrossPlatformTime::getTimeMillis();
+	elapsed	= now - lastUpdated;
     
-    cv::SiftFeatureDetector detector;
-    std::vector<cv::KeyPoint> frameKeyPoints;
-    std::vector<cv::KeyPoint> targetKeyPoints;
-    
-    cv::SiftDescriptorExtractor extractor;
-    cv::Mat frameDescriptors;
-    cv::Mat targetDescriptors;
-    
-    cv::BFMatcher matcher(cv::NORM_L2, false);
-    std::vector<cv::DMatch> matches;
-    
-    target = cv::imread("/Users/Jon/Desktop/target.jpg", CV_LOAD_IMAGE_GRAYSCALE);
-    
-    detector.detect(target, targetKeyPoints);
-    extractor.compute(target, targetKeyPoints, targetDescriptors);
-    
-    while(true)
-    {
-        cap.read(frame);
-        cv::cvtColor(frame, gray, CV_RGB2GRAY);
-       
-        detector.detect(gray, frameKeyPoints);
-        extractor.compute(gray, frameKeyPoints, frameDescriptors);
-        matcher.match(targetDescriptors, frameDescriptors, matches);
-
-        double max_dist = 0; double min_dist = 100;
-        for(int i = 0; i < targetDescriptors.rows; i++)
-        {
-            double dist = matches[i].distance;
-            if(dist < min_dist) min_dist = dist;
-            if(dist > max_dist) max_dist = dist;
-        }
-        
-        std::vector<cv::DMatch> goodMatches;
-        for(int i = 0; i < targetDescriptors.rows; i++)
-        {
-            if(matches[i].distance < 3 * min_dist)
-            {
-                goodMatches.push_back( matches[i]);
-            }
-        }
-        
-        std::vector<cv::Point2f> t;
-        std::vector<cv::Point2f> f;
-        
-        for(int i = 0; i < goodMatches.size(); i++)
-        {
-            t.push_back(targetKeyPoints[goodMatches[i].queryIdx].pt);
-            f.push_back(frameKeyPoints[goodMatches[i].trainIdx].pt);
-        }
-        
-        if(t.size() > 0 && f.size() > 0)
-        {
-            cv::Mat H = cv::findHomography(t, f, CV_RANSAC);
-        
-            std::vector<cv::Point2f> corners(4);
-            corners[0] = cvPoint(0,0);
-            corners[1] = cvPoint(target.cols, 0);
-            corners[2] = cvPoint(target.cols, target.rows);
-            corners[3] = cvPoint(0, target.rows);
-            std::vector<cv::Point2f> sceneCorners(4);
-        
-            cv::perspectiveTransform(corners, sceneCorners, H);
-
-            cv::line(frame, sceneCorners[0], sceneCorners[1], cv::Scalar(0, 255, 0), 4);
-            cv::line(frame, sceneCorners[1], sceneCorners[2], cv::Scalar(0, 255, 0), 4);
-            cv::line(frame, sceneCorners[2], sceneCorners[3], cv::Scalar(0, 255, 0), 4);
-            cv::line(frame, sceneCorners[3], sceneCorners[0], cv::Scalar(0, 255, 0), 4);
-        }
-        
-        cv::imshow("window", frame);
-    }
-
-    
+	if(elapsed >= UPDATE_RATE)
+	{
+		glutPostRedisplay();
+		lastUpdated = now;
+	}
 }
 
+void init(void)
+{
+    FileLocationUtility::setResourcePath("/Users/Jon/github/local/PaintingRegistration/Resources");
+    
+    texture = new GLTexture("target.jpg");
+    p = new PaintingTracker();
+    r = new Renderer();
+    
+    p->train("target.jpg");
+    r->initScene();
+    r->setCurrentImage(texture);
+}
+
+void render(void)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    r->render();
+    
+    glutSwapBuffers();
+    
+    GLenum error = glGetError();
+    if(error != GL_NO_ERROR)
+    {
+        printf("OpenGL error: %i\n", error);
+    }
+}
+
+void resize(int width, int height)
+{
+	setupProjection(width, height);
+}
+
+void setupProjection(unsigned int width, unsigned int height)
+{
+	if(height == 0)
+	{
+		height = 1;
+	}
+    
+	float ratio = (float)width / (float)height;
+    
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glViewport(0, 0, width, height);
+	glOrtho(0.0f, 1.0f, 1.0f / ratio, 0.0f, -1.0f, 100.0f);
+    
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
+void update(void)
+{
+    p->computeHomography();
+    if(p->getHasTarget())
+    {
+        const cv::Mat &homography = p->getHomography();
+        r->setHomography(homography);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+	glutInitWindowSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	glutInitWindowPosition(0, 0);
+    glutCreateWindow(WINDOW_TITLE);
+    glutDisplayFunc(render);
+	glutReshapeFunc(resize);
+	glutIdleFunc(idle);
+    
+    init();
+    
+	glutMainLoop();
+    return 0;
+}

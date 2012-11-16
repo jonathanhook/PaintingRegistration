@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC2E12C1165575CD005798FA /* libopencv_core.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12C0165575CD005798FA /* libopencv_core.2.4.3.dylib */; };
-		FC2E12C4165575DB005798FA /* libopencv_highgui.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12C2165575DB005798FA /* libopencv_highgui.2.4.3.dylib */; };
-		FC2E12C5165575DB005798FA /* libopencv_imgproc.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12C3165575DB005798FA /* libopencv_imgproc.2.4.3.dylib */; };
-		FC2E12C7165575E8005798FA /* libopencv_features2d.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12C6165575E8005798FA /* libopencv_features2d.2.4.3.dylib */; };
-		FC2E12C9165577D1005798FA /* libopencv_nonfree.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12C8165577D1005798FA /* libopencv_nonfree.2.4.3.dylib */; };
-		FC2E12CB165584F9005798FA /* libopencv_flann.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12CA165584F9005798FA /* libopencv_flann.2.4.3.dylib */; };
-		FC2E12CD16558C58005798FA /* libopencv_calib3d.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2E12CC16558C58005798FA /* libopencv_calib3d.2.4.3.dylib */; };
+		FC5C4B451656747F00085587 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5C4B441656747F00085587 /* OpenGL.framework */; };
+		FC5C4B471656748800085587 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5C4B461656748800085587 /* GLUT.framework */; };
+		FC5C4B55165674D100085587 /* CrossPlatformTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5C4B49165674D100085587 /* CrossPlatformTime.cpp */; };
+		FC5C4B56165674D100085587 /* FileLocationUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5C4B4B165674D100085587 /* FileLocationUtility.cpp */; };
+		FC5C4B57165674D100085587 /* GLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5C4B4D165674D100085587 /* GLTexture.cpp */; };
+		FC5C4B58165674D100085587 /* GLVbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5C4B4F165674D100085587 /* GLVbo.cpp */; };
+		FC5C4B59165674D100085587 /* LoadImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5C4B51165674D100085587 /* LoadImage.cpp */; };
 		FCA5736516556A17002CF651 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCA5736416556A17002CF651 /* main.cpp */; };
 		FCA5736716556A17002CF651 /* PaintingRegistration.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = FCA5736616556A17002CF651 /* PaintingRegistration.1 */; };
+		FCD8FA95165675C300BB4434 /* PaintingTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD8FA93165675C300BB4434 /* PaintingTracker.cpp */; };
+		FCD8FA96165675C300BB4434 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD8FA94165675C300BB4434 /* Renderer.cpp */; };
+		FCD8FA99165675D800BB4434 /* libopencv_calib3d.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FA98165675D800BB4434 /* libopencv_calib3d.2.4.3.dylib */; };
+		FCD8FA9B165675E500BB4434 /* libopencv_core.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FA9A165675E500BB4434 /* libopencv_core.2.4.3.dylib */; };
+		FCD8FA9D165675EF00BB4434 /* libopencv_features2d.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FA9C165675EF00BB4434 /* libopencv_features2d.2.4.3.dylib */; };
+		FCD8FA9F1656760200BB4434 /* libopencv_highgui.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FA9E1656760200BB4434 /* libopencv_highgui.2.4.3.dylib */; };
+		FCD8FAA11656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FAA01656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib */; };
+		FCD8FAA31656761600BB4434 /* libopencv_imgproc.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FAA21656761600BB4434 /* libopencv_imgproc.2.4.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,16 +40,33 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FC2E12C0165575CD005798FA /* libopencv_core.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_core.2.4.3.dylib; sourceTree = "<group>"; };
-		FC2E12C2165575DB005798FA /* libopencv_highgui.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_highgui.2.4.3.dylib; sourceTree = "<group>"; };
-		FC2E12C3165575DB005798FA /* libopencv_imgproc.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_imgproc.2.4.3.dylib; sourceTree = "<group>"; };
-		FC2E12C6165575E8005798FA /* libopencv_features2d.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_features2d.2.4.3.dylib; sourceTree = "<group>"; };
-		FC2E12C8165577D1005798FA /* libopencv_nonfree.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_nonfree.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_nonfree.2.4.3.dylib; sourceTree = "<group>"; };
-		FC2E12CA165584F9005798FA /* libopencv_flann.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_flann.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_flann.2.4.3.dylib; sourceTree = "<group>"; };
-		FC2E12CC16558C58005798FA /* libopencv_calib3d.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_calib3d.2.4.3.dylib; sourceTree = "<group>"; };
+		FC5C4B441656747F00085587 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		FC5C4B461656748800085587 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		FC5C4B49165674D100085587 /* CrossPlatformTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CrossPlatformTime.cpp; sourceTree = "<group>"; };
+		FC5C4B4A165674D100085587 /* CrossPlatformTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossPlatformTime.h; sourceTree = "<group>"; };
+		FC5C4B4B165674D100085587 /* FileLocationUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileLocationUtility.cpp; sourceTree = "<group>"; };
+		FC5C4B4C165674D100085587 /* FileLocationUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileLocationUtility.h; sourceTree = "<group>"; };
+		FC5C4B4D165674D100085587 /* GLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLTexture.cpp; sourceTree = "<group>"; };
+		FC5C4B4E165674D100085587 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
+		FC5C4B4F165674D100085587 /* GLVbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLVbo.cpp; sourceTree = "<group>"; };
+		FC5C4B50165674D100085587 /* GLVbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVbo.h; sourceTree = "<group>"; };
+		FC5C4B51165674D100085587 /* LoadImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadImage.cpp; sourceTree = "<group>"; };
+		FC5C4B52165674D100085587 /* LoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadImage.h; sourceTree = "<group>"; };
+		FC5C4B53165674D100085587 /* Ndelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ndelete.h; sourceTree = "<group>"; };
+		FC5C4B54165674D100085587 /* OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL.h; sourceTree = "<group>"; };
 		FCA5736016556A17002CF651 /* PaintingRegistration */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PaintingRegistration; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA5736416556A17002CF651 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FCA5736616556A17002CF651 /* PaintingRegistration.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PaintingRegistration.1; sourceTree = "<group>"; };
+		FCD8FA91165675C300BB4434 /* PaintingTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintingTracker.h; sourceTree = "<group>"; };
+		FCD8FA92165675C300BB4434 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		FCD8FA93165675C300BB4434 /* PaintingTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintingTracker.cpp; sourceTree = "<group>"; };
+		FCD8FA94165675C300BB4434 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		FCD8FA98165675D800BB4434 /* libopencv_calib3d.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_calib3d.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_calib3d.2.4.3.dylib; sourceTree = "<group>"; };
+		FCD8FA9A165675E500BB4434 /* libopencv_core.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_core.2.4.3.dylib; sourceTree = "<group>"; };
+		FCD8FA9C165675EF00BB4434 /* libopencv_features2d.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_features2d.2.4.3.dylib; sourceTree = "<group>"; };
+		FCD8FA9E1656760200BB4434 /* libopencv_highgui.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_highgui.2.4.3.dylib; sourceTree = "<group>"; };
+		FCD8FAA01656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_nonfree.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_nonfree.2.4.3.dylib; sourceTree = "<group>"; };
+		FCD8FAA21656761600BB4434 /* libopencv_imgproc.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_imgproc.2.4.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,29 +74,72 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC2E12CD16558C58005798FA /* libopencv_calib3d.2.4.3.dylib in Frameworks */,
-				FC2E12CB165584F9005798FA /* libopencv_flann.2.4.3.dylib in Frameworks */,
-				FC2E12C9165577D1005798FA /* libopencv_nonfree.2.4.3.dylib in Frameworks */,
-				FC2E12C7165575E8005798FA /* libopencv_features2d.2.4.3.dylib in Frameworks */,
-				FC2E12C4165575DB005798FA /* libopencv_highgui.2.4.3.dylib in Frameworks */,
-				FC2E12C5165575DB005798FA /* libopencv_imgproc.2.4.3.dylib in Frameworks */,
-				FC2E12C1165575CD005798FA /* libopencv_core.2.4.3.dylib in Frameworks */,
+				FCD8FAA31656761600BB4434 /* libopencv_imgproc.2.4.3.dylib in Frameworks */,
+				FCD8FAA11656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib in Frameworks */,
+				FCD8FA9F1656760200BB4434 /* libopencv_highgui.2.4.3.dylib in Frameworks */,
+				FCD8FA9D165675EF00BB4434 /* libopencv_features2d.2.4.3.dylib in Frameworks */,
+				FCD8FA9B165675E500BB4434 /* libopencv_core.2.4.3.dylib in Frameworks */,
+				FCD8FA99165675D800BB4434 /* libopencv_calib3d.2.4.3.dylib in Frameworks */,
+				FC5C4B471656748800085587 /* GLUT.framework in Frameworks */,
+				FC5C4B451656747F00085587 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC47380616563E190011871B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				FCD8FA91165675C300BB4434 /* PaintingTracker.h */,
+				FCD8FA92165675C300BB4434 /* Renderer.h */,
+				FCD8FA93165675C300BB4434 /* PaintingTracker.cpp */,
+				FCD8FA94165675C300BB4434 /* Renderer.cpp */,
+				FC5C4B48165674D100085587 /* JDHUtility */,
+			);
+			name = Source;
+			path = ../../../../Source;
+			sourceTree = "<group>";
+		};
+		FC4738261656547A0011871B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = ../../../Resources;
+			sourceTree = "<group>";
+		};
+		FC5C4B48165674D100085587 /* JDHUtility */ = {
+			isa = PBXGroup;
+			children = (
+				FC5C4B49165674D100085587 /* CrossPlatformTime.cpp */,
+				FC5C4B4A165674D100085587 /* CrossPlatformTime.h */,
+				FC5C4B4B165674D100085587 /* FileLocationUtility.cpp */,
+				FC5C4B4C165674D100085587 /* FileLocationUtility.h */,
+				FC5C4B4D165674D100085587 /* GLTexture.cpp */,
+				FC5C4B4E165674D100085587 /* GLTexture.h */,
+				FC5C4B4F165674D100085587 /* GLVbo.cpp */,
+				FC5C4B50165674D100085587 /* GLVbo.h */,
+				FC5C4B51165674D100085587 /* LoadImage.cpp */,
+				FC5C4B52165674D100085587 /* LoadImage.h */,
+				FC5C4B53165674D100085587 /* Ndelete.h */,
+				FC5C4B54165674D100085587 /* OpenGL.h */,
+			);
+			path = JDHUtility;
+			sourceTree = "<group>";
+		};
 		FCA5735516556A17002CF651 = {
 			isa = PBXGroup;
 			children = (
-				FC2E12CC16558C58005798FA /* libopencv_calib3d.2.4.3.dylib */,
-				FC2E12CA165584F9005798FA /* libopencv_flann.2.4.3.dylib */,
-				FC2E12C8165577D1005798FA /* libopencv_nonfree.2.4.3.dylib */,
-				FC2E12C6165575E8005798FA /* libopencv_features2d.2.4.3.dylib */,
-				FC2E12C2165575DB005798FA /* libopencv_highgui.2.4.3.dylib */,
-				FC2E12C3165575DB005798FA /* libopencv_imgproc.2.4.3.dylib */,
-				FC2E12C0165575CD005798FA /* libopencv_core.2.4.3.dylib */,
+				FCD8FAA21656761600BB4434 /* libopencv_imgproc.2.4.3.dylib */,
+				FCD8FAA01656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib */,
+				FCD8FA9E1656760200BB4434 /* libopencv_highgui.2.4.3.dylib */,
+				FCD8FA9C165675EF00BB4434 /* libopencv_features2d.2.4.3.dylib */,
+				FCD8FA9A165675E500BB4434 /* libopencv_core.2.4.3.dylib */,
+				FCD8FA98165675D800BB4434 /* libopencv_calib3d.2.4.3.dylib */,
+				FC5C4B461656748800085587 /* GLUT.framework */,
+				FC5C4B441656747F00085587 /* OpenGL.framework */,
+				FC4738261656547A0011871B /* Resources */,
 				FCA5736316556A17002CF651 /* PaintingRegistration */,
 				FCA5736116556A17002CF651 /* Products */,
 			);
@@ -88,6 +156,7 @@
 		FCA5736316556A17002CF651 /* PaintingRegistration */ = {
 			isa = PBXGroup;
 			children = (
+				FC47380616563E190011871B /* Source */,
 				FCA5736416556A17002CF651 /* main.cpp */,
 				FCA5736616556A17002CF651 /* PaintingRegistration.1 */,
 			);
@@ -146,6 +215,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCA5736516556A17002CF651 /* main.cpp in Sources */,
+				FC5C4B55165674D100085587 /* CrossPlatformTime.cpp in Sources */,
+				FC5C4B56165674D100085587 /* FileLocationUtility.cpp in Sources */,
+				FC5C4B57165674D100085587 /* GLTexture.cpp in Sources */,
+				FC5C4B58165674D100085587 /* GLVbo.cpp in Sources */,
+				FC5C4B59165674D100085587 /* LoadImage.cpp in Sources */,
+				FCD8FA95165675C300BB4434 /* PaintingTracker.cpp in Sources */,
+				FCD8FA96165675C300BB4434 /* Renderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +291,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Dependencies\"",
 				);
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/include/**",
+					"../../../Source/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -226,6 +306,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Dependencies\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/include/**",
+					"../../../Source/**",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

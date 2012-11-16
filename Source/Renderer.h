@@ -18,21 +18,34 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
+#include <opencv2/core/core.hpp>
 
-class CvCapture;
+namespace JDHUtility
+{
+    class GLTexture;
+    class GLVbo;
+}
+
+using namespace JDHUtility;
 
 namespace PaintingRegistration
 {
-    class OpenCVTest
+    class Renderer
     {
     public:
-        OpenCVTest(void);
-        ~OpenCVTest(void);
+        Renderer(void);
+        ~Renderer(void);
         
+        void initScene(void) const;
         void render(void) const;
-        void update(void);
+        void setCurrentImage(GLTexture *currentImage);
+        void setHomography(const cv::Mat &homography);
         
     private:
-        CvCapture* capture;
+        cv::Mat homography;
+        GLTexture *currentImage;
+        GLVbo *vbo;
+        
+        void initVbo(void);
     };
 }
