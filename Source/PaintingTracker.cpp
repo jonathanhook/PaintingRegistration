@@ -93,6 +93,31 @@ namespace PaintingRegistration
         if(t.size() >= 4 && f.size() >= 4)
         {
             homography = cv::findHomography(t, f, CV_RANSAC);
+            
+            std::vector<cv::Point2f> targetCorners(4);
+            targetCorners[0] = cvPoint(0,0);
+            targetCorners[1] = cvPoint(targetImage.cols, 0 );
+            targetCorners[2] = cvPoint(targetImage.cols, targetImage.rows );
+            targetCorners[3] = cvPoint(0, targetImage.rows );
+            std::vector<cv::Point2f> cameraCorners(4);
+            
+            perspectiveTransform(targetCorners, cameraCorners, homography);
+            
+            float cm[9] =
+            {
+                20, 0,  (float)cameraImage.rows,
+                0,  20, (float)cameraImage.cols,
+                0,  0,  1
+            };
+            
+            cv::Mat camMatrix(3, 3, CV_32F, cm);
+            
+            cv::Mat rvec;
+            cv::Mat tvec;
+            cv::solvePnP(targetCorners, cameraCorners, camMatrix, NULL, rvec, tvec, false);
+            
+            
+            
             hasTarget = true;
         }
         else

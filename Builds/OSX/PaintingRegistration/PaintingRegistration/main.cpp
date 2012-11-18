@@ -67,20 +67,22 @@ void init(void)
 {
     FileLocationUtility::setResourcePath("/Users/Jon/github/local/PaintingRegistration/Resources");
     
-    texture = new GLTexture("target.jpg");
-    p = new PaintingTracker();
-    r = new Renderer();
+    texture = new GLTexture("move.tga");
     
-    p->train("target.jpg");
+    r = new Renderer();
     r->initScene();
     r->setCurrentImage(texture);
+    
+    p = new PaintingTracker();
+    p->train("target.png");
+
 }
 
 void render(void)
 {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     r->render();
@@ -111,7 +113,10 @@ void setupProjection(unsigned int width, unsigned int height)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, width, height);
-	glOrtho(0.0f, 1.0f, 1.0f / ratio, 0.0f, -1.0f, 100.0f);
+	
+    gluPerspective(45.0f, ratio, -100.0f, 100.0f);
+    
+    //glOrtho(0.0f, 1.0f, 1.0f / ratio, 0.0f, -100.0f, 100.0f);
     
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

@@ -22,6 +22,7 @@
 
 namespace JDHUtility
 {
+    class GLMatrixf;
     class GLTexture;
     class GLVbo;
 }
@@ -42,7 +43,7 @@ namespace PaintingRegistration
         void setHomography(const cv::Mat &homography);
         
     private:
-        cv::Mat homography;
+        GLMatrixf *transform;
         GLTexture *currentImage;
         GLVbo *vbo;
         

@@ -61,9 +61,5 @@ namespace PaintingRegistration
         cv::SiftFeatureDetector *detector;
         cv::SiftDescriptorExtractor *extractor;
         cv::BFMatcher *matcher;
-
-        
-
-        
     };
 }

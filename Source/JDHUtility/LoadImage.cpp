@@ -1355,7 +1355,12 @@ int createTexture(const char *filename)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tWidth, tHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
 #endif
     
-    if (!glIsTexture(textureId)) { textureId = (int)-1; }
+    if(!glIsTexture(textureId))
+    {
+        textureId = (int)-1;
+    }
+    
+    glDisable(GL_TEXTURE_2D);
     return (int)textureId;
 }
 
