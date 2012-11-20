@@ -18,7 +18,6 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #import "AppDelegate.h"
-
 #import "ViewController.h"
 
 @implementation AppDelegate
@@ -41,17 +40,14 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -60,7 +56,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-
 }
 
 @end

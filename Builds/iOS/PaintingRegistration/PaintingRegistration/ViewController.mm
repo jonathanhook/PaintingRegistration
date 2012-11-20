@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "OpenCVTest.h"
 #import "ViewController.h"
+#include "App.h"
 
 @interface ViewController ()
 {
@@ -33,8 +33,7 @@
 
 @implementation ViewController
 
-using namespace PaintingRegistration;
-OpenCVTest *cv;
+PaintingRegistration::App *app;
 
 - (void)dealloc
 {
@@ -66,7 +65,11 @@ OpenCVTest *cv;
     
     [self setupGL];
     
-    cv = new OpenCVTest();
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = CGSizeMake(screenBounds.size.width, screenBounds.size.height);
+    
+    app = new PaintingRegistration::App(screenSize.width, screenSize.height, [resourcePath UTF8String]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,17 +103,12 @@ OpenCVTest *cv;
 
 - (void)update
 {
-    assert(cv);
-    cv->update();
+    app->update();
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    assert(cv);
-    cv->render();
+    app->render();
 }
 
 @end

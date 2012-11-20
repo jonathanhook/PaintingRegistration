@@ -17,36 +17,44 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
-#include <opencv2/core/core.hpp>
-
-namespace JDHUtility
-{
-    class GLMatrixf;
-    class GLTexture;
-    class GLVbo;
-}
-
-using namespace JDHUtility;
+#include "JDHUtility/GLPrimitives.h"
+#include "CameraControls.h"
 
 namespace PaintingRegistration
 {
-    class Renderer
+    /* Public */
+    CameraControls::CameraControls(const Point2i &position, const Point2i &dimensions) :
+        UIElement(position, dimensions)
     {
-    public:
-        Renderer(void);
-        ~Renderer(void);
+    }
+    
+    CameraControls::~CameraControls(void)
+    {
+    }
+    
+    void CameraControls::render(void) const
+    {
+        float x = getSizef(position.getX());
+		float y	= getSizef(position.getY());
+		float h	= getSizef(dimensions.getY());
+		float w	= getSizef(dimensions.getX());
         
-        void initScene(void) const;
-        void render(void) const;
-        void setCurrentImage(GLTexture *currentImage);
-        void setHomography(const cv::Mat &homography);
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glTranslatef(x, y, 0.0f);
+		glScalef(w, h, 1.0f);
+
+        if(selected)
+        {
+            BLUE.use();
+        }
+        else
+        {
+            GREY.use();
+        }
         
-    private:
-        GLMatrixf *transform;
-        GLTexture *currentImage;
-        GLVbo *vbo;
-        
-        void initVbo(void);
-    };
+        GLPrimitives::getInstance()->renderSquare();
+
+        glPopMatrix();
+    }
 }

@@ -1231,7 +1231,7 @@ void *loadImage(const char *filename, int *outWidth, int *outHeight, bool *outAl
   }
   int numRead = (int)fread(readBuffer, 1, (size_t)length, fp);
   if (numRead != length) {
-    dprintf("ERROR: Only read %d of %d bytes (%s).\n", numRead, length, filename);
+    dprintf("ERROR: Only read %d of %d bytes (%s).\n", numRead, (int)length, filename);
     fclose(fp);
     return NULL;
   }

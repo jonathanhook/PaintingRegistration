@@ -25,41 +25,58 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/nonfree/nonfree.hpp>
 
+namespace JDHUtility
+{
+    class Point2f;
+}
+using namespace JDHUtility;
+
 namespace PaintingRegistration
 {
     class PaintingTracker
     {
     public:
+        static const unsigned int VERTEX_COUNT = 4;
+        
         PaintingTracker(const std::string image = "");
         ~PaintingTracker(void);
         
-        void computeHomography(void);
-        bool getHasTarget(void) const;
-        const cv::Mat &getHomography(void) const;
+        void capture(void);
+        bool compute(void);
+        bool getHasVertices(void) const;
+        GLuint getTextureHandle(void) const;
+        const Point2f *getVertices(void) const;
         void train(const std::string image);
         
     private:
         bool hasTarget;
-        
         double maxDist;
         double minDist;
+        Point2f *vertices;
+        GLuint textureHandle;
         
         cv::Mat cameraDescriptors;
         cv::Mat cameraImage;
+        cv::Mat greyImage;
         cv::Mat homography;
         cv::Mat targetDescriptors;
         cv::Mat targetImage;
         
+        std::vector<cv::Point2f> cameraCorners;
         std::vector<cv::KeyPoint> cameraKeyPoints;
         std::vector<cv::DMatch> goodMatches;
         std::vector<cv::DMatch> matches;
+        std::vector<cv::Point2f> targetCorners;
         std::vector<cv::KeyPoint> targetKeyPoints;
         std::vector<cv::Point2f> t;
         std::vector<cv::Point2f> f;
         
         cv::VideoCapture *cap;
-        cv::SiftFeatureDetector *detector;
-        cv::SiftDescriptorExtractor *extractor;
+        cv::FeatureDetector *detector;
+        cv::DescriptorExtractor *extractor;
         cv::BFMatcher *matcher;
+        
+        void initTextureHandle(void);
+        void updateTexture(void) const;
     };
 }

@@ -17,33 +17,38 @@
  * You should have received a copy of the GNU General Public License
  * along with PhysicsSynth.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
+#ifndef FingerEventArgs_H
+#define FingerEventArgs_H
 
-#include "JDHUtility/Matrixf.h"
-#include "JDHUtility/Point2f.h"
-#include "JDHUtility/Point3f.h"
+#include <JDHUtility/Point2f.h>
 
-namespace JDHUtility
+using namespace JDHUtility;
+
+namespace MultiTouchEvents
 {
-	class GLMatrixf :
-		public Matrixf
+	class FingerEventArgs
 	{
 	public:
-		static const unsigned int OPEN_GL_MATRIX_DIM = 4;
+		typedef enum
+		{
+			FINGER_ADDED,
+			FINGER_REMOVED,
+			FINGER_UPDATED
+		} EventType;
 
-		GLMatrixf	(void);
-		~GLMatrixf	(void);
+		FingerEventArgs(unsigned int id, const Point2f &position, EventType type);
+		~FingerEventArgs(void);
 
-		float	getXScale		(void) const;
-		float	getXTranslation	(void) const;
-		float	getYScale		(void) const;
-		float	getYTranslation	(void) const;
-		float	getZScale		(void) const;
-		float	getZTranslation	(void) const;
-		void	transform		(Point2f &p) const;
-		void	transform		(Point3f &p) const;
-		void	unScalePoint	(Point2f &p) const;
-		void	unTranslatePoint(Point2f &p) const;
+		unsigned int getId(void) const;
+		const Point2f &getPosition(void) const;
+		EventType getType(void) const;
+		float getX(void) const;
+		float getY(void) const;
+
+	protected:
+		unsigned int id;
+		Point2f position;
+		EventType type;
 	};
 }
-
+#endif

@@ -17,30 +17,62 @@
  * You should have received a copy of the GNU General Public License
  * along with PhysicsSynth.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
+#include <JDHUtility/OpenGL.h>
+#include "Colour3f.h"
 
 namespace JDHUtility
 {
-	class Matrixf
+	/* CONSTRUCTORS */
+	Colour3f::Colour3f(float r, float g, float b)
 	{
-	public:
-		Matrixf(unsigned int width, unsigned int height);
-		~Matrixf(void);
+		Colour3f:: r = r;
+		Colour3f:: g = g;
+		Colour3f:: b = b;
+	}
 
-		Matrixf *add(Matrixf &m) const;
-		unsigned int getHeight(void) const;
-		float *getMatrix(void);
-		float getValue(unsigned int x, unsigned int y) const;
-		unsigned int getWidth(void) const;
-		Matrixf *multiply(Matrixf &m) const;
-		void setValue(float value, unsigned int x, unsigned int y);
+	Colour3f::Colour3f(void) 
+	{
+		Colour3f(0.0f, 0.0f, 0.0);
+	}
 
-	protected:
-		Matrixf(void);
+	Colour3f::~Colour3f(void)
+	{
 
-		unsigned int width;
-		float *matrix;
-		unsigned int height;
-	};
+	}
+
+	/* PUBLIC MEMBER FUNCTIONS */
+	float Colour3f::getR(void) const
+	{
+		return r;
+	}
+
+	float Colour3f::getG(void) const
+	{
+		return g;
+	}
+
+	float Colour3f::getB(void) const
+	{
+		return b;
+	}
+
+	void Colour3f::setR(float r)
+	{
+		this->r = r;
+	}
+
+	void Colour3f::setG(float g)
+	{
+		this->g = g;
+	}
+
+	void Colour3f::setB(float b)
+	{
+		this->b = b;
+	}
+
+	void Colour3f::use(void) const
+	{
+		glColor4f(r, g, b, 1.0f);
+	}
 }
-

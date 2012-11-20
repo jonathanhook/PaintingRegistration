@@ -20,34 +20,26 @@
 #include <assert.h>
 #include <stdio.h>
 #include <GLUT/glut.h>
-#include <JDHUtility/CrossPlatformTime.h>
-#include <JDHUtility/FileLocationUtility.h>
-#include <JDHUtility/GLTexture.h>
-#include <JDHUtility/OpenGL.h>
-#include "PaintingTracker.h"
-#include "Renderer.h"
+#include "JDHUtility/CrossPlatformTime.h"
+#include "App.h"
 
-using namespace PaintingRegistration;
-using namespace JDHUtility;
-
-const unsigned int DEFAULT_HEIGHT = 768;
-const unsigned int DEFAULT_WIDTH = 1024;
+const unsigned int DEFAULT_HEIGHT = 480;
+const unsigned int DEFAULT_WIDTH = 320;
 const char *WINDOW_TITLE = "PaintingTracker";
-const unsigned int UPDATE_RATE = 16;
+const unsigned int UPDATE_RATE = 30;
 
 void idle(void);
-void init(void);
+void mouse(int button, int state, int x, int y);
 void render(void);
-void resize(int width, int height);
-void setupProjection(unsigned int width, unsigned int height);
 void update(void);
 
-PaintingTracker *p;
-Renderer *r;
-GLTexture *texture;
 unsigned int lastUpdated= 0;
 int now	= 0;
 int elapsed	= 0;
+bool initialised = false;
+bool mouseDown = false;
+
+PaintingRegistration::App *app;
 
 void idle(void)
 {
@@ -63,73 +55,51 @@ void idle(void)
 	}
 }
 
-void init(void)
+void mouse(int button, int state, int x, int y)
 {
-    FileLocationUtility::setResourcePath("/Users/Jon/github/local/PaintingRegistration/Resources");
-    
-    texture = new GLTexture("move.tga");
-    
-    r = new Renderer();
-    r->initScene();
-    r->setCurrentImage(texture);
-    
-    p = new PaintingTracker();
-    p->train("target.png");
-
+	if(button == GLUT_LEFT_BUTTON)
+	{
+		int width = glutGet(GLUT_WINDOW_WIDTH);
+		float fx = (float)x / (float)width;
+		float fy = (float)y / (float)width;
+        
+		mouseDown = (state == GLUT_DOWN);
+		FingerEventArgs::EventType type = mouseDown ? FingerEventArgs::FINGER_ADDED : FingerEventArgs::FINGER_REMOVED;
+        
+		app->raiseEvent(0, fx, fy, type);
+	}
 }
 
+void motion(int x, int y)
+{
+	if(mouseDown)
+	{
+		int width = glutGet(GLUT_WINDOW_WIDTH);
+		float fx = (float)x / (float)width;
+		float fy = (float)y / (float)width;
+        
+		app->raiseEvent(0, fx, fy, FingerEventArgs::FINGER_UPDATED);
+	}
+}
 void render(void)
 {
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    r->render();
-    
-    glutSwapBuffers();
-    
-    GLenum error = glGetError();
-    if(error != GL_NO_ERROR)
+    if(initialised)
     {
-        printf("OpenGL error: %i\n", error);
+        app->render();
+
+        glutSwapBuffers();
+    
+        GLenum error = glGetError();
+        if(error != GL_NO_ERROR)
+        {
+            printf("OpenGL error: %i\n", error);
+        }
     }
-}
-
-void resize(int width, int height)
-{
-	setupProjection(width, height);
-}
-
-void setupProjection(unsigned int width, unsigned int height)
-{
-	if(height == 0)
-	{
-		height = 1;
-	}
-    
-	float ratio = (float)width / (float)height;
-    
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glViewport(0, 0, width, height);
-	
-    gluPerspective(45.0f, ratio, -100.0f, 100.0f);
-    
-    //glOrtho(0.0f, 1.0f, 1.0f / ratio, 0.0f, -100.0f, 100.0f);
-    
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 }
 
 void update(void)
 {
-    p->computeHomography();
-    if(p->getHasTarget())
-    {
-        const cv::Mat &homography = p->getHomography();
-        r->setHomography(homography);
-    }
+    app->update();
 }
 
 int main(int argc, char **argv)
@@ -140,10 +110,15 @@ int main(int argc, char **argv)
 	glutInitWindowPosition(0, 0);
     glutCreateWindow(WINDOW_TITLE);
     glutDisplayFunc(render);
-	glutReshapeFunc(resize);
 	glutIdleFunc(idle);
+    glutMouseFunc(mouse);
+    glutMotionFunc(motion);
     
-    init();
+    unsigned int width = glutGet(GLUT_WINDOW_WIDTH);
+    unsigned int height = glutGet(GLUT_WINDOW_HEIGHT);
+    
+    app = new PaintingRegistration::App(width, height, "/Users/Jon/github/local/PaintingRegistration/Resources");
+    initialised = true;
     
 	glutMainLoop();
     return 0;

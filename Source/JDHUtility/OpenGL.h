@@ -29,6 +29,7 @@
 #if TARGET_OS_IPHONE
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
+#define glOrtho glOrthof
 #define IOS_WINDOWING
 #elif TARGET_OS_MAC
 #include <GLUT/glut.h>
