@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "JDHUtility/GLPrimitives.h"
+#include "JDHUtility/GLVbo.h"
 #include "JDHUtility/Ndelete.h"
 #include "CameraControls.h"
 #include "Camera.h"
@@ -36,11 +36,35 @@ namespace PaintingRegistration
         controls = new CameraControls(Point2i(px, py), Point2i(dx, dy));
         controls->setClickedCallback(MakeDelegate(this, &Camera::controls_Clicked));
         registerEventHandler(controls);
+        
+        
+        GLfloat data[12] =
+		{
+			0.0f, 0.0f, 0.0f,
+			0.0f, 1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			1.0f, 1.0f, 0.0f
+		};
+        
+        GLfloat textureData[8] =
+		{
+			0.0f, 0.0f,
+			0.0f, 1.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f
+		};
+        
+        vbo = new GLVbo(GL_TRIANGLE_STRIP, GL_STATIC_DRAW, data, 4, textureData);
     }
     
     Camera::~Camera(void)
     {
         NDELETE(controls);
+    }
+    
+    bool Camera::contains(const FingerEventArgs &e) const
+    {
+        return false;
     }
     
     void Camera::render(void) const
@@ -57,8 +81,13 @@ namespace PaintingRegistration
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, cameraTexture);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         
-        GLPrimitives::getInstance()->renderSquare();
+        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        vbo->render();
         
         glDisable(GL_TEXTURE_2D);
         glPopMatrix();

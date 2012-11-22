@@ -18,6 +18,7 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <string>
+#include <opencv2/opencv.hpp>
 #include "MultiTouchEvents/MultiTouchEventManager.h"
 
 using namespace MultiTouchEvents;
@@ -45,17 +46,26 @@ namespace PaintingRegistration
         ~App(void);
         
         void render(void) const;
+        void setLatestFrame(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         void update(void);
         
     private:
         Browser *browser;
         Camera *camera;
+        GLuint cameraTexture;
         PaintingTracker *tracker;
         GLTexture *texture;
         UIMode uiMode;
         
+        const unsigned char *fData;
+        unsigned int fWidth;
+        unsigned int fHeight;
+        
+        void browser_Clicked(UIElement *e);
         void camera_Clicked(UIElement *e);
         void initScene(unsigned int width, unsigned int height);
         void initUI(unsigned int width, unsigned int height);
+        void initTextureHandle(void);
+        void updateTexture(void) const;
     };
 }

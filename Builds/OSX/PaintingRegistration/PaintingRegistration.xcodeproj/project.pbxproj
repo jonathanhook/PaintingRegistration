@@ -43,6 +43,7 @@
 		FCD8FA9F1656760200BB4434 /* libopencv_highgui.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FA9E1656760200BB4434 /* libopencv_highgui.2.4.3.dylib */; };
 		FCD8FAA11656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FAA01656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib */; };
 		FCD8FAA31656761600BB4434 /* libopencv_imgproc.2.4.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD8FAA21656761600BB4434 /* libopencv_imgproc.2.4.3.dylib */; };
+		FCE92DF4165C046B002FF92C /* ExitButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE92DF2165C046B002FF92C /* ExitButton.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,6 +128,8 @@
 		FCD8FAA01656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_nonfree.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_nonfree.2.4.3.dylib; sourceTree = "<group>"; };
 		FCD8FAA21656761600BB4434 /* libopencv_imgproc.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_imgproc.2.4.3.dylib; sourceTree = "<group>"; };
 		FCDA913B1656AB1D001F0B55 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
+		FCE92DF2165C046B002FF92C /* ExitButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExitButton.cpp; sourceTree = "<group>"; };
+		FCE92DF3165C046B002FF92C /* ExitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExitButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				FCC809D6165BF1D0007966A9 /* BrowserControls.h */,
 				FCC809D8165BF2C8007966A9 /* Slider.cpp */,
 				FCC809D9165BF2C8007966A9 /* Slider.h */,
+				FCE92DF2165C046B002FF92C /* ExitButton.cpp */,
+				FCE92DF3165C046B002FF92C /* ExitButton.h */,
 			);
 			name = Source;
 			path = ../../../../Source;
@@ -350,6 +355,7 @@
 				FCC809D4165BEDD6007966A9 /* Browser.cpp in Sources */,
 				FCC809D7165BF1D0007966A9 /* BrowserControls.cpp in Sources */,
 				FCC809DA165BF2C8007966A9 /* Slider.cpp in Sources */,
+				FCE92DF4165C046B002FF92C /* ExitButton.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

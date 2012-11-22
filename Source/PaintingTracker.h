@@ -41,8 +41,7 @@ namespace PaintingRegistration
         PaintingTracker(const std::string image = "");
         ~PaintingTracker(void);
         
-        void capture(void);
-        bool compute(void);
+        bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
         GLuint getTextureHandle(void) const;
         const Point2f *getVertices(void) const;
@@ -53,7 +52,6 @@ namespace PaintingRegistration
         double maxDist;
         double minDist;
         Point2f *vertices;
-        GLuint textureHandle;
         
         cv::Mat cameraDescriptors;
         cv::Mat cameraImage;
@@ -75,8 +73,5 @@ namespace PaintingRegistration
         cv::FeatureDetector *detector;
         cv::DescriptorExtractor *extractor;
         cv::BFMatcher *matcher;
-        
-        void initTextureHandle(void);
-        void updateTexture(void) const;
     };
 }

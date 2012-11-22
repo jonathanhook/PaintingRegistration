@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
+#import <opencv2/opencv.hpp>
 #import "ViewController.h"
 #include "App.h"
 
@@ -33,7 +34,14 @@
 
 @implementation ViewController
 
+const unsigned int BUFFER_SIZE = 640 * 480;
+
+CGFloat winX = 1.0f;
+CGFloat winY = 1.0f;
+uchar *frameData = new uchar[BUFFER_SIZE * 4];
 PaintingRegistration::App *app;
+unsigned int frameWidth = 0;
+unsigned int frameHeight = 0;
 
 - (void)dealloc
 {
@@ -68,8 +76,12 @@ PaintingRegistration::App *app;
     NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGSize screenSize = CGSizeMake(screenBounds.size.width, screenBounds.size.height);
+    winX = screenSize.width;
+    winY = screenSize.height;
     
-    app = new PaintingRegistration::App(screenSize.width, screenSize.height, [resourcePath UTF8String]);
+    app = new PaintingRegistration::App(winX, winY, [resourcePath UTF8String]);
+    
+    [self initVideoCapture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,4 +123,111 @@ PaintingRegistration::App *app;
     app->render();
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSSet *allTouches = [event allTouches];
+    
+    // todo: multiple touches
+    UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
+    CGPoint p = [touch locationInView:(self.view)];
+    
+    CGFloat x = p.x / winX;
+    CGFloat y = p.y / winX;
+    
+    app->raiseEvent(0, x, y, FingerEventArgs::FINGER_ADDED);
+}
+
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSSet *allTouches = [event allTouches];
+    
+    // todo: multiple touches
+    UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
+    CGPoint p = [touch locationInView:(self.view)];
+    
+    CGFloat x = p.x / winX;
+    CGFloat y = p.y / winX;
+    
+    app->raiseEvent(0, x, y, FingerEventArgs::FINGER_UPDATED);
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSSet *allTouches = [event allTouches];
+    
+    // todo: multiple touches
+    UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
+    CGPoint p = [touch locationInView:(self.view)];
+    
+    CGFloat x = p.x / winX;
+    CGFloat y = p.y / winX;
+    
+    app->raiseEvent(0, x, y, FingerEventArgs::FINGER_REMOVED);
+}
+
+- (void)initVideoCapture
+{
+    NSError *error;
+    
+    AVCaptureSession *session = [[AVCaptureSession alloc] init];
+    session.sessionPreset = AVCaptureSessionPreset640x480;
+    
+    AVCaptureDevice *device = [self findBackFacingCamera];
+    
+    [device lockForConfiguration:&error];
+    [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+    [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
+    [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance];
+    [device unlockForConfiguration];
+    
+    AVCaptureDeviceInput *input =[AVCaptureDeviceInput deviceInputWithDevice:device error:&error];    
+    [session addInput:input];
+    
+    AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];
+    [output setAlwaysDiscardsLateVideoFrames:YES];
+    
+    dispatch_queue_t queue = dispatch_queue_create("cameraQueue", NULL);
+    [output setSampleBufferDelegate:self queue:queue];
+    dispatch_release(queue);
+    
+    NSDictionary *settings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+    [output setVideoSettings:settings];
+
+    [session addOutput:output];
+    [session startRunning];
+}
+
+-(AVCaptureDevice *)findBackFacingCamera
+{
+    NSArray *devices = [AVCaptureDevice devices];
+    for (AVCaptureDevice *device in devices)
+    {
+        if ([device hasMediaType:AVMediaTypeVideo] && [device position] == AVCaptureDevicePositionBack)
+        {
+            return device;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
+{
+    NSAutoreleasePool* localpool = [[NSAutoreleasePool alloc] init];
+    CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CGRect videoRect = CGRectMake(0.0f, 0.0f, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    void *baseaddress = CVPixelBufferGetBaseAddress(pixelBuffer);
+
+    frameWidth = videoRect.size.width;
+    frameHeight = videoRect.size.height;
+    memcpy(frameData, baseaddress, sizeof(unsigned char) * BUFFER_SIZE * 4);
+    
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+
+    [localpool drain];
+    
+    app->setLatestFrame(frameData, frameWidth, frameHeight);
+}
 @end

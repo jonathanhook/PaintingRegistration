@@ -27,14 +27,24 @@ namespace PaintingRegistration
         public UIElement
     {
     public:
+        typedef FastDelegate1<float> ValueChangedCallback;
+        
         Slider(float value, const Point2i &position, const Point2i &dimensions);
         ~Slider(void);
         
+        void fingerAdded(const FingerEventArgs &e);
+		void fingerUpdated(const FingerEventArgs &e);
         float getValue(void) const;
         void render(void) const;
         void setValue(float value);
+        void setValueChangedCallback(ValueChangedCallback valueChanged);
         
     private:
+        static const unsigned int BAR_WIDTH;
+        
         float value;
+        ValueChangedCallback valueChanged;
+        
+        void updateSliderValue(float x);
     };
 }

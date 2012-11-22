@@ -43,12 +43,12 @@ namespace JDHUtility
 }
 #elif defined(IOS_WINDOWING)
 
-	const Point2f WindowingUtils::getWindowPosition(void)
+	const Point2f &WindowingUtils::getWindowPosition(void)
 	{
         return Point2f(0.0f, 0.0f);
 	}
     
-	const Vector2f WindowingUtils::getWindowDimensions(void)
+	const Vector2f &WindowingUtils::getWindowDimensions(void)
 	{
 		return Vector2f(DEVICE_WINDOW_WIDTH, DEVICE_WINDOW_HEIGHT);
 	}

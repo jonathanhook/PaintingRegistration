@@ -21,6 +21,11 @@
 #include "JDHUtility/OpenGL.h"
 #include "UIElement.h"
 
+namespace JDHUtility
+{
+    class GLVbo;
+}
+
 namespace PaintingRegistration
 {
     class CameraControls;
@@ -32,12 +37,14 @@ namespace PaintingRegistration
         Camera(const Point2i &position, const Point2i &dimensions);
         ~Camera(void);
         
+        bool contains(const FingerEventArgs &e) const;
         void render(void) const;
         void setCameraTexture(GLuint handle);
         
     private:
         GLuint cameraTexture;
         CameraControls *controls;
+        GLVbo *vbo;
         
         void controls_Clicked(UIElement *e);
     };

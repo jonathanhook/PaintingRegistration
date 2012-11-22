@@ -39,5 +39,7 @@ namespace PaintingRegistration
     private:
         BrowserControls *controls;
         PaintingRenderer *painting;
+        
+        void controls_Clicked(UIElement *e);
     };
 }

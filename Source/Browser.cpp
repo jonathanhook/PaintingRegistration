@@ -28,6 +28,7 @@ namespace PaintingRegistration
     Browser::Browser(const Point2i &position, const Point2i &dimensions) :
         UIElement(position, dimensions)
     {
+        clicked = NULL;
         painting = new PaintingRenderer();
         
         int px = position.getX();
@@ -36,6 +37,7 @@ namespace PaintingRegistration
         int dy = CONTROL_BAR_HEIGHT;
         
         controls = new BrowserControls(Point2i(px, py), Point2i(dx, dy));
+        controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
         registerEventHandler(controls);
     }
     
@@ -53,5 +55,14 @@ namespace PaintingRegistration
     {
         painting->render();
         controls->render();
+    }
+    
+    /* Private */
+    void Browser::controls_Clicked(UIElement *e)
+    {
+        if(clicked != NULL)
+        {
+            clicked(e);
+        }
     }
 }

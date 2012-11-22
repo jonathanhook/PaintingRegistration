@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/features2d/features2d.hpp>
@@ -35,17 +36,14 @@ namespace PaintingRegistration
     /* Public */
     PaintingTracker::PaintingTracker(const std::string image)
     {
-        cap = new cv::VideoCapture(0);
         hasTarget = false;
         matcher = new cv::BFMatcher(cv::NORM_L2, false);
         vertices = new Point2f[VERTEX_COUNT];
-        textureHandle = NULL;
 
         detector = new cv::SiftFeatureDetector();
         extractor = new cv::SiftDescriptorExtractor();
 
         targetCorners.resize(4);
-        initTextureHandle();
         
         if(image != "")
         {
@@ -62,13 +60,9 @@ namespace PaintingRegistration
         NDELETE_ARRAY(vertices);
     }
     
-    void PaintingTracker::capture(void)
+    bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
     {
-        cap->read(cameraImage);
-    }
-    
-    bool PaintingTracker::compute(void)
-    {
+        cv::Mat cameraImage(fWidth, fHeight, CV_8UC1, (void *)fData, 0);
         cv::cvtColor(cameraImage, greyImage, CV_RGB2GRAY);
         
         detector->detect(greyImage, cameraKeyPoints);
@@ -105,7 +99,7 @@ namespace PaintingRegistration
             f.push_back(cameraKeyPoints[goodMatches[i].trainIdx].pt);
         }
         
-        if(t.size() >= 25 && f.size() >= 25)
+        if(t.size() >= 4 && f.size() >= 4)
         {
             homography = cv::findHomography(t, f, CV_RANSAC);
             hasTarget = true;
@@ -123,20 +117,25 @@ namespace PaintingRegistration
             vertices[3].setPosition(cameraCorners[3].x / (float)cameraImage.cols, cameraCorners[3].y / (float)cameraImage.rows);
             
 #if defined(DEBUG) && defined(GLUT_WINDOWING)
-            cv::line(cameraImage, cameraCorners[0], cameraCorners[1], cv::Scalar(0, 255, 0), 4);
-            cv::line(cameraImage, cameraCorners[1], cameraCorners[2], cv::Scalar(0, 255, 0), 4);
-            cv::line(cameraImage, cameraCorners[2], cameraCorners[3], cv::Scalar(0, 255, 0), 4);
-            cv::line(cameraImage, cameraCorners[3], cameraCorners[0], cv::Scalar(0, 255, 0), 4);
+            cv::Mat imgMatches;
+            
+            cv::drawMatches(targetImage, targetKeyPoints, cameraImage, cameraKeyPoints,
+                            goodMatches, imgMatches, cv::Scalar::all(-1), cv::Scalar::all(-1),
+                            cv::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+            
+            cv::line(imgMatches, cameraCorners[0] + cv::Point2f(targetImage.cols, 0), cameraCorners[1] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
+            cv::line(imgMatches, cameraCorners[1] + cv::Point2f(targetImage.cols, 0), cameraCorners[2] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
+            cv::line(imgMatches, cameraCorners[2] + cv::Point2f(targetImage.cols, 0), cameraCorners[3] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
+            cv::line(imgMatches, cameraCorners[3] + cv::Point2f(targetImage.cols, 0), cameraCorners[0] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
+            
+            cv::resize(imgMatches, imgMatches, cv::Size(imgMatches.cols / 2, imgMatches.rows / 2));
+            cv::imshow( "Good Matches & Object detection", imgMatches);
 #endif
         }
         else
         {
             hasTarget = false;
         }
-        
-#if defined(DEBUG) && defined(GLUT_WINDOWING)
-        cv::imshow( "Good Matches & Object detection", cameraImage);  
-#endif
         
         cameraKeyPoints.clear();
         f.clear();
@@ -152,12 +151,6 @@ namespace PaintingRegistration
         return hasTarget;
     }
     
-    GLuint PaintingTracker::getTextureHandle(void) const
-    {
-        updateTexture();
-        return textureHandle;
-    }
-    
     const Point2f *PaintingTracker::getVertices(void) const
     {
         return vertices;
@@ -170,29 +163,5 @@ namespace PaintingRegistration
         
         detector->detect(targetImage, targetKeyPoints);
         extractor->compute(targetImage, targetKeyPoints, targetDescriptors);
-    }
-    
-    /* Private */
-    void PaintingTracker::initTextureHandle(void)
-    {
-        glEnable(GL_TEXTURE_2D);
-        glGenTextures(1, &textureHandle);
-        glDisable(GL_TEXTURE_2D);
-    }
-    
-    void PaintingTracker::updateTexture(void) const
-    {
-        cv::Mat img;
-        cv::cvtColor(cameraImage, img, CV_RGB2BGR);
-        
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textureHandle);
-        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.cols, img.rows, 0, GL_RGB, GL_UNSIGNED_BYTE, img.data);
-        glDisable(GL_TEXTURE_2D);
     }
 }

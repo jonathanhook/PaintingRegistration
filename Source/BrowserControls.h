@@ -23,6 +23,9 @@
 
 namespace PaintingRegistration
 {
+    class ExitButton;
+    class Slider;
+    
     class BrowserControls :
         public UIElement
     {
@@ -31,5 +34,12 @@ namespace PaintingRegistration
         ~BrowserControls(void);
         
         void render(void) const;
+        
+    private:
+        ExitButton *exit;
+        Slider *slider;
+        
+        void exit_Clicked(UIElement *e);
+        void slider_ValueChanged(float value);
     };
 }

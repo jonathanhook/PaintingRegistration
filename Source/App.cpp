@@ -37,12 +37,14 @@ namespace PaintingRegistration
         WindowingUtils::DEVICE_WINDOW_WIDTH = width;
         WindowingUtils::DEVICE_WINDOW_HEIGHT = height;
         
+        fData = NULL;
         texture = new GLTexture("move.tga");
         tracker = new PaintingTracker();
         tracker->train("target.jpg");
         
         initScene(width, height);
         initUI(width, height);
+        initTextureHandle();
     }
     
     App::~App(void)
@@ -60,6 +62,8 @@ namespace PaintingRegistration
         
         if(uiMode == CAMERA)
         {
+            updateTexture();
+            camera->setCameraTexture(cameraTexture);
             camera->render();
         }
         else if(uiMode == BROWSER)
@@ -68,19 +72,29 @@ namespace PaintingRegistration
         }
     }
     
+    void App::setLatestFrame(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
+    {
+        this->fData = fData;
+        this->fWidth = fWidth;
+        this->fHeight = fHeight;
+    }
+    
     void App::update(void)
     {
-        if(uiMode == CAMERA)
-        {
-            tracker->capture();
-            camera->setCameraTexture(tracker->getTextureHandle());
-        }
+
     }
     
     /* Private */
+    void App::browser_Clicked(UIElement *e)
+    {
+        uiMode = CAMERA;
+        registerEventHandler(camera);
+        unregisterEventHandler(browser);
+    }
+    
     void App::camera_Clicked(UIElement *e)
     {
-        if(tracker->compute())
+        if(tracker->compute(fData, fWidth, fHeight))
         {
             uiMode = BROWSER;
             
@@ -118,5 +132,32 @@ namespace PaintingRegistration
         registerEventHandler(camera);
         
         browser = new Browser(Point2i(0, 0), Point2i(width, height));
+        browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
+    }
+    
+    void App::initTextureHandle(void)
+    {
+        glEnable(GL_TEXTURE_2D);
+        glGenTextures(1, &cameraTexture);
+        glDisable(GL_TEXTURE_2D);
+    }
+    
+    void App::updateTexture(void) const
+    {
+        if(fData != NULL)
+        {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, cameraTexture);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+            
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1024, 1024, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, fWidth, fHeight, GL_BGRA, GL_UNSIGNED_BYTE, fData);
+            
+            glDisable(GL_TEXTURE_2D);
+        }
     }
 }

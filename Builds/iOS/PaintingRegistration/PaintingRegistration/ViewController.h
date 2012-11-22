@@ -17,9 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
+#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface ViewController : GLKViewController
+@interface ViewController : GLKViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @end

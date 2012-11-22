@@ -22,15 +22,32 @@
 
 namespace PaintingRegistration
 {
+    /* Static */
+    const unsigned int Slider::BAR_WIDTH = 10;
+
     /* Public */
     Slider::Slider(float value, const Point2i &position, const Point2i &dimensions) :
         UIElement(position, dimensions)
     {
         this->value = value;
+        
+        valueChanged = NULL;
     }
     
     Slider::~Slider(void)
     {
+    }
+    
+    void Slider::fingerAdded(const FingerEventArgs &e)
+    {
+        UIElement::fingerAdded(e);
+        updateSliderValue(e.getX());
+    }
+    
+    void Slider::fingerUpdated(const FingerEventArgs &e)
+    {
+        UIElement::fingerUpdated(e);
+        updateSliderValue(e.getX());
     }
     
     float Slider::getValue(void) const
@@ -62,10 +79,49 @@ namespace PaintingRegistration
         GLPrimitives::getInstance()->renderSquare();
         
         glPopMatrix();
+
+        float b = getSizef(BAR_WIDTH);
+        float bx = x + (value * (w - b));
+
+        glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glTranslatef(bx, y, 0.0f);
+		glScalef(b, h, 1.0f);
+        
+        glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+        GLPrimitives::getInstance()->renderSquare();
+        
+        glPopMatrix();
     }
     
     void Slider::setValue(float value)
     {
         this->value = value;
+    }
+    
+    void Slider::setValueChangedCallback(ValueChangedCallback valueChanged)
+    {
+        this->valueChanged = valueChanged;
+    }
+    
+    /* Private */
+    void Slider::updateSliderValue(float x)
+    {
+        x = x - getSizef(position.getX()) - getSizef(BAR_WIDTH / 2);
+        value = x / getSizef(dimensions.getX() - (BAR_WIDTH / 2));
+        
+        if(value < 0.0f)
+        {
+            value = 0.0f;
+        }
+        else if(value > 1.0f)
+        {
+            value = 1.0f;
+        }
+        
+        if(valueChanged != NULL)
+        {
+            valueChanged(value);
+        }
     }
 }

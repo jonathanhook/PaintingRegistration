@@ -55,7 +55,7 @@ namespace PaintingRegistration
     
     void PaintingRenderer::render(void) const
     {
-        currentImage->bind();
+        currentImage->bind(GL_REPLACE);
         vbo->render();
         currentImage->unbind();
     }
