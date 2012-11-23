@@ -37,7 +37,10 @@ namespace PaintingRegistration
 		typedef FastDelegate1<UIElement *> PressedCallback;
 		typedef FastDelegate1<UIElement *> ReleasedCallback;
 
-		static float getSizef(unsigned int pixels); 
+        static const Colour3f GREY;
+        static const Colour3f BLUE;
+        
+		static float getSizef(unsigned int pixels);
 
 		UIElement(const Point2i &position, const Point2i &dimensions);
 		~UIElement(void);
@@ -57,8 +60,6 @@ namespace PaintingRegistration
 
 	protected:
         static const unsigned int CONTROL_BAR_HEIGHT;
-        static const Colour3f GREY;
-        static const Colour3f BLUE;
         
 		bool				captured;
 		unsigned int		capturedId;

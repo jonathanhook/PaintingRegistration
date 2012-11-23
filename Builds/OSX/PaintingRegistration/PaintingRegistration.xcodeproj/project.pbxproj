@@ -14,7 +14,6 @@
 		FC4CA25F165BBEDC002E58C9 /* FileLocationUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA24A165BBEDC002E58C9 /* FileLocationUtility.cpp */; };
 		FC4CA261165BBEDC002E58C9 /* GLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA24E165BBEDC002E58C9 /* GLTexture.cpp */; };
 		FC4CA262165BBEDC002E58C9 /* GLVbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA250165BBEDC002E58C9 /* GLVbo.cpp */; };
-		FC4CA263165BBEDC002E58C9 /* LoadImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA252165BBEDC002E58C9 /* LoadImage.cpp */; };
 		FC4CA265165BBEDC002E58C9 /* Point2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA258165BBEDC002E58C9 /* Point2f.cpp */; };
 		FC4CA266165BBEDC002E58C9 /* Point3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA25A165BBEDC002E58C9 /* Point3f.cpp */; };
 		FC4CA267165BBEDC002E58C9 /* Vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA25C165BBEDC002E58C9 /* Vector2f.cpp */; };
@@ -30,6 +29,7 @@
 		FC4CA288165BCD1D002E58C9 /* GLPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA287165BCD1C002E58C9 /* GLPrimitives.cpp */; };
 		FC5C4B451656747F00085587 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5C4B441656747F00085587 /* OpenGL.framework */; };
 		FC5C4B471656748800085587 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC5C4B461656748800085587 /* GLUT.framework */; };
+		FC73B1D5165F871E00AF9DCB /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = FC73B1D4165F871E00AF9DCB /* stb_image.c */; };
 		FCA5736516556A17002CF651 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCA5736416556A17002CF651 /* main.cpp */; };
 		FCA5736716556A17002CF651 /* PaintingRegistration.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = FCA5736616556A17002CF651 /* PaintingRegistration.1 */; };
 		FCC809CE165BE32A007966A9 /* CameraControls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCC809CC165BE32A007966A9 /* CameraControls.cpp */; };
@@ -74,8 +74,6 @@
 		FC4CA24F165BBEDC002E58C9 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
 		FC4CA250165BBEDC002E58C9 /* GLVbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLVbo.cpp; sourceTree = "<group>"; };
 		FC4CA251165BBEDC002E58C9 /* GLVbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVbo.h; sourceTree = "<group>"; };
-		FC4CA252165BBEDC002E58C9 /* LoadImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadImage.cpp; sourceTree = "<group>"; };
-		FC4CA253165BBEDC002E58C9 /* LoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadImage.h; sourceTree = "<group>"; };
 		FC4CA256165BBEDC002E58C9 /* Ndelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ndelete.h; sourceTree = "<group>"; };
 		FC4CA257165BBEDC002E58C9 /* OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL.h; sourceTree = "<group>"; };
 		FC4CA258165BBEDC002E58C9 /* Point2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point2f.cpp; sourceTree = "<group>"; };
@@ -108,9 +106,12 @@
 		FC4CA287165BCD1C002E58C9 /* GLPrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLPrimitives.cpp; sourceTree = "<group>"; };
 		FC5C4B441656747F00085587 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		FC5C4B461656748800085587 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		FC73B1D4165F871E00AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		FC73B1D7165F8B2300AF9DCB /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		FCA5736016556A17002CF651 /* PaintingRegistration */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PaintingRegistration; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCA5736416556A17002CF651 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FCA5736616556A17002CF651 /* PaintingRegistration.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PaintingRegistration.1; sourceTree = "<group>"; };
+		FCBEA699165FD2C00053F822 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
 		FCC809CC165BE32A007966A9 /* CameraControls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraControls.cpp; sourceTree = "<group>"; };
 		FCC809CD165BE32A007966A9 /* CameraControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraControls.h; sourceTree = "<group>"; };
 		FCC809CF165BE844007966A9 /* Colour3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colour3f.h; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 		FCD8FA9E1656760200BB4434 /* libopencv_highgui.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_highgui.2.4.3.dylib; sourceTree = "<group>"; };
 		FCD8FAA01656760B00BB4434 /* libopencv_nonfree.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_nonfree.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_nonfree.2.4.3.dylib; sourceTree = "<group>"; };
 		FCD8FAA21656761600BB4434 /* libopencv_imgproc.2.4.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.3.dylib; path = ../../../../../../../../usr/local/lib/libopencv_imgproc.2.4.3.dylib; sourceTree = "<group>"; };
-		FCDA913B1656AB1D001F0B55 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
 		FCE92DF2165C046B002FF92C /* ExitButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExitButton.cpp; sourceTree = "<group>"; };
 		FCE92DF3165C046B002FF92C /* ExitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExitButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,7 +184,7 @@
 		FC4738261656547A0011871B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FCDA913B1656AB1D001F0B55 /* target.jpg */,
+				FCBEA699165FD2C00053F822 /* target.jpg */,
 			);
 			name = Resources;
 			path = ../../../Resources;
@@ -193,6 +193,7 @@
 		FC4CA247165BBEDB002E58C9 /* JDHUtility */ = {
 			isa = PBXGroup;
 			children = (
+				FC73B1D4165F871E00AF9DCB /* stb_image.c */,
 				FCC809CF165BE844007966A9 /* Colour3f.h */,
 				FCC809D0165BE844007966A9 /* Colour3f.cpp */,
 				FC4CA286165BCD1C002E58C9 /* GLPrimitives.h */,
@@ -211,8 +212,6 @@
 				FC4CA24F165BBEDC002E58C9 /* GLTexture.h */,
 				FC4CA250165BBEDC002E58C9 /* GLVbo.cpp */,
 				FC4CA251165BBEDC002E58C9 /* GLVbo.h */,
-				FC4CA252165BBEDC002E58C9 /* LoadImage.cpp */,
-				FC4CA253165BBEDC002E58C9 /* LoadImage.h */,
 				FC4CA256165BBEDC002E58C9 /* Ndelete.h */,
 				FC4CA257165BBEDC002E58C9 /* OpenGL.h */,
 				FC4CA258165BBEDC002E58C9 /* Point2f.cpp */,
@@ -221,6 +220,7 @@
 				FC4CA25B165BBEDC002E58C9 /* Point3f.h */,
 				FC4CA25C165BBEDC002E58C9 /* Vector2f.cpp */,
 				FC4CA25D165BBEDC002E58C9 /* Vector2f.h */,
+				FC73B1D7165F8B2300AF9DCB /* stb_image.h */,
 			);
 			path = JDHUtility;
 			sourceTree = "<group>";
@@ -336,7 +336,6 @@
 				FC4CA25F165BBEDC002E58C9 /* FileLocationUtility.cpp in Sources */,
 				FC4CA261165BBEDC002E58C9 /* GLTexture.cpp in Sources */,
 				FC4CA262165BBEDC002E58C9 /* GLVbo.cpp in Sources */,
-				FC4CA263165BBEDC002E58C9 /* LoadImage.cpp in Sources */,
 				FC4CA265165BBEDC002E58C9 /* Point2f.cpp in Sources */,
 				FC4CA266165BBEDC002E58C9 /* Point3f.cpp in Sources */,
 				FC4CA267165BBEDC002E58C9 /* Vector2f.cpp in Sources */,
@@ -356,6 +355,7 @@
 				FCC809D7165BF1D0007966A9 /* BrowserControls.cpp in Sources */,
 				FCC809DA165BF2C8007966A9 /* Slider.cpp in Sources */,
 				FCE92DF4165C046B002FF92C /* ExitButton.cpp in Sources */,
+				FC73B1D5165F871E00AF9DCB /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

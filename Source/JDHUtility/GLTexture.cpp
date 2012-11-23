@@ -17,10 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <exception>
-#include <JDHUtility/FileLocationUtility.h>
+#include "JDHUtility/FileLocationUtility.h"
+#include "JDHUtility/stb_image.h"
 #include "GLTexture.h"
-#include "LoadImage.h"
 
 namespace JDHUtility
 {
@@ -30,8 +29,21 @@ namespace JDHUtility
 	/* Constructors */
 	GLTexture::GLTexture(std::string path)
 	{
-        std::string resourcePath = FileLocationUtility::getFileInResourcePath(path);        
-        id = createTexture(resourcePath.c_str());
+        std::string resPath = FileLocationUtility::getFileInResourcePath(path);
+        
+        int x, y, n;
+        unsigned char *data = stbi_load(resPath.c_str(), &x, &y, &n, 0);
+        
+        glEnable(GL_TEXTURE_2D);
+        glGenTextures(1, &id);
+        glBindTexture(GL_TEXTURE_2D, id);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glTexImage2D(GL_TEXTURE_2D, 0, n == 4 ? GL_RGBA : GL_RGB, x, y, 0, n == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);
+        glDisable(GL_TEXTURE_2D);
 	}
 
 	GLTexture::~GLTexture(void)

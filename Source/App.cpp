@@ -36,9 +36,9 @@ namespace PaintingRegistration
         FileLocationUtility::setResourcePath(resourcePath);
         WindowingUtils::DEVICE_WINDOW_WIDTH = width;
         WindowingUtils::DEVICE_WINDOW_HEIGHT = height;
-        
+    
         fData = NULL;
-        texture = new GLTexture("move.tga");
+        texture = new GLTexture("texture.jpg");
         tracker = new PaintingTracker();
         tracker->train("target.jpg");
         
@@ -127,7 +127,7 @@ namespace PaintingRegistration
     {
         uiMode = CAMERA;
         
-        camera = new Camera(Point2i(0, 0), Point2i(width, height));
+        camera = new Camera(Point2i(0, 0), Point2i(width, height), Point2i(640, 480), Point2i(1024, 1024));
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
         
@@ -145,7 +145,7 @@ namespace PaintingRegistration
     void App::updateTexture(void) const
     {
         if(fData != NULL)
-        {
+        {            
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, cameraTexture);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -153,10 +153,8 @@ namespace PaintingRegistration
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-            
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1024, 1024, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, fWidth, fHeight, GL_BGRA, GL_UNSIGNED_BYTE, fData);
-            
             glDisable(GL_TEXTURE_2D);
         }
     }

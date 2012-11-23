@@ -24,6 +24,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "JDHUtility/CrossPlatformTime.h"
 #include "JDHUtility/FileLocationUtility.h"
+#include "JDHUtility/stb_image.h"
 #include "JDHUtility/Ndelete.h"
 #include "JDHUtility/OpenGL.h"
 #include "JDHUtility/Point2f.h"
@@ -34,7 +35,7 @@ using namespace JDHUtility;
 namespace PaintingRegistration
 {
     /* Public */
-    PaintingTracker::PaintingTracker(const std::string image)
+    PaintingTracker::PaintingTracker(void)
     {
         hasTarget = false;
         matcher = new cv::BFMatcher(cv::NORM_L2, false);
@@ -44,11 +45,6 @@ namespace PaintingRegistration
         extractor = new cv::SiftDescriptorExtractor();
 
         targetCorners.resize(4);
-        
-        if(image != "")
-        {
-            train(image);
-        }
     }
     
     PaintingTracker::~PaintingTracker(void)
@@ -62,13 +58,18 @@ namespace PaintingRegistration
     
     bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
     {
-        cv::Mat cameraImage(fWidth, fHeight, CV_8UC1, (void *)fData, 0);
-        cv::cvtColor(cameraImage, greyImage, CV_RGB2GRAY);
+        cv::Mat camImage(fHeight, fWidth, CV_8UC4, (unsigned char *)fData, 0);
+        cv::cvtColor(camImage, greyImage, CV_BGRA2GRAY);
+        cv::transpose(greyImage, greyImage);
+
+#ifdef IOS_WINDOWING
+        cv::flip(greyImage, greyImage, 2);
+#endif
         
         detector->detect(greyImage, cameraKeyPoints);
         extractor->compute(greyImage, cameraKeyPoints, cameraDescriptors);
         matcher->match(targetDescriptors, cameraDescriptors, matches);
-
+    
         maxDist = 0;
         minDist = 100;
         for(int i = 0; i < targetDescriptors.rows; i++)
@@ -111,16 +112,15 @@ namespace PaintingRegistration
             
             cv::perspectiveTransform(targetCorners, cameraCorners, homography);
             
-            vertices[0].setPosition(cameraCorners[0].x / (float)cameraImage.cols, cameraCorners[0].y / (float)cameraImage.rows);
-            vertices[1].setPosition(cameraCorners[1].x / (float)cameraImage.cols, cameraCorners[1].y / (float)cameraImage.rows);
-            vertices[2].setPosition(cameraCorners[2].x / (float)cameraImage.cols, cameraCorners[2].y / (float)cameraImage.rows);
-            vertices[3].setPosition(cameraCorners[3].x / (float)cameraImage.cols, cameraCorners[3].y / (float)cameraImage.rows);
-            
+            vertices[0].setPosition(cameraCorners[0].x / (float)greyImage.cols, cameraCorners[0].y / (float)greyImage.rows);
+            vertices[1].setPosition(cameraCorners[1].x / (float)greyImage.cols, cameraCorners[1].y / (float)greyImage.rows);
+            vertices[2].setPosition(cameraCorners[2].x / (float)greyImage.cols, cameraCorners[2].y / (float)greyImage.rows);
+            vertices[3].setPosition(cameraCorners[3].x / (float)greyImage.cols, cameraCorners[3].y / (float)greyImage.rows);
+
 #if defined(DEBUG) && defined(GLUT_WINDOWING)
             cv::Mat imgMatches;
             
-            cv::drawMatches(targetImage, targetKeyPoints, cameraImage, cameraKeyPoints,
-                            goodMatches, imgMatches, cv::Scalar::all(-1), cv::Scalar::all(-1),
+            cv::drawMatches(targetImage, targetKeyPoints, greyImage, cameraKeyPoints, goodMatches, imgMatches, cv::Scalar::all(-1), cv::Scalar::all(-1),
                             cv::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
             
             cv::line(imgMatches, cameraCorners[0] + cv::Point2f(targetImage.cols, 0), cameraCorners[1] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
@@ -128,7 +128,7 @@ namespace PaintingRegistration
             cv::line(imgMatches, cameraCorners[2] + cv::Point2f(targetImage.cols, 0), cameraCorners[3] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
             cv::line(imgMatches, cameraCorners[3] + cv::Point2f(targetImage.cols, 0), cameraCorners[0] + cv::Point2f(targetImage.cols, 0), cv::Scalar(0, 255, 0), 4);
             
-            cv::resize(imgMatches, imgMatches, cv::Size(imgMatches.cols / 2, imgMatches.rows / 2));
+            cv::resize(imgMatches, imgMatches, cv::Size(imgMatches.cols / 4, imgMatches.rows / 4));
             cv::imshow( "Good Matches & Object detection", imgMatches);
 #endif
         }
@@ -156,10 +156,13 @@ namespace PaintingRegistration
         return vertices;
     }
     
-    void PaintingTracker::train(const std::string image)
+    void PaintingTracker::train(const std::string &image)
     {
-        std::string localPath = FileLocationUtility::getFileInResourcePath(image);
-        targetImage = cv::imread(localPath, CV_LOAD_IMAGE_GRAYSCALE);
+        std::string path = FileLocationUtility::getFileInResourcePath(image);
+        
+        int x, y, n;
+        unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 1);   
+        targetImage = cv::Mat(y, x, CV_8UC1, (unsigned char *)data, 0);
         
         detector->detect(targetImage, targetKeyPoints);
         extractor->compute(targetImage, targetKeyPoints, targetDescriptors);

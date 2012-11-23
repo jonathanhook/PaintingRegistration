@@ -34,11 +34,11 @@
 
 @implementation ViewController
 
-const unsigned int BUFFER_SIZE = 640 * 480;
+const unsigned int BUFFER_SIZE = 640 * 480 * 4;
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
-uchar *frameData = new uchar[BUFFER_SIZE * 4];
+uchar *frameData = new uchar[BUFFER_SIZE];
 PaintingRegistration::App *app;
 unsigned int frameWidth = 0;
 unsigned int frameHeight = 0;
@@ -222,7 +222,7 @@ unsigned int frameHeight = 0;
 
     frameWidth = videoRect.size.width;
     frameHeight = videoRect.size.height;
-    memcpy(frameData, baseaddress, sizeof(unsigned char) * BUFFER_SIZE * 4);
+    memcpy(frameData, baseaddress, sizeof(unsigned char) * BUFFER_SIZE);
     
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 

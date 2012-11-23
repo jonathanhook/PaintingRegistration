@@ -38,14 +38,14 @@ namespace PaintingRegistration
     public:
         static const unsigned int VERTEX_COUNT = 4;
         
-        PaintingTracker(const std::string image = "");
+        PaintingTracker(void);
         ~PaintingTracker(void);
         
         bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
         GLuint getTextureHandle(void) const;
         const Point2f *getVertices(void) const;
-        void train(const std::string image);
+        void train(const std::string &image);
         
     private:
         bool hasTarget;
@@ -54,7 +54,6 @@ namespace PaintingRegistration
         Point2f *vertices;
         
         cv::Mat cameraDescriptors;
-        cv::Mat cameraImage;
         cv::Mat greyImage;
         cv::Mat homography;
         cv::Mat targetDescriptors;

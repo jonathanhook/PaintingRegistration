@@ -27,7 +27,11 @@ const unsigned int DEFAULT_HEIGHT = 480;
 const unsigned int DEFAULT_WIDTH = 320;
 const char *WINDOW_TITLE = "PaintingTracker";
 const unsigned int UPDATE_RATE = 30;
+const unsigned int BUFFER_SIZE = 640 * 480 * 4;
+const unsigned int VIDEO_WIDTH = 480;
+const unsigned int VIDEO_HEIGHT = 640;
 
+void captureFakeiPhoneImage(void);
 void idle(void);
 void mouse(int button, int state, int x, int y);
 void render(void);
@@ -40,6 +44,21 @@ bool initialised = false;
 bool mouseDown = false;
 
 PaintingRegistration::App *app;
+cv::VideoCapture *capture;
+unsigned char *frameData = new unsigned char[BUFFER_SIZE];
+
+void captureFakeiPhoneImage(void)
+{
+    cv::Mat img;
+    capture->read(img);
+    cv::transpose(img, img);
+    cv::cvtColor(img, img, CV_BGR2BGRA);
+
+    memcpy(frameData, img.data, sizeof(unsigned char) * BUFFER_SIZE);
+    app->setLatestFrame(frameData, img.cols, img.rows);
+    
+    cv::imshow("Hello", img);
+}
 
 void idle(void)
 {
@@ -99,6 +118,7 @@ void render(void)
 
 void update(void)
 {
+    captureFakeiPhoneImage();
     app->update();
 }
 
@@ -119,6 +139,10 @@ int main(int argc, char **argv)
     
     app = new PaintingRegistration::App(width, height, "/Users/Jon/github/local/PaintingRegistration/Resources");
     initialised = true;
+    
+    capture = new cv::VideoCapture(0);
+    capture->set(CV_CAP_PROP_FRAME_WIDTH, VIDEO_WIDTH);
+    capture->set(CV_CAP_PROP_FRAME_HEIGHT, VIDEO_HEIGHT);
     
 	glutMainLoop();
     return 0;

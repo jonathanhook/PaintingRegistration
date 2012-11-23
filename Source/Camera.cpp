@@ -25,7 +25,7 @@
 namespace PaintingRegistration
 {
     /* Public */
-    Camera::Camera(const Point2i &position, const Point2i &dimensions) :
+    Camera::Camera(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
         UIElement(position, dimensions)
     {
         int px = position.getX();
@@ -37,7 +37,6 @@ namespace PaintingRegistration
         controls->setClickedCallback(MakeDelegate(this, &Camera::controls_Clicked));
         registerEventHandler(controls);
         
-        
         GLfloat data[12] =
 		{
 			0.0f, 0.0f, 0.0f,
@@ -45,15 +44,19 @@ namespace PaintingRegistration
 			1.0f, 0.0f, 0.0f,
 			1.0f, 1.0f, 0.0f
 		};
-        
+
+        float u0 = 0.0f;
+        float u1 = (float)frameDimensions.getX() / (float)textureDimensions.getX();
+        float v0 = 0.0f;// 
+        float v1 = (float)frameDimensions.getY() / (float)textureDimensions.getY();
         GLfloat textureData[8] =
 		{
-			0.0f, 0.0f,
-			0.0f, 1.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f
+			u0, v1,
+			u1, v1,
+			u0, v0,
+			u1, v0
 		};
-        
+
         vbo = new GLVbo(GL_TRIANGLE_STRIP, GL_STATIC_DRAW, data, 4, textureData);
     }
     

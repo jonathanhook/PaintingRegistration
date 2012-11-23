@@ -28,13 +28,11 @@
 		FC4CA1F7165B9D17002E58C9 /* FileLocationUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1ED165B9D17002E58C9 /* FileLocationUtility.cpp */; };
 		FC4CA1F9165B9D17002E58C9 /* GLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1EF165B9D17002E58C9 /* GLTexture.cpp */; };
 		FC4CA1FA165B9D17002E58C9 /* GLVbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F0165B9D17002E58C9 /* GLVbo.cpp */; };
-		FC4CA1FB165B9D17002E58C9 /* LoadImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F1165B9D17002E58C9 /* LoadImage.cpp */; };
 		FC4CA1FD165B9D17002E58C9 /* Point2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F3165B9D17002E58C9 /* Point2f.cpp */; };
 		FC4CA1FE165B9D17002E58C9 /* Point3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F4165B9D17002E58C9 /* Point3f.cpp */; };
 		FC4CA1FF165B9D17002E58C9 /* Vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */; };
-		FC4CA21A165BA19D002E58C9 /* move.tga in Resources */ = {isa = PBXBuildFile; fileRef = FC4CA215165BA19D002E58C9 /* move.tga */; };
 		FC4CA220165BA349002E58C9 /* PaintingTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */; };
-		FC4CA222165BB149002E58C9 /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC4CA221165BB148002E58C9 /* target.jpg */; };
+		FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = FC73B1DD165F918000AF9DCB /* stb_image.c */; };
 		FC8E4ABD165CFE8000B4B64D /* Colour3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB8165CFE8000B4B64D /* Colour3f.cpp */; };
 		FC8E4ABE165CFE8000B4B64D /* GLPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB9165CFE8000B4B64D /* GLPrimitives.cpp */; };
 		FC8E4ABF165CFE8000B4B64D /* Point2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ABA165CFE8000B4B64D /* Point2i.cpp */; };
@@ -52,6 +50,8 @@
 		FC8E4AE4165CFEAE00B4B64D /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ADD165CFEAE00B4B64D /* Slider.cpp */; };
 		FC8E4AE5165CFEAE00B4B64D /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */; };
 		FCACCDBA165B956F00CD0644 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCACCDB8165B956F00CD0644 /* App.cpp */; };
+		FCBEA6A1165FD3A20053F822 /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBEA69F165FD3A20053F822 /* target.jpg */; };
+		FCBEA6A2165FD3A20053F822 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBEA6A0165FD3A20053F822 /* texture.jpg */; };
 		FCFE873B165D4EBE004177F5 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE8739165D4E31004177F5 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +84,6 @@
 		FC4CA1E2165B9D17002E58C9 /* FileLocationUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileLocationUtility.h; sourceTree = "<group>"; };
 		FC4CA1E4165B9D17002E58C9 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
 		FC4CA1E5165B9D17002E58C9 /* GLVbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLVbo.h; sourceTree = "<group>"; };
-		FC4CA1E6165B9D17002E58C9 /* LoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadImage.h; sourceTree = "<group>"; };
 		FC4CA1E8165B9D17002E58C9 /* Ndelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ndelete.h; sourceTree = "<group>"; };
 		FC4CA1E9165B9D17002E58C9 /* Point2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point2f.h; sourceTree = "<group>"; };
 		FC4CA1EA165B9D17002E58C9 /* Point3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point3f.h; sourceTree = "<group>"; };
@@ -93,14 +92,13 @@
 		FC4CA1ED165B9D17002E58C9 /* FileLocationUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileLocationUtility.cpp; sourceTree = "<group>"; };
 		FC4CA1EF165B9D17002E58C9 /* GLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLTexture.cpp; sourceTree = "<group>"; };
 		FC4CA1F0165B9D17002E58C9 /* GLVbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLVbo.cpp; sourceTree = "<group>"; };
-		FC4CA1F1165B9D17002E58C9 /* LoadImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadImage.cpp; sourceTree = "<group>"; };
 		FC4CA1F3165B9D17002E58C9 /* Point2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point2f.cpp; sourceTree = "<group>"; };
 		FC4CA1F4165B9D17002E58C9 /* Point3f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point3f.cpp; sourceTree = "<group>"; };
 		FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2f.cpp; sourceTree = "<group>"; };
-		FC4CA215165BA19D002E58C9 /* move.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = move.tga; sourceTree = "<group>"; };
 		FC4CA21E165BA349002E58C9 /* PaintingTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintingTracker.h; sourceTree = "<group>"; };
 		FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintingTracker.cpp; sourceTree = "<group>"; };
-		FC4CA221165BB148002E58C9 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
+		FC73B1DC165F918000AF9DCB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		FC73B1DD165F918000AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		FC8E4AB3165CFE8000B4B64D /* Colour3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colour3f.h; sourceTree = "<group>"; };
 		FC8E4AB4165CFE8000B4B64D /* GLPrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPrimitives.h; sourceTree = "<group>"; };
 		FC8E4AB5165CFE8000B4B64D /* Point2i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point2i.h; sourceTree = "<group>"; };
@@ -137,6 +135,8 @@
 		FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		FCACCDB8165B956F00CD0644 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		FCACCDB9165B956F00CD0644 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		FCBEA69F165FD3A20053F822 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
+		FCBEA6A0165FD3A20053F822 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
 		FCFE8739165D4E31004177F5 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Library/Frameworks/opencv2.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -255,8 +255,8 @@
 		FC4CA213165BA19D002E58C9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FC4CA221165BB148002E58C9 /* target.jpg */,
-				FC4CA215165BA19D002E58C9 /* move.tga */,
+				FCBEA69F165FD3A20053F822 /* target.jpg */,
+				FCBEA6A0165FD3A20053F822 /* texture.jpg */,
 			);
 			name = Resources;
 			path = ../../../../Resources;
@@ -282,6 +282,8 @@
 		FCACCDBC165B96DF00CD0644 /* JDHUtility */ = {
 			isa = PBXGroup;
 			children = (
+				FC73B1DC165F918000AF9DCB /* stb_image.h */,
+				FC73B1DD165F918000AF9DCB /* stb_image.c */,
 				FC8E4AB3165CFE8000B4B64D /* Colour3f.h */,
 				FC8E4AB4165CFE8000B4B64D /* GLPrimitives.h */,
 				FC8E4AB5165CFE8000B4B64D /* Point2i.h */,
@@ -296,7 +298,6 @@
 				FC4CA1E2165B9D17002E58C9 /* FileLocationUtility.h */,
 				FC4CA1E4165B9D17002E58C9 /* GLTexture.h */,
 				FC4CA1E5165B9D17002E58C9 /* GLVbo.h */,
-				FC4CA1E6165B9D17002E58C9 /* LoadImage.h */,
 				FC4CA1E8165B9D17002E58C9 /* Ndelete.h */,
 				FC4CA1E9165B9D17002E58C9 /* Point2f.h */,
 				FC4CA1EA165B9D17002E58C9 /* Point3f.h */,
@@ -305,7 +306,6 @@
 				FC4CA1ED165B9D17002E58C9 /* FileLocationUtility.cpp */,
 				FC4CA1EF165B9D17002E58C9 /* GLTexture.cpp */,
 				FC4CA1F0165B9D17002E58C9 /* GLVbo.cpp */,
-				FC4CA1F1165B9D17002E58C9 /* LoadImage.cpp */,
 				FC4CA1F3165B9D17002E58C9 /* Point2f.cpp */,
 				FC4CA1F4165B9D17002E58C9 /* Point3f.cpp */,
 				FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */,
@@ -370,8 +370,8 @@
 				FC33FEC216555EDC00B1FC69 /* Default@2x.png in Resources */,
 				FC33FEC416555EDC00B1FC69 /* Default-568h@2x.png in Resources */,
 				FC33FECE16555EDC00B1FC69 /* ViewController.xib in Resources */,
-				FC4CA21A165BA19D002E58C9 /* move.tga in Resources */,
-				FC4CA222165BB149002E58C9 /* target.jpg in Resources */,
+				FCBEA6A1165FD3A20053F822 /* target.jpg in Resources */,
+				FCBEA6A2165FD3A20053F822 /* texture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +391,6 @@
 				FC4CA1F7165B9D17002E58C9 /* FileLocationUtility.cpp in Sources */,
 				FC4CA1F9165B9D17002E58C9 /* GLTexture.cpp in Sources */,
 				FC4CA1FA165B9D17002E58C9 /* GLVbo.cpp in Sources */,
-				FC4CA1FB165B9D17002E58C9 /* LoadImage.cpp in Sources */,
 				FC4CA1FD165B9D17002E58C9 /* Point2f.cpp in Sources */,
 				FC4CA1FE165B9D17002E58C9 /* Point3f.cpp in Sources */,
 				FC4CA1FF165B9D17002E58C9 /* Vector2f.cpp in Sources */,
@@ -412,6 +411,7 @@
 				FC8E4AE3165CFEAE00B4B64D /* ExitButton.cpp in Sources */,
 				FC8E4AE4165CFEAE00B4B64D /* Slider.cpp in Sources */,
 				FC8E4AE5165CFEAE00B4B64D /* UIElement.cpp in Sources */,
+				FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

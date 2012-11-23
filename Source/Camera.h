@@ -34,7 +34,7 @@ namespace PaintingRegistration
         public UIElement
     {
     public:
-        Camera(const Point2i &position, const Point2i &dimensions);
+        Camera(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
         ~Camera(void);
         
         bool contains(const FingerEventArgs &e) const;
