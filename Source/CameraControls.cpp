@@ -18,6 +18,9 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "JDHUtility/GLPrimitives.h"
+#include "JDHUtility/FileLocationUtility.h"
+#include "JDHUtility/GLTexture.h"
+#include "JDHUtility/Ndelete.h"
 #include "CameraControls.h"
 
 namespace PaintingRegistration
@@ -26,10 +29,12 @@ namespace PaintingRegistration
     CameraControls::CameraControls(const Point2i &position, const Point2i &dimensions) :
         UIElement(position, dimensions)
     {
+        texture = new GLTexture("camera.png");
     }
     
     CameraControls::~CameraControls(void)
     {
+        NDELETE(texture);
     }
     
     void CameraControls::render(void) const
@@ -43,7 +48,9 @@ namespace PaintingRegistration
 		glPushMatrix();
 		glTranslatef(x, y, 0.0f);
 		glScalef(w, h, 1.0f);
-
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
         if(selected)
         {
             BLUE.use();
@@ -54,7 +61,12 @@ namespace PaintingRegistration
         }
         
         GLPrimitives::getInstance()->renderSquare();
+        
+        texture->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        texture->unbind();
 
+        glDisable(GL_BLEND);
         glPopMatrix();
     }
 }

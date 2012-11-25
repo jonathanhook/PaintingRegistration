@@ -93,9 +93,6 @@ namespace PaintingRegistration
             vertices[2].getX(), vertices[2].getY(), 0.0f,
 		};
         
-        printf("(%2.2f, %2.2f)\t(%2.2f, %2.2f)\r\n", vertices[0].getX(), vertices[0].getY(), vertices[1].getX(), vertices[1].getY());
-        printf("(%2.2f, %2.2f)\t(%2.2f, %2.2f)\r\n", vertices[3].getX(), vertices[3].getY(), vertices[2].getX(), vertices[2].getY());
-        
         vbo->update(GL_TRIANGLE_STRIP, GL_DYNAMIC_DRAW, data, 4);
     }
 }

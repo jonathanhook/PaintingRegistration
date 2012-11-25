@@ -21,6 +21,11 @@
 
 #include "UIElement.h"
 
+namespace JDHUtility
+{
+    class GLTexture;
+}
+
 namespace PaintingRegistration
 {
     class BrowserControls;
@@ -33,12 +38,14 @@ namespace PaintingRegistration
         Browser(const Point2i &position, const Point2i &dimensions);
         ~Browser(void);
         
+        bool contains (const FingerEventArgs &e) const;
         PaintingRenderer *getPainting(void);
         void render(void) const;
     
     private:
         BrowserControls *controls;
         PaintingRenderer *painting;
+        GLTexture *texture;
         
         void controls_Clicked(UIElement *e);
     };

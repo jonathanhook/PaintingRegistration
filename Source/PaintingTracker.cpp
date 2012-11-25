@@ -34,12 +34,18 @@ using namespace JDHUtility;
 
 namespace PaintingRegistration
 {
+    /* Static */
+    const std::string PaintingTracker::DESCRIPTOR_FILE = "descriptors.bmp";
+    const std::string PaintingTracker::KEY_POINT_FORMAT = "%f, %f, %f, %f, %f, %i, %i\r\n";
+    const std::string PaintingTracker::KEY_POINT_FILE = "keyPoints.csv";
+    
     /* Public */
     PaintingTracker::PaintingTracker(void)
     {
         hasTarget = false;
         matcher = new cv::BFMatcher(cv::NORM_L2, false);
         vertices = new Point2f[VERTEX_COUNT];
+        loadedData = NULL;
 
         detector = new cv::SiftFeatureDetector();
         extractor = new cv::SiftDescriptorExtractor();
@@ -154,6 +160,66 @@ namespace PaintingRegistration
     const Point2f *PaintingTracker::getVertices(void) const
     {
         return vertices;
+    }
+    
+    void PaintingTracker::loadFeatures(void)
+    {
+        // key points
+        targetKeyPoints.clear();
+        
+        std::string path = FileLocationUtility::getFileInResourcePath(KEY_POINT_FILE);
+        FILE *f = fopen(path.c_str(), "r");
+
+        unsigned int bufferSize = 4096;
+        char sBuffer[bufferSize]; // small buffer could be an issue
+        fgets(sBuffer, bufferSize, f);
+
+        while (!feof(f))
+        {
+            std::stringstream ss(sBuffer);
+
+            float x = 0.0f, y = 0.0f, size = 0.0f, angle = 0.0f, response = 0.0f;
+            int octave = 0, classId = 0;
+            sscanf(ss.str().c_str(), KEY_POINT_FORMAT.c_str(), &x, &y, &size, &angle, &response, &octave, &classId);
+                
+            cv::KeyPoint kp(y, x, size, angle, response, octave, classId);
+            targetKeyPoints.push_back(kp);
+               
+            fgets(sBuffer, bufferSize, f);
+        }
+            
+        fclose(f);
+        
+        // descriptors
+        path = FileLocationUtility::getFileInResourcePath(DESCRIPTOR_FILE);
+        
+        int x, y, n;
+        unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 0);
+        
+        NDELETE_ARRAY(loadedData);
+        size_t size = x * y * n;
+        loadedData = new unsigned char[size];
+        memcpy(loadedData, data, sizeof(unsigned char) * size);
+        targetDescriptors = cv::Mat(y, x, CV_32F, (unsigned char *)loadedData, 0);
+    }
+    
+    void PaintingTracker::saveFeatures(void) const
+    {
+        // key points
+        std::string path = FileLocationUtility::getFileInResourcePath(KEY_POINT_FILE);
+        FILE *f = fopen(path.c_str(), "w");
+        
+        for(std::vector<cv::KeyPoint>::const_iterator it = targetKeyPoints.begin(); it != targetKeyPoints.end(); it++)
+        {
+            const cv::KeyPoint &kp = (*it);
+            fprintf(f, KEY_POINT_FORMAT.c_str(), kp.pt.x, kp.pt.y, kp.size, kp.angle, kp.response, kp.octave, kp.class_id);
+        };
+        
+        fclose(f);
+        
+        // descriptors
+        path = FileLocationUtility::getFileInResourcePath(DESCRIPTOR_FILE);
+        cv::imwrite(path, targetDescriptors);
     }
     
     void PaintingTracker::train(const std::string &image)

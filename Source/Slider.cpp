@@ -18,12 +18,14 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "JDHUtility/GLPrimitives.h"
+#include "JDHUtility/GLTexture.h"
+#include "JDHUtility/Ndelete.h"
 #include "Slider.h"
 
 namespace PaintingRegistration
 {
     /* Static */
-    const unsigned int Slider::BAR_WIDTH = 10;
+    const unsigned int Slider::BAR_WIDTH = 30;
 
     /* Public */
     Slider::Slider(float value, const Point2i &position, const Point2i &dimensions) :
@@ -32,10 +34,14 @@ namespace PaintingRegistration
         this->value = value;
         
         valueChanged = NULL;
+        
+        texture = new GLTexture("slider.png");
+        barTexture = new GLTexture("bar.png");
     }
     
     Slider::~Slider(void)
     {
+        NDELETE(texture);
     }
     
     void Slider::fingerAdded(const FingerEventArgs &e)
@@ -78,6 +84,13 @@ namespace PaintingRegistration
         
         GLPrimitives::getInstance()->renderSquare();
         
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+        texture->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        texture->unbind();
+        
         glPopMatrix();
 
         float b = getSizef(BAR_WIDTH);
@@ -88,9 +101,11 @@ namespace PaintingRegistration
 		glTranslatef(bx, y, 0.0f);
 		glScalef(b, h, 1.0f);
         
-        glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+        barTexture->bind();
         GLPrimitives::getInstance()->renderSquare();
+        barTexture->unbind();
         
+        glDisable(GL_BLEND);
         glPopMatrix();
     }
     

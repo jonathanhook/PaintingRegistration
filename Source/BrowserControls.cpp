@@ -18,6 +18,7 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "JDHUtility/Ndelete.h"
+#include "JDHUtility/GLTexture.h"
 #include "ExitButton.h"
 #include "Slider.h"
 #include "BrowserControls.h"
@@ -42,7 +43,7 @@ namespace PaintingRegistration
         px += slider->getDimensions().getX();
         dy = CONTROL_BAR_HEIGHT;
         
-        exit = new ExitButton(Point2i(px, py), Point2i(dx, dy));
+        exit = new ExitButton(Point2i(px, py), Point2i(dy, dy));
         exit->setClickedCallback(MakeDelegate(this, &BrowserControls::exit_Clicked));
         registerEventHandler(exit);
     }

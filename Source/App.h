@@ -47,6 +47,7 @@ namespace PaintingRegistration
         
         void render(void) const;
         void setLatestFrame(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
+        void train(void);
         void update(void);
         
     private:
@@ -56,6 +57,7 @@ namespace PaintingRegistration
         PaintingTracker *tracker;
         GLTexture *texture;
         UIMode uiMode;
+        bool renderedOnce;
         
         const unsigned char *fData;
         unsigned int fWidth;

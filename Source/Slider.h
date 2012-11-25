@@ -18,8 +18,12 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-
 #include "UIElement.h"
+
+namespace JDHUtility
+{
+    class GLTexture;
+}
 
 namespace PaintingRegistration
 {
@@ -44,6 +48,9 @@ namespace PaintingRegistration
         
         float value;
         ValueChangedCallback valueChanged;
+        
+        GLTexture *barTexture;
+        GLTexture *texture;
         
         void updateSliderValue(float x);
     };

@@ -45,13 +45,20 @@ namespace PaintingRegistration
         bool getHasVertices(void) const;
         GLuint getTextureHandle(void) const;
         const Point2f *getVertices(void) const;
+        void loadFeatures(void);
+        void saveFeatures(void) const;
         void train(const std::string &image);
         
     private:
+        static const std::string DESCRIPTOR_FILE;
+        static const std::string KEY_POINT_FORMAT;
+        static const std::string KEY_POINT_FILE;
+        
         bool hasTarget;
         double maxDist;
         double minDist;
         Point2f *vertices;
+        unsigned char *loadedData;
         
         cv::Mat cameraDescriptors;
         cv::Mat greyImage;

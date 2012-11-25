@@ -59,7 +59,6 @@ unsigned int frameHeight = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.context = [[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1] autorelease];
 
     if (!self.context)
@@ -80,7 +79,8 @@ unsigned int frameHeight = 0;
     winY = screenSize.height;
     
     app = new PaintingRegistration::App(winX, winY, [resourcePath UTF8String]);
-    
+    app->train();
+
     [self initVideoCapture];
 }
 

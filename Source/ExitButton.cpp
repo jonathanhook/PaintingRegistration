@@ -18,6 +18,8 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "JDHUtility/GLPrimitives.h"
+#include "JDHUtility/GLTexture.h"
+#include "JDHUtility/Ndelete.h"
 #include "ExitButton.h"
 
 namespace PaintingRegistration
@@ -25,10 +27,12 @@ namespace PaintingRegistration
     ExitButton::ExitButton(const Point2i &position, const Point2i &dimensions) :
         UIElement(position, dimensions)
     {
+        texture = new GLTexture("exit.png");
     }
     
     ExitButton::~ExitButton(void)
     {
+        NDELETE(texture);
     }
     
     void ExitButton::render(void) const
@@ -54,6 +58,14 @@ namespace PaintingRegistration
         
         GLPrimitives::getInstance()->renderSquare();
         
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+        texture->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        texture->unbind();
+        
+        glDisable(GL_BLEND);
         glPopMatrix();
     }
 }

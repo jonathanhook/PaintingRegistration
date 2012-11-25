@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC2B02FB1662A88B007BB3C6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2B02FA1662A88B007BB3C6 /* icon.png */; };
+		FC2B02FE1662A890007BB3C6 /* icon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2B02FD1662A890007BB3C6 /* icon_retina.png */; };
 		FC33FEAA16555EDC00B1FC69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC33FEA916555EDC00B1FC69 /* UIKit.framework */; };
 		FC33FEAC16555EDC00B1FC69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC33FEAB16555EDC00B1FC69 /* Foundation.framework */; };
 		FC33FEAE16555EDC00B1FC69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC33FEAD16555EDC00B1FC69 /* CoreGraphics.framework */; };
@@ -32,6 +34,8 @@
 		FC4CA1FE165B9D17002E58C9 /* Point3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F4165B9D17002E58C9 /* Point3f.cpp */; };
 		FC4CA1FF165B9D17002E58C9 /* Vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */; };
 		FC4CA220165BA349002E58C9 /* PaintingTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */; };
+		FC65C4091662A3F5007BECC2 /* keyPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = FC65C4081662A3F5007BECC2 /* keyPoints.csv */; };
+		FC65C40B1662A400007BECC2 /* descriptors.bmp in Resources */ = {isa = PBXBuildFile; fileRef = FC65C40A1662A400007BECC2 /* descriptors.bmp */; };
 		FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = FC73B1DD165F918000AF9DCB /* stb_image.c */; };
 		FC8E4ABD165CFE8000B4B64D /* Colour3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB8165CFE8000B4B64D /* Colour3f.cpp */; };
 		FC8E4ABE165CFE8000B4B64D /* GLPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB9165CFE8000B4B64D /* GLPrimitives.cpp */; };
@@ -49,14 +53,23 @@
 		FC8E4AE3165CFEAE00B4B64D /* ExitButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ADC165CFEAE00B4B64D /* ExitButton.cpp */; };
 		FC8E4AE4165CFEAE00B4B64D /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ADD165CFEAE00B4B64D /* Slider.cpp */; };
 		FC8E4AE5165CFEAE00B4B64D /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */; };
+		FC956B621660E2C6004438D0 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5C1660E2C6004438D0 /* bar.png */; };
+		FC956B631660E2C6004438D0 /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5D1660E2C6004438D0 /* exit.png */; };
+		FC956B641660E2C6004438D0 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5E1660E2C6004438D0 /* slider.png */; };
+		FC956B651660E2C6004438D0 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5F1660E2C6004438D0 /* camera.png */; };
+		FC956B661660E2C6004438D0 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B601660E2C6004438D0 /* frame.png */; };
 		FCACCDBA165B956F00CD0644 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCACCDB8165B956F00CD0644 /* App.cpp */; };
 		FCBEA6A1165FD3A20053F822 /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBEA69F165FD3A20053F822 /* target.jpg */; };
 		FCBEA6A2165FD3A20053F822 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBEA6A0165FD3A20053F822 /* texture.jpg */; };
+		FCD42FF91660F31F0068FDDA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FF81660F31F0068FDDA /* Default.png */; };
+		FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FFB1660F5CB0068FDDA /* Default@2x.png */; };
 		FCFE873B165D4EBE004177F5 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE8739165D4E31004177F5 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FC33FEA516555EDC00B1FC69 /* PaintingRegistration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintingRegistration.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC2B02FA1662A88B007BB3C6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		FC2B02FD1662A890007BB3C6 /* icon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_retina.png; sourceTree = "<group>"; };
+		FC33FEA516555EDC00B1FC69 /* Pentimento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pentimento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC33FEA916555EDC00B1FC69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FC33FEAB16555EDC00B1FC69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FC33FEAD16555EDC00B1FC69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,6 +110,8 @@
 		FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2f.cpp; sourceTree = "<group>"; };
 		FC4CA21E165BA349002E58C9 /* PaintingTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintingTracker.h; sourceTree = "<group>"; };
 		FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintingTracker.cpp; sourceTree = "<group>"; };
+		FC65C4081662A3F5007BECC2 /* keyPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keyPoints.csv; sourceTree = "<group>"; };
+		FC65C40A1662A400007BECC2 /* descriptors.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = descriptors.bmp; sourceTree = "<group>"; };
 		FC73B1DC165F918000AF9DCB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		FC73B1DD165F918000AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		FC8E4AB3165CFE8000B4B64D /* Colour3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colour3f.h; sourceTree = "<group>"; };
@@ -133,10 +148,17 @@
 		FC8E4ADC165CFEAE00B4B64D /* ExitButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExitButton.cpp; sourceTree = "<group>"; };
 		FC8E4ADD165CFEAE00B4B64D /* Slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Slider.cpp; sourceTree = "<group>"; };
 		FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
+		FC956B5C1660E2C6004438D0 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
+		FC956B5D1660E2C6004438D0 /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
+		FC956B5E1660E2C6004438D0 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
+		FC956B5F1660E2C6004438D0 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		FC956B601660E2C6004438D0 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		FCACCDB8165B956F00CD0644 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		FCACCDB9165B956F00CD0644 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		FCBEA69F165FD3A20053F822 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
 		FCBEA6A0165FD3A20053F822 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
+		FCD42FF81660F31F0068FDDA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		FCD42FFB1660F5CB0068FDDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FCFE8739165D4E31004177F5 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Library/Frameworks/opencv2.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -163,6 +185,10 @@
 		FC33FE9A16555EDC00B1FC69 = {
 			isa = PBXGroup;
 			children = (
+				FC2B02FD1662A890007BB3C6 /* icon_retina.png */,
+				FC2B02FA1662A88B007BB3C6 /* icon.png */,
+				FCD42FFB1660F5CB0068FDDA /* Default@2x.png */,
+				FCD42FF81660F31F0068FDDA /* Default.png */,
 				FC33FEB316555EDC00B1FC69 /* PaintingRegistration */,
 				FC33FEA816555EDC00B1FC69 /* Frameworks */,
 				FC33FEA616555EDC00B1FC69 /* Products */,
@@ -172,7 +198,7 @@
 		FC33FEA616555EDC00B1FC69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC33FEA516555EDC00B1FC69 /* PaintingRegistration.app */,
+				FC33FEA516555EDC00B1FC69 /* Pentimento.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -255,6 +281,13 @@
 		FC4CA213165BA19D002E58C9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC65C40A1662A400007BECC2 /* descriptors.bmp */,
+				FC65C4081662A3F5007BECC2 /* keyPoints.csv */,
+				FC956B5C1660E2C6004438D0 /* bar.png */,
+				FC956B5D1660E2C6004438D0 /* exit.png */,
+				FC956B5E1660E2C6004438D0 /* slider.png */,
+				FC956B5F1660E2C6004438D0 /* camera.png */,
+				FC956B601660E2C6004438D0 /* frame.png */,
 				FCBEA69F165FD3A20053F822 /* target.jpg */,
 				FCBEA6A0165FD3A20053F822 /* texture.jpg */,
 			);
@@ -331,7 +364,7 @@
 			);
 			name = PaintingRegistration;
 			productName = PaintingRegistration;
-			productReference = FC33FEA516555EDC00B1FC69 /* PaintingRegistration.app */;
+			productReference = FC33FEA516555EDC00B1FC69 /* Pentimento.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -372,6 +405,17 @@
 				FC33FECE16555EDC00B1FC69 /* ViewController.xib in Resources */,
 				FCBEA6A1165FD3A20053F822 /* target.jpg in Resources */,
 				FCBEA6A2165FD3A20053F822 /* texture.jpg in Resources */,
+				FC956B621660E2C6004438D0 /* bar.png in Resources */,
+				FC956B631660E2C6004438D0 /* exit.png in Resources */,
+				FC956B641660E2C6004438D0 /* slider.png in Resources */,
+				FC956B651660E2C6004438D0 /* camera.png in Resources */,
+				FC956B661660E2C6004438D0 /* frame.png in Resources */,
+				FCD42FF91660F31F0068FDDA /* Default.png in Resources */,
+				FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */,
+				FC65C4091662A3F5007BECC2 /* keyPoints.csv in Resources */,
+				FC65C40B1662A400007BECC2 /* descriptors.bmp in Resources */,
+				FC2B02FB1662A88B007BB3C6 /* icon.png in Resources */,
+				FC2B02FE1662A890007BB3C6 /* icon_retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +546,7 @@
 				HEADER_SEARCH_PATHS = "../../../Source/**";
 				INFOPLIST_FILE = "PaintingRegistration/PaintingRegistration-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pentimento;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -522,7 +566,7 @@
 				HEADER_SEARCH_PATHS = "../../../Source/**";
 				INFOPLIST_FILE = "PaintingRegistration/PaintingRegistration-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pentimento;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

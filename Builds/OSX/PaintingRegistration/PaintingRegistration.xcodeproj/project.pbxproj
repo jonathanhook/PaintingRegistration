@@ -106,6 +106,8 @@
 		FC4CA287165BCD1C002E58C9 /* GLPrimitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLPrimitives.cpp; sourceTree = "<group>"; };
 		FC5C4B441656747F00085587 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		FC5C4B461656748800085587 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		FC616CD716602E9000038B2F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		FC616CD916602E9900038B2F /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		FC73B1D4165F871E00AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		FC73B1D7165F8B2300AF9DCB /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		FCA5736016556A17002CF651 /* PaintingRegistration */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PaintingRegistration; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,8 @@
 		FC4738261656547A0011871B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC616CD916602E9900038B2F /* frame.png */,
+				FC616CD716602E9000038B2F /* camera.png */,
 				FCBEA699165FD2C00053F822 /* target.jpg */,
 			);
 			name = Resources;

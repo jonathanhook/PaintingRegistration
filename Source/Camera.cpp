@@ -17,6 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "JDHUtility/GLPrimitives.h"
+#include "JDHUtility/GLTexture.h"
 #include "JDHUtility/GLVbo.h"
 #include "JDHUtility/Ndelete.h"
 #include "CameraControls.h"
@@ -36,6 +38,8 @@ namespace PaintingRegistration
         controls = new CameraControls(Point2i(px, py), Point2i(dx, dy));
         controls->setClickedCallback(MakeDelegate(this, &Camera::controls_Clicked));
         registerEventHandler(controls);
+        
+        texture = new GLTexture("frame.png");
         
         GLfloat data[12] =
 		{
@@ -63,6 +67,7 @@ namespace PaintingRegistration
     Camera::~Camera(void)
     {
         NDELETE(controls);
+        NDELETE(texture);
     }
     
     bool Camera::contains(const FingerEventArgs &e) const
@@ -81,6 +86,7 @@ namespace PaintingRegistration
 		glPushMatrix();
 		glTranslatef(x, y, 0.0f);
 		glScalef(w, h, 1.0f);
+        
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, cameraTexture);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -93,6 +99,21 @@ namespace PaintingRegistration
         vbo->render();
         
         glDisable(GL_TEXTURE_2D);
+        glPopMatrix();
+        
+        float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
+        
+        glPushMatrix();
+		glTranslatef(x, y, 0.0f);
+		glScalef(w, fh, 1.0f);
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+        texture->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        texture->unbind();
+        
+        glDisable(GL_BLEND);
         glPopMatrix();
         
         controls->render();

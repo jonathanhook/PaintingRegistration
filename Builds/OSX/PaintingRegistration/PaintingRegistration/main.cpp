@@ -138,6 +138,7 @@ int main(int argc, char **argv)
     unsigned int height = glutGet(GLUT_WINDOW_HEIGHT);
     
     app = new PaintingRegistration::App(width, height, "/Users/Jon/github/local/PaintingRegistration/Resources");
+    app->train();
     initialised = true;
     
     capture = new cv::VideoCapture(0);

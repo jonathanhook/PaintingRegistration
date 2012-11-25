@@ -20,6 +20,11 @@
 #pragma once
 #include "UIElement.h"
 
+namespace JDHUtility
+{
+    class GLTexture;
+}
+
 namespace PaintingRegistration
 {
     class CameraControls :
@@ -30,5 +35,8 @@ namespace PaintingRegistration
         ~CameraControls(void);
         
         void render(void) const;
+        
+    private:
+        GLTexture *texture;
     };
 }

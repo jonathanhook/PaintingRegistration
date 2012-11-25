@@ -23,6 +23,7 @@
 
 namespace JDHUtility
 {
+    class GLTexture;
     class GLVbo;
 }
 
@@ -44,6 +45,7 @@ namespace PaintingRegistration
     private:
         GLuint cameraTexture;
         CameraControls *controls;
+        GLTexture *texture;
         GLVbo *vbo;
         
         void controls_Clicked(UIElement *e);

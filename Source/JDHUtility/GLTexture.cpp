@@ -30,6 +30,10 @@ namespace JDHUtility
 	GLTexture::GLTexture(std::string path)
 	{
         std::string resPath = FileLocationUtility::getFileInResourcePath(path);
+
+#ifdef IOS_WINDOWING
+        stbi_convert_iphone_png_to_rgb(1);
+#endif
         
         int x, y, n;
         unsigned char *data = stbi_load(resPath.c_str(), &x, &y, &n, 0);
@@ -39,7 +43,7 @@ namespace JDHUtility
         glBindTexture(GL_TEXTURE_2D, id);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glTexImage2D(GL_TEXTURE_2D, 0, n == 4 ? GL_RGBA : GL_RGB, x, y, 0, n == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);

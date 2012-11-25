@@ -32,7 +32,7 @@ namespace PaintingRegistration
 {
     /* Public */
     App::App(unsigned int width, unsigned height, std::string resourcePath)
-    {
+    {        
         FileLocationUtility::setResourcePath(resourcePath);
         WindowingUtils::DEVICE_WINDOW_WIDTH = width;
         WindowingUtils::DEVICE_WINDOW_HEIGHT = height;
@@ -40,7 +40,7 @@ namespace PaintingRegistration
         fData = NULL;
         texture = new GLTexture("texture.jpg");
         tracker = new PaintingTracker();
-        tracker->train("target.jpg");
+        renderedOnce = false;
         
         initScene(width, height);
         initUI(width, height);
@@ -77,6 +77,16 @@ namespace PaintingRegistration
         this->fData = fData;
         this->fWidth = fWidth;
         this->fHeight = fHeight;
+    }
+    
+    void App::train(void)
+    {
+#ifdef GLUT_WINDOWING
+        tracker->train("target.jpg");
+        tracker->saveFeatures();
+#endif
+    
+        tracker->loadFeatures();
     }
     
     void App::update(void)
