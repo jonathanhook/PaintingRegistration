@@ -50,9 +50,9 @@ namespace PaintingRegistration
         void train(const std::string &image);
         
     private:
-        static const std::string DESCRIPTOR_FILE;
-        static const std::string KEY_POINT_FORMAT;
-        static const std::string KEY_POINT_FILE;
+        static const std::string SAVE_FILE;
+        static const std::string DESCRIPTOR_LABEL;
+        static const std::string KEY_POINT_LABEL;
         
         bool hasTarget;
         double maxDist;

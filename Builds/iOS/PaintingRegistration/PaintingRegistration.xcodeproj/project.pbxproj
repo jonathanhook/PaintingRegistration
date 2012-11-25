@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC19AFC61662C6F800A827A0 /* model.xml in Resources */ = {isa = PBXBuildFile; fileRef = FC19AFC51662C6F800A827A0 /* model.xml */; };
 		FC2B02FB1662A88B007BB3C6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2B02FA1662A88B007BB3C6 /* icon.png */; };
 		FC2B02FE1662A890007BB3C6 /* icon_retina.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2B02FD1662A890007BB3C6 /* icon_retina.png */; };
 		FC33FEAA16555EDC00B1FC69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC33FEA916555EDC00B1FC69 /* UIKit.framework */; };
@@ -17,9 +18,6 @@
 		FC33FEB816555EDC00B1FC69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC33FEB616555EDC00B1FC69 /* InfoPlist.strings */; };
 		FC33FEBA16555EDC00B1FC69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC33FEB916555EDC00B1FC69 /* main.m */; };
 		FC33FEBE16555EDC00B1FC69 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC33FEBD16555EDC00B1FC69 /* AppDelegate.mm */; };
-		FC33FEC016555EDC00B1FC69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33FEBF16555EDC00B1FC69 /* Default.png */; };
-		FC33FEC216555EDC00B1FC69 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33FEC116555EDC00B1FC69 /* Default@2x.png */; };
-		FC33FEC416555EDC00B1FC69 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33FEC316555EDC00B1FC69 /* Default-568h@2x.png */; };
 		FC33FECB16555EDC00B1FC69 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC33FECA16555EDC00B1FC69 /* ViewController.mm */; };
 		FC33FECE16555EDC00B1FC69 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC33FECC16555EDC00B1FC69 /* ViewController.xib */; };
 		FC33FEDF1655643000B1FC69 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC33FEDE1655643000B1FC69 /* AVFoundation.framework */; };
@@ -34,8 +32,6 @@
 		FC4CA1FE165B9D17002E58C9 /* Point3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F4165B9D17002E58C9 /* Point3f.cpp */; };
 		FC4CA1FF165B9D17002E58C9 /* Vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */; };
 		FC4CA220165BA349002E58C9 /* PaintingTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */; };
-		FC65C4091662A3F5007BECC2 /* keyPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = FC65C4081662A3F5007BECC2 /* keyPoints.csv */; };
-		FC65C40B1662A400007BECC2 /* descriptors.bmp in Resources */ = {isa = PBXBuildFile; fileRef = FC65C40A1662A400007BECC2 /* descriptors.bmp */; };
 		FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = FC73B1DD165F918000AF9DCB /* stb_image.c */; };
 		FC8E4ABD165CFE8000B4B64D /* Colour3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB8165CFE8000B4B64D /* Colour3f.cpp */; };
 		FC8E4ABE165CFE8000B4B64D /* GLPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB9165CFE8000B4B64D /* GLPrimitives.cpp */; };
@@ -59,7 +55,6 @@
 		FC956B651660E2C6004438D0 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5F1660E2C6004438D0 /* camera.png */; };
 		FC956B661660E2C6004438D0 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B601660E2C6004438D0 /* frame.png */; };
 		FCACCDBA165B956F00CD0644 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCACCDB8165B956F00CD0644 /* App.cpp */; };
-		FCBEA6A1165FD3A20053F822 /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBEA69F165FD3A20053F822 /* target.jpg */; };
 		FCBEA6A2165FD3A20053F822 /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCBEA6A0165FD3A20053F822 /* texture.jpg */; };
 		FCD42FF91660F31F0068FDDA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FF81660F31F0068FDDA /* Default.png */; };
 		FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FFB1660F5CB0068FDDA /* Default@2x.png */; };
@@ -67,8 +62,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FC2B02FA1662A88B007BB3C6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		FC2B02FD1662A890007BB3C6 /* icon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_retina.png; sourceTree = "<group>"; };
+		FC19AFC51662C6F800A827A0 /* model.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = model.xml; sourceTree = "<group>"; };
+		FC2B02FA1662A88B007BB3C6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		FC2B02FD1662A890007BB3C6 /* icon_retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_retina.png; path = ../icon_retina.png; sourceTree = "<group>"; };
 		FC33FEA516555EDC00B1FC69 /* Pentimento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pentimento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC33FEA916555EDC00B1FC69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FC33FEAB16555EDC00B1FC69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -81,9 +77,6 @@
 		FC33FEBB16555EDC00B1FC69 /* PaintingRegistration-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PaintingRegistration-Prefix.pch"; sourceTree = "<group>"; };
 		FC33FEBC16555EDC00B1FC69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC33FEBD16555EDC00B1FC69 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		FC33FEBF16555EDC00B1FC69 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		FC33FEC116555EDC00B1FC69 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		FC33FEC316555EDC00B1FC69 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FC33FEC916555EDC00B1FC69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FC33FECA16555EDC00B1FC69 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		FC33FECD16555EDC00B1FC69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
@@ -110,8 +103,6 @@
 		FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2f.cpp; sourceTree = "<group>"; };
 		FC4CA21E165BA349002E58C9 /* PaintingTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintingTracker.h; sourceTree = "<group>"; };
 		FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintingTracker.cpp; sourceTree = "<group>"; };
-		FC65C4081662A3F5007BECC2 /* keyPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keyPoints.csv; sourceTree = "<group>"; };
-		FC65C40A1662A400007BECC2 /* descriptors.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = descriptors.bmp; sourceTree = "<group>"; };
 		FC73B1DC165F918000AF9DCB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		FC73B1DD165F918000AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		FC8E4AB3165CFE8000B4B64D /* Colour3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colour3f.h; sourceTree = "<group>"; };
@@ -155,10 +146,9 @@
 		FC956B601660E2C6004438D0 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		FCACCDB8165B956F00CD0644 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		FCACCDB9165B956F00CD0644 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
-		FCBEA69F165FD3A20053F822 /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
 		FCBEA6A0165FD3A20053F822 /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
-		FCD42FF81660F31F0068FDDA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		FCD42FFB1660F5CB0068FDDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FCD42FF81660F31F0068FDDA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		FCD42FFB1660F5CB0068FDDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		FCFE8739165D4E31004177F5 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Library/Frameworks/opencv2.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -185,10 +175,6 @@
 		FC33FE9A16555EDC00B1FC69 = {
 			isa = PBXGroup;
 			children = (
-				FC2B02FD1662A890007BB3C6 /* icon_retina.png */,
-				FC2B02FA1662A88B007BB3C6 /* icon.png */,
-				FCD42FFB1660F5CB0068FDDA /* Default@2x.png */,
-				FCD42FF81660F31F0068FDDA /* Default.png */,
 				FC33FEB316555EDC00B1FC69 /* PaintingRegistration */,
 				FC33FEA816555EDC00B1FC69 /* Frameworks */,
 				FC33FEA616555EDC00B1FC69 /* Products */,
@@ -237,13 +223,14 @@
 		FC33FEB416555EDC00B1FC69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FC2B02FD1662A890007BB3C6 /* icon_retina.png */,
+				FC2B02FA1662A88B007BB3C6 /* icon.png */,
+				FCD42FFB1660F5CB0068FDDA /* Default@2x.png */,
+				FCD42FF81660F31F0068FDDA /* Default.png */,
 				FC33FEB516555EDC00B1FC69 /* PaintingRegistration-Info.plist */,
 				FC33FEB616555EDC00B1FC69 /* InfoPlist.strings */,
 				FC33FEB916555EDC00B1FC69 /* main.m */,
 				FC33FEBB16555EDC00B1FC69 /* PaintingRegistration-Prefix.pch */,
-				FC33FEBF16555EDC00B1FC69 /* Default.png */,
-				FC33FEC116555EDC00B1FC69 /* Default@2x.png */,
-				FC33FEC316555EDC00B1FC69 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -281,14 +268,12 @@
 		FC4CA213165BA19D002E58C9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FC65C40A1662A400007BECC2 /* descriptors.bmp */,
-				FC65C4081662A3F5007BECC2 /* keyPoints.csv */,
+				FC19AFC51662C6F800A827A0 /* model.xml */,
 				FC956B5C1660E2C6004438D0 /* bar.png */,
 				FC956B5D1660E2C6004438D0 /* exit.png */,
 				FC956B5E1660E2C6004438D0 /* slider.png */,
 				FC956B5F1660E2C6004438D0 /* camera.png */,
 				FC956B601660E2C6004438D0 /* frame.png */,
-				FCBEA69F165FD3A20053F822 /* target.jpg */,
 				FCBEA6A0165FD3A20053F822 /* texture.jpg */,
 			);
 			name = Resources;
@@ -399,11 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC33FEB816555EDC00B1FC69 /* InfoPlist.strings in Resources */,
-				FC33FEC016555EDC00B1FC69 /* Default.png in Resources */,
-				FC33FEC216555EDC00B1FC69 /* Default@2x.png in Resources */,
-				FC33FEC416555EDC00B1FC69 /* Default-568h@2x.png in Resources */,
 				FC33FECE16555EDC00B1FC69 /* ViewController.xib in Resources */,
-				FCBEA6A1165FD3A20053F822 /* target.jpg in Resources */,
 				FCBEA6A2165FD3A20053F822 /* texture.jpg in Resources */,
 				FC956B621660E2C6004438D0 /* bar.png in Resources */,
 				FC956B631660E2C6004438D0 /* exit.png in Resources */,
@@ -412,10 +393,9 @@
 				FC956B661660E2C6004438D0 /* frame.png in Resources */,
 				FCD42FF91660F31F0068FDDA /* Default.png in Resources */,
 				FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */,
-				FC65C4091662A3F5007BECC2 /* keyPoints.csv in Resources */,
-				FC65C40B1662A400007BECC2 /* descriptors.bmp in Resources */,
 				FC2B02FB1662A88B007BB3C6 /* icon.png in Resources */,
 				FC2B02FE1662A890007BB3C6 /* icon_retina.png in Resources */,
+				FC19AFC61662C6F800A827A0 /* model.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
