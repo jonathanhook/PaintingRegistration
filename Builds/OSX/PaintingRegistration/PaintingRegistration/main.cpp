@@ -137,7 +137,7 @@ int main(int argc, char **argv)
     unsigned int width = glutGet(GLUT_WINDOW_WIDTH);
     unsigned int height = glutGet(GLUT_WINDOW_HEIGHT);
     
-    app = new PaintingRegistration::App(width, height, "/Users/Jon/github/local/PaintingRegistration/Resources");
+    app = new PaintingRegistration::App(width, height, "/Users/Jon/github/local/PaintingRegistration/Resources", "/Users/Jon/github/local/PaintingRegistration/Resources");
     app->train();
     initialised = true;
     

@@ -24,6 +24,7 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/nonfree/nonfree.hpp>
+#include "JDHUtility/Point3f.h"
 
 namespace JDHUtility
 {
@@ -43,7 +44,7 @@ namespace PaintingRegistration
         
         bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
-        GLuint getTextureHandle(void) const;
+        const double *getGlMatrix(void) const;
         const Point2f *getVertices(void) const;
         void loadFeatures(void);
         void saveFeatures(void) const;
@@ -60,6 +61,7 @@ namespace PaintingRegistration
         double minDist;
         Point2f *vertices;
         unsigned char *loadedData;
+        double *glMatrix;
         
         cv::Mat cameraDescriptors;
         cv::Mat greyImage;
@@ -80,6 +82,9 @@ namespace PaintingRegistration
         cv::FeatureDetector *detector;
         cv::DescriptorExtractor *extractor;
         cv::BFMatcher *matcher;
+        
+        Point3f rotation;
+        Point3f translation;
         
         float getArea(void) const;
     };

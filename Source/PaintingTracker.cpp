@@ -47,6 +47,7 @@ namespace PaintingRegistration
         matcher = new cv::BFMatcher(cv::NORM_L2, false);
         vertices = new Point2f[VERTEX_COUNT];
         loadedData = NULL;
+        glMatrix = new double[16];
 
         detector = new cv::SiftFeatureDetector();
         extractor = new cv::SiftDescriptorExtractor();
@@ -61,6 +62,7 @@ namespace PaintingRegistration
         NDELETE(extractor);
         NDELETE(matcher);
         NDELETE_ARRAY(vertices);
+        NDELETE_ARRAY(glMatrix);
     }
     
     bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
@@ -126,13 +128,29 @@ namespace PaintingRegistration
             float area = getArea();
             if(area > AREA_THRESHOLD)
             {
+                glMatrix[0] = homography.at<double>(0);
+                glMatrix[4] = homography.at<double>(1);
+                glMatrix[12] = homography.at<double>(2);
+                glMatrix[1] = homography.at<double>(3);
+                glMatrix[5] = homography.at<double>(4);
+                glMatrix[13] = homography.at<double>(5);
+                glMatrix[3] = homography.at<double>(6);
+                glMatrix[7] = homography.at<double>(7);
+                glMatrix[15] = homography.at<double>(8);
+                glMatrix[2] = 0.0;
+                glMatrix[6] = 0.0;
+                glMatrix[8] = 0.0;
+                glMatrix[9] = 0.0;
+                glMatrix[10] = 0.0;
+                glMatrix[11] = 0.0;
+                glMatrix[14] = 0.0;
+                
                 hasTarget = true;
             }
             else
             {
                 hasTarget = false;
             }
-            
 
 #if defined(DEBUG) && defined(GLUT_WINDOWING)
             cv::Mat imgMatches;
@@ -161,6 +179,11 @@ namespace PaintingRegistration
         t.clear();
         
         return hasTarget;
+    }
+    
+    const double *PaintingTracker::getGlMatrix(void) const
+    {
+        return glMatrix;
     }
     
     bool PaintingTracker::getHasVertices(void) const

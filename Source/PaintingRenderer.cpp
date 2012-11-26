@@ -62,6 +62,7 @@ namespace PaintingRegistration
     
     void PaintingRenderer::render(void) const
     {
+        /*
         float w = WindowingUtils::getWindowDimensions().getX();
         float h = WindowingUtils::getWindowDimensions().getY();
         float ratio = h / w;
@@ -87,6 +88,38 @@ namespace PaintingRegistration
         
         glDisable(GL_BLEND);
         glPopMatrix();
+        */
+        
+        float w = WindowingUtils::getWindowDimensions().getX();
+        float h = WindowingUtils::getWindowDimensions().getY();
+
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glViewport(0, 0, w, h);
+        glOrtho(0.0f, 640.0f, 0.0f, 480.0f, -100.0f, 100.0f);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glMultMatrixd(matrix);
+
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glBegin(GL_QUADS);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(640.0f, 0.0f, 0.0f);
+        glVertex3f(640.0f, 480.0f, 0.0f);
+        glVertex3f(0.0f, 480.0f, 0.0f);
+        glEnd();
+        
+        glPopMatrix();
+        
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+    }
+    
+    void PaintingRenderer::setMatrix(const double *matrix)
+    {
+        this->matrix = matrix;
     }
     
     void PaintingRenderer::setPosition(float position)

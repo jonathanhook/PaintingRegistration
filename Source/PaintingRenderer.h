@@ -39,6 +39,7 @@ namespace PaintingRegistration
         ~PaintingRenderer(void);
         
         void render(void) const;
+        void setMatrix(const double *matrix);
         void setPosition(float position);
         void setVertices(const Point2f *vertices);
         
@@ -47,5 +48,6 @@ namespace PaintingRegistration
         GLVbo *vbo;
         const Point2f *vertices;
         TextureBlock *textureBlock;
+        const double *matrix;
     };
 }

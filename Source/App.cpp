@@ -104,6 +104,7 @@ namespace PaintingRegistration
         {
             uiMode = BROWSER;
         
+            browser->getPainting()->setMatrix(tracker->getGlMatrix());
             browser->getPainting()->setVertices(tracker->getVertices());
             
             unregisterEventHandler(camera);
@@ -124,6 +125,7 @@ namespace PaintingRegistration
         glLoadIdentity();
         glViewport(0, 0, width, height);
         glOrtho(0.0f, 1.0f, 1.0f / ratio, 0.0f, -100.0f, 100.0f);
+        
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
     }
