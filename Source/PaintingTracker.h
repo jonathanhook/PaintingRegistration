@@ -50,6 +50,7 @@ namespace PaintingRegistration
         void train(const std::string &image);
         
     private:
+        static const float AREA_THRESHOLD;
         static const std::string SAVE_FILE;
         static const std::string DESCRIPTOR_LABEL;
         static const std::string KEY_POINT_LABEL;
@@ -79,5 +80,7 @@ namespace PaintingRegistration
         cv::FeatureDetector *detector;
         cv::DescriptorExtractor *extractor;
         cv::BFMatcher *matcher;
+        
+        float getArea(void) const;
     };
 }

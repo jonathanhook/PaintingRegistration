@@ -41,12 +41,13 @@ namespace PaintingRegistration
         bool contains (const FingerEventArgs &e) const;
         PaintingRenderer *getPainting(void);
         void render(void) const;
-    
+
     private:
         BrowserControls *controls;
         PaintingRenderer *painting;
         GLTexture *texture;
-        
+
         void controls_Clicked(UIElement *e);
+        void controls_PositionChanged(float position);
     };
 }

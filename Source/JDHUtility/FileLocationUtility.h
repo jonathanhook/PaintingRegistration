@@ -24,11 +24,15 @@ namespace JDHUtility
 	class FileLocationUtility
 	{
     public:
-        static const std::string    getResourcePath         (void);
-        static const std::string    getFileInResourcePath   (const std::string &path);
-        static void                 setResourcePath         (const std::string &path);
+        static const std::string getDocumentsPath(void);
+        static const std::string getResourcePath(void);
+        static const std::string getFileInDocumentsPath(const std::string &path);
+        static const std::string getFileInResourcePath(const std::string &path);
+        static void setDocumentsPath(const std::string &path);
+        static void setResourcePath(const std::string &path);
         
     private:
+        static std::string documentsPath;
         static std::string resourcePath;
     };
 }

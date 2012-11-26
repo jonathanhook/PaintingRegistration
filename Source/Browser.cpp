@@ -40,6 +40,7 @@ namespace PaintingRegistration
         
         controls = new BrowserControls(Point2i(px, py), Point2i(dx, dy));
         controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
+        controls->setPositionChangedCallback(MakeDelegate(this, &Browser::controls_PositionChanged));
         registerEventHandler(controls);
         
         texture = new GLTexture("frame.png");
@@ -93,5 +94,10 @@ namespace PaintingRegistration
         {
             clicked(e);
         }
+    }
+    
+    void Browser::controls_PositionChanged(float position)
+    {
+        painting->setPosition(position);
     }
 }

@@ -31,9 +31,10 @@
 namespace PaintingRegistration
 {
     /* Public */
-    App::App(unsigned int width, unsigned height, std::string resourcePath)
+    App::App(unsigned int width, unsigned height, std::string resourcePath, std::string documentsPath)
     {        
         FileLocationUtility::setResourcePath(resourcePath);
+        FileLocationUtility::setDocumentsPath(documentsPath);
         WindowingUtils::DEVICE_WINDOW_WIDTH = width;
         WindowingUtils::DEVICE_WINDOW_HEIGHT = height;
     
@@ -81,12 +82,7 @@ namespace PaintingRegistration
     
     void App::train(void)
     {
-#ifdef GLUT_WINDOWING
         tracker->train("target.jpg");
-        tracker->saveFeatures();
-#endif
-    
-        tracker->loadFeatures();
     }
     
     void App::update(void)
@@ -107,8 +103,7 @@ namespace PaintingRegistration
         if(tracker->compute(fData, fWidth, fHeight))
         {
             uiMode = BROWSER;
-            
-            browser->getPainting()->setCurrentImage(texture);
+        
             browser->getPainting()->setVertices(tracker->getVertices());
             
             unregisterEventHandler(camera);

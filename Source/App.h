@@ -42,7 +42,7 @@ namespace PaintingRegistration
     public:
         enum UIMode { CAMERA, BROWSER };
         
-        App(unsigned int width, unsigned int height, std::string resourcePath);
+        App(unsigned int width, unsigned int height, std::string resourcePath, std::string documentsPath);
         ~App(void);
         
         void render(void) const;

@@ -24,6 +24,7 @@
 #include "JDHUtility/OpenGL.h"
 #include "JDHUtility/Point2f.h"
 #include "JDHUtility/WindowingUtils.h"
+#include "TextureBlock.h"
 #include "UIElement.h"
 #include "PaintingRenderer.h"
 
@@ -49,11 +50,14 @@ namespace PaintingRegistration
 		};
         
         vbo = new GLVbo(GL_TRIANGLE_STRIP, GL_DYNAMIC_DRAW, data, 4, textureData);
+        borderVbo = new GLVbo(GL_LINE_LOOP, GL_DYNAMIC_DRAW, data, 4);
+        textureBlock = new TextureBlock("tex%i.jpg", 1, 10, 1.0f);
     }
     
     PaintingRenderer::~PaintingRenderer(void)
     {
         NDELETE(vbo);
+        NDELETE(textureBlock);
     }
     
     void PaintingRenderer::render(void) const
@@ -69,16 +73,25 @@ namespace PaintingRegistration
         UIElement::GREY.use();
         GLPrimitives::getInstance()->renderSquare();
         
-        currentImage->bind(GL_REPLACE);
+        textureBlock->bind();
         vbo->render();
-        currentImage->unbind();
+        textureBlock->unbind();
+
+        glEnable(GL_BLEND);
+        glEnable(GL_LINE_SMOOTH);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         
+        glLineWidth(5.0f);
+        UIElement::BLUE.use();
+        borderVbo->render();
+        
+        glDisable(GL_BLEND);
         glPopMatrix();
     }
     
-    void PaintingRenderer::setCurrentImage(GLTexture *currentImage)
+    void PaintingRenderer::setPosition(float position)
     {
-        this->currentImage = currentImage;
+        textureBlock->setPosition(position);
     }
     
     void PaintingRenderer::setVertices(const Point2f *vertices)
@@ -93,6 +106,15 @@ namespace PaintingRegistration
             vertices[2].getX(), vertices[2].getY(), 0.0f,
 		};
         
+        GLfloat bData[12] =
+        {
+            vertices[0].getX(), vertices[0].getY(), 0.0f,
+            vertices[1].getX(), vertices[1].getY(), 0.0f,
+            vertices[2].getX(), vertices[2].getY(), 0.0f,
+            vertices[3].getX(), vertices[3].getY(), 0.0f,
+		};
+        
         vbo->update(GL_TRIANGLE_STRIP, GL_DYNAMIC_DRAW, data, 4);
+        borderVbo->update(GL_LINE_LOOP, GL_DYNAMIC_DRAW, bData, 4);
     }
 }

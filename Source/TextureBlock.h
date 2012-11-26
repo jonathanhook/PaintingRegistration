@@ -18,34 +18,32 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-#include <opencv2/core/core.hpp>
-
-namespace JDHUtility
-{
-    class GLTexture;
-    class GLVbo;
-    class Point2f;
-    class TextureBlock;
-}
+#include <vector>
+#include "JDHUtility/GLTexture.h"
 
 using namespace JDHUtility;
 
 namespace PaintingRegistration
 {
-    class PaintingRenderer
+    class TextureBlock
     {
     public:
-        PaintingRenderer(void);
-        ~PaintingRenderer(void);
+        TextureBlock(std::string format, unsigned int start, unsigned int end, float position);
+        ~TextureBlock(void);
         
-        void render(void) const;
+        void bind(void) const;
         void setPosition(float position);
-        void setVertices(const Point2f *vertices);
+        void unbind(void) const;
         
     private:
-        GLVbo *borderVbo;
-        GLVbo *vbo;
-        const Point2f *vertices;
-        TextureBlock *textureBlock;
+        unsigned int start;
+        unsigned int end;
+        float position;
+        unsigned int currentTexture;
+        std::string format;
+        std::vector<GLTexture> textures;
+        
+        void loadAll(void);
+        void loadTexture(unsigned int i);
     };
 }

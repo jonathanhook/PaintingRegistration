@@ -27,7 +27,7 @@ namespace PaintingRegistration
 	/* Static */
     const unsigned int UIElement::CONTROL_BAR_HEIGHT = 60;
     const Colour3f UIElement::GREY(0.5f, 0.5f, 0.5f);
-    const Colour3f UIElement::BLUE(0.188f, 0.424f, 0.773f);
+    const Colour3f UIElement::BLUE(0.0f, 0.676f, 0.93f);
     
 	float UIElement::getSizef(unsigned int pixels)
 	{

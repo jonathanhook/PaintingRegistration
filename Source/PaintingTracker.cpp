@@ -35,6 +35,7 @@ using namespace JDHUtility;
 namespace PaintingRegistration
 {
     /* Static */
+    const float PaintingTracker::AREA_THRESHOLD = 0.1f;
     const std::string PaintingTracker::SAVE_FILE = "model.xml";
     const std::string PaintingTracker::DESCRIPTOR_LABEL = "descriptors";
     const std::string PaintingTracker::KEY_POINT_LABEL = "keypoints";
@@ -77,7 +78,7 @@ namespace PaintingRegistration
         matcher->match(targetDescriptors, cameraDescriptors, matches);
     
         maxDist = 0;
-        minDist = 100;
+        minDist = 1000;
         for(int i = 0; i < targetDescriptors.rows; i++)
         {
             double dist = matches[i].distance;
@@ -109,7 +110,6 @@ namespace PaintingRegistration
         if(t.size() >= 4 && f.size() >= 4)
         {
             homography = cv::findHomography(t, f, CV_RANSAC);
-            hasTarget = true;
 
             targetCorners[0] = cvPoint(0,0);
             targetCorners[1] = cvPoint(targetImage.cols, 0);
@@ -122,6 +122,17 @@ namespace PaintingRegistration
             vertices[1].setPosition(cameraCorners[1].x / (float)greyImage.cols, cameraCorners[1].y / (float)greyImage.rows);
             vertices[2].setPosition(cameraCorners[2].x / (float)greyImage.cols, cameraCorners[2].y / (float)greyImage.rows);
             vertices[3].setPosition(cameraCorners[3].x / (float)greyImage.cols, cameraCorners[3].y / (float)greyImage.rows);
+            
+            float area = getArea();
+            if(area > AREA_THRESHOLD)
+            {
+                hasTarget = true;
+            }
+            else
+            {
+                hasTarget = false;
+            }
+            
 
 #if defined(DEBUG) && defined(GLUT_WINDOWING)
             cv::Mat imgMatches;
@@ -164,7 +175,7 @@ namespace PaintingRegistration
     
     void PaintingTracker::loadFeatures(void)
     {
-        std::string path = FileLocationUtility::getFileInResourcePath(SAVE_FILE);
+        std::string path = FileLocationUtility::getFileInDocumentsPath(SAVE_FILE);
         cv::FileStorage fs(path, cv::FileStorage::READ);
         cv::FileNode node = fs[KEY_POINT_LABEL];
         cv::read(node, targetKeyPoints);
@@ -174,7 +185,7 @@ namespace PaintingRegistration
     
     void PaintingTracker::saveFeatures(void) const
     {
-        std::string path = FileLocationUtility::getFileInResourcePath(SAVE_FILE);
+        std::string path = FileLocationUtility::getFileInDocumentsPath(SAVE_FILE);
         cv::FileStorage fs(path, cv::FileStorage::WRITE);
         fs << KEY_POINT_LABEL << targetKeyPoints;
         fs << DESCRIPTOR_LABEL << targetDescriptors;
@@ -183,13 +194,46 @@ namespace PaintingRegistration
     
     void PaintingTracker::train(const std::string &image)
     {
-        std::string path = FileLocationUtility::getFileInResourcePath(image);
+        // TODO: make saving and loading model work on iOS
         
-        int x, y, n;
-        unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 1);   
-        targetImage = cv::Mat(y, x, CV_8UC1, (unsigned char *)data, 0);
+        //std::string sPath = FileLocationUtility::getFileInDocumentsPath(SAVE_FILE);
+        //if(fopen(sPath.c_str(), "r") == NULL)
+        //{
+            std::string path = FileLocationUtility::getFileInResourcePath(image);
         
-        detector->detect(targetImage, targetKeyPoints);
-        extractor->compute(targetImage, targetKeyPoints, targetDescriptors);
+            int x, y, n;
+            unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 1);
+            targetImage = cv::Mat(y, x, CV_8UC1, (unsigned char *)data, 0);
+        
+            detector->detect(targetImage, targetKeyPoints);
+            extractor->compute(targetImage, targetKeyPoints, targetDescriptors);
+            
+        //    saveFeatures();
+        //}
+        //else
+        //{
+        //    loadFeatures();
+        //}
+    }
+    
+    /* Private */
+    float PaintingTracker::getArea(void) const
+    {
+        float result = 0.0f;
+        for(int i = 0; i < VERTEX_COUNT; i++)
+        {
+            float x0 = vertices[i].getX();
+            float y0 = vertices[i].getY();
+            float x1 = vertices[(i + 1) % VERTEX_COUNT].getX();
+            float y1 = vertices[(i + 1) % VERTEX_COUNT].getY();
+            
+            float ay = (y0 + y1) / 2.0f;
+            float dx = (x0 - x1);
+            float area = dx * ay;
+            
+            result += area;
+        }
+        
+        return result;
     }
 }

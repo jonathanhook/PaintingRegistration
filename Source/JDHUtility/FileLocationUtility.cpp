@@ -21,11 +21,25 @@
 
 namespace JDHUtility
 {
+    std::string FileLocationUtility::documentsPath = "";
     std::string FileLocationUtility::resourcePath = "";
+
+    const std::string FileLocationUtility::getDocumentsPath(void)
+    {
+        return documentsPath;
+    }
     
     const std::string FileLocationUtility::getResourcePath(void)
     {
         return resourcePath;
+    }
+
+    const std::string FileLocationUtility::getFileInDocumentsPath(const std::string &path)
+    {
+        std::string p = documentsPath;
+        p.append("/");
+        p.append(path);
+        return p;
     }
     
     const std::string FileLocationUtility::getFileInResourcePath(const std::string &path)
@@ -34,6 +48,11 @@ namespace JDHUtility
         p.append("/");
         p.append(path);
         return p;
+    }
+
+    void FileLocationUtility::setDocumentsPath(const std::string &path)
+    {
+        documentsPath = path;
     }
     
     void FileLocationUtility::setResourcePath(const std::string &path)

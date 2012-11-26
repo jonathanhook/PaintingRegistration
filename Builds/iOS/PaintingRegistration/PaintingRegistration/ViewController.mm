@@ -78,7 +78,10 @@ unsigned int frameHeight = 0;
     winX = screenSize.width;
     winY = screenSize.height;
     
-    app = new PaintingRegistration::App(winX, winY, [resourcePath UTF8String]);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    
+    app = new PaintingRegistration::App(winX, winY, [resourcePath UTF8String], [documentsPath UTF8String]);
     app->train();
 
     [self initVideoCapture];

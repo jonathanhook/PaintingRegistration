@@ -60,6 +60,11 @@ namespace PaintingRegistration
         slider->render();
     }
     
+    void BrowserControls::setPositionChangedCallback(PositionChangedCallback positionChanged)
+    {
+        this->positionChanged = positionChanged;
+    }
+    
     /* Private */
     void BrowserControls::exit_Clicked(UIElement *e)
     {
@@ -71,6 +76,9 @@ namespace PaintingRegistration
     
     void BrowserControls::slider_ValueChanged(float value)
     {
-
+        if(positionChanged != NULL)
+        {
+            positionChanged(value);
+        }
     }
 }
