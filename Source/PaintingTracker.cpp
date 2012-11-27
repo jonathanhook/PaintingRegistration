@@ -22,6 +22,7 @@
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <pthread.h>
 #include "JDHUtility/CrossPlatformTime.h"
 #include "JDHUtility/FileLocationUtility.h"
 #include "JDHUtility/stb_image.h"
@@ -178,6 +179,25 @@ namespace PaintingRegistration
         return hasTarget;
     }
     
+    void *run(void *instance)
+    {
+        PaintingTracker *t = (PaintingTracker *)instance;
+        bool result = t->compute(t->threadData.fData, t->threadData.fWidth, t->threadData.fHeight);
+        t->throwCompletedEvent(result);
+        
+        return 0;
+    }
+    
+    void PaintingTracker::computeAsync(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
+    {
+        threadData.fData = fData;
+        threadData.fWidth = fWidth;
+        threadData.fHeight = fHeight;
+        
+        pthread_t thread;
+        pthread_create(&thread, NULL, run, (void *)this);
+    }
+    
     const float *PaintingTracker::getGlMatrix(void) const
     {
         return glMatrix;
@@ -212,6 +232,11 @@ namespace PaintingRegistration
         fs.release();
     }
     
+    void PaintingTracker::setCompletedCallback(CompletedCallback completed)
+    {
+        this->completed = completed;
+    }
+    
     void PaintingTracker::train(const std::string &image)
     {
         // TODO: make saving and loading model work on iOS
@@ -234,6 +259,14 @@ namespace PaintingRegistration
         //{
         //    loadFeatures();
         //}
+    }
+    
+    void PaintingTracker::throwCompletedEvent(bool result)
+    {
+        if(completed != NULL)
+        {
+            completed(result);
+        }
     }
     
     /* Private */

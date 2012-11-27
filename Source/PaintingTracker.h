@@ -24,7 +24,10 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/nonfree/nonfree.hpp>
+#include "MultiTouchEvents/FastDelegate.h"
 #include "JDHUtility/Point3f.h"
+
+using namespace fastdelegate;
 
 namespace JDHUtility
 {
@@ -39,16 +42,29 @@ namespace PaintingRegistration
     public:
         static const unsigned int VERTEX_COUNT = 4;
         
+        struct AsyncData
+        {
+            const unsigned char *fData;
+            unsigned int fWidth;
+            unsigned int fHeight;
+        };
+        AsyncData threadData;
+        
+        typedef FastDelegate1<bool> CompletedCallback;
+        
         PaintingTracker(void);
         ~PaintingTracker(void);
         
         bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
+        void computeAsync(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
         const float *getGlMatrix(void) const;
         const Point2f *getVertices(void) const;
         void loadFeatures(void);
         void saveFeatures(void) const;
+        void setCompletedCallback(CompletedCallback completed);
         void train(const std::string &image);
+        void throwCompletedEvent(bool result);
         
     private:
         static const float AREA_THRESHOLD;
@@ -85,6 +101,8 @@ namespace PaintingRegistration
         
         Point3f rotation;
         Point3f translation;
+        
+        CompletedCallback completed;
         
         float getArea(void) const;
     };

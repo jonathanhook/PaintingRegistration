@@ -68,6 +68,8 @@
 		FCE6FCF21663C7B7008BB2FD /* tex3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE6FCE81663C7B7008BB2FD /* tex3.jpg */; };
 		FCE6FCF31663C7B7008BB2FD /* tex2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE6FCE91663C7B7008BB2FD /* tex2.jpg */; };
 		FCE6FCF41663C7B7008BB2FD /* tex1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE6FCEA1663C7B7008BB2FD /* tex1.jpg */; };
+		FCFC2435166525F8005611E3 /* Overlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFC2433166525F8005611E3 /* Overlay.cpp */; };
+		FCFC243816653503005611E3 /* processing.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC243716653503005611E3 /* processing.png */; };
 		FCFE873B165D4EBE004177F5 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE8739165D4E31004177F5 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +172,9 @@
 		FCE6FCE81663C7B7008BB2FD /* tex3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tex3.jpg; sourceTree = "<group>"; };
 		FCE6FCE91663C7B7008BB2FD /* tex2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tex2.jpg; sourceTree = "<group>"; };
 		FCE6FCEA1663C7B7008BB2FD /* tex1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tex1.jpg; sourceTree = "<group>"; };
+		FCFC2433166525F8005611E3 /* Overlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Overlay.cpp; sourceTree = "<group>"; };
+		FCFC2434166525F8005611E3 /* Overlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overlay.h; sourceTree = "<group>"; };
+		FCFC243716653503005611E3 /* processing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = processing.png; sourceTree = "<group>"; };
 		FCFE8739165D4E31004177F5 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Library/Frameworks/opencv2.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -283,6 +288,8 @@
 				FCACCDB9165B956F00CD0644 /* App.h */,
 				FCE6FCDD1663C211008BB2FD /* TextureBlock.cpp */,
 				FCE6FCDE1663C211008BB2FD /* TextureBlock.h */,
+				FCFC2433166525F8005611E3 /* Overlay.cpp */,
+				FCFC2434166525F8005611E3 /* Overlay.h */,
 			);
 			name = Source;
 			path = ../../../../Source;
@@ -292,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				FCE6FCE01663C536008BB2FD /* Textures */,
+				FCFC243716653503005611E3 /* processing.png */,
 				FCE6FCDA1663B6B5008BB2FD /* target.jpg */,
 				FC956B5C1660E2C6004438D0 /* bar.png */,
 				FC956B5D1660E2C6004438D0 /* exit.png */,
@@ -445,6 +453,7 @@
 				FCE6FCF21663C7B7008BB2FD /* tex3.jpg in Resources */,
 				FCE6FCF31663C7B7008BB2FD /* tex2.jpg in Resources */,
 				FCE6FCF41663C7B7008BB2FD /* tex1.jpg in Resources */,
+				FCFC243816653503005611E3 /* processing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +495,7 @@
 				FC8E4AE5165CFEAE00B4B64D /* UIElement.cpp in Sources */,
 				FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */,
 				FCE6FCDF1663C211008BB2FD /* TextureBlock.cpp in Sources */,
+				FCFC2435166525F8005611E3 /* Overlay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

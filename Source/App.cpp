@@ -24,6 +24,7 @@
 #include "JDHUtility/WindowingUtils.h"
 #include "Browser.h"
 #include "Camera.h"
+#include "Overlay.h"
 #include "PaintingRenderer.h"
 #include "PaintingTracker.h"
 #include "App.h"
@@ -41,8 +42,8 @@ namespace PaintingRegistration
         fData = NULL;
         texture = new GLTexture("texture.jpg");
         tracker = new PaintingTracker();
-        renderedOnce = false;
-        
+        tracker->setCompletedCallback(MakeDelegate(this, &App::tracker_Completed));
+
         initScene(width, height);
         initUI(width, height);
         initTextureHandle();
@@ -61,11 +62,14 @@ namespace PaintingRegistration
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        
         if(uiMode == CAMERA)
         {
-            updateTexture();
-            camera->setCameraTexture(cameraTexture);
+            if(!processing->getIsVisible())
+            {
+                updateTexture();
+                camera->setCameraTexture(cameraTexture);
+            }
+            
             camera->render();
         }
         else if(uiMode == BROWSER)
@@ -73,6 +77,8 @@ namespace PaintingRegistration
             browser->getPainting()->setCameraTexture(cameraTexture);
             browser->render();
         }
+        
+        processing->render();
     }
     
     void App::setLatestFrame(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
@@ -89,7 +95,6 @@ namespace PaintingRegistration
     
     void App::update(void)
     {
-
     }
     
     /* Private */
@@ -102,15 +107,11 @@ namespace PaintingRegistration
     
     void App::camera_Clicked(UIElement *e)
     {
-        if(tracker->compute(fData, fWidth, fHeight))
-        {
-            uiMode = BROWSER;
+        registerEventHandler(processing);
+        unregisterEventHandler(camera);
         
-            browser->getPainting()->setMatrix(tracker->getGlMatrix());
-
-            unregisterEventHandler(camera);
-            registerEventHandler(browser);
-        }
+        processing->setIsVisible(true);
+        tracker->computeAsync(fData, fWidth, fHeight);
     }
     
     void App::initScene(unsigned int width, unsigned height)
@@ -141,6 +142,8 @@ namespace PaintingRegistration
         
         browser = new Browser(Point2i(0, 0), Point2i(width, height), Point2i(640, 480), Point2i(1024, 1024));
         browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
+        
+        processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));
     }
     
     void App::initTextureHandle(void)
@@ -148,6 +151,27 @@ namespace PaintingRegistration
         glEnable(GL_TEXTURE_2D);
         glGenTextures(1, &cameraTexture);
         glDisable(GL_TEXTURE_2D);
+    }
+    
+    void App::tracker_Completed(bool result)
+    {
+        if(result)
+        {
+            uiMode = BROWSER;
+            
+            browser->getPainting()->setMatrix(tracker->getGlMatrix());
+            unregisterEventHandler(camera);
+            
+            unregisterEventHandler(processing);
+            registerEventHandler(browser);
+        }
+        else
+        {
+            unregisterEventHandler(processing);
+            registerEventHandler(camera);
+        }
+        
+        processing->setIsVisible(false);
     }
     
     void App::updateTexture(void) const

@@ -33,6 +33,7 @@ namespace PaintingRegistration
 {
     class Browser;
     class Camera;
+    class Overlay;
     class PaintingTracker;
     class UIElement;
     
@@ -54,10 +55,10 @@ namespace PaintingRegistration
         Browser *browser;
         Camera *camera;
         GLuint cameraTexture;
+        Overlay *processing;
         PaintingTracker *tracker;
         GLTexture *texture;
         UIMode uiMode;
-        bool renderedOnce;
         
         const unsigned char *fData;
         unsigned int fWidth;
@@ -68,6 +69,7 @@ namespace PaintingRegistration
         void initScene(unsigned int width, unsigned int height);
         void initUI(unsigned int width, unsigned int height);
         void initTextureHandle(void);
+        void tracker_Completed(bool result);
         void updateTexture(void) const;
     };
 }
