@@ -61,6 +61,7 @@ namespace PaintingRegistration
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
+        
         if(uiMode == CAMERA)
         {
             updateTexture();
@@ -69,6 +70,7 @@ namespace PaintingRegistration
         }
         else if(uiMode == BROWSER)
         {
+            browser->getPainting()->setCameraTexture(cameraTexture);
             browser->render();
         }
     }
@@ -105,8 +107,7 @@ namespace PaintingRegistration
             uiMode = BROWSER;
         
             browser->getPainting()->setMatrix(tracker->getGlMatrix());
-            browser->getPainting()->setVertices(tracker->getVertices());
-            
+
             unregisterEventHandler(camera);
             registerEventHandler(browser);
         }
@@ -138,7 +139,7 @@ namespace PaintingRegistration
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
         
-        browser = new Browser(Point2i(0, 0), Point2i(width, height));
+        browser = new Browser(Point2i(0, 0), Point2i(width, height), Point2i(640, 480), Point2i(1024, 1024));
         browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
     }
     

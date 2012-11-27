@@ -31,9 +31,10 @@
 namespace PaintingRegistration
 {
     /* Public */
-    PaintingRenderer::PaintingRenderer(void)
+    PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
+        UIElement(position, dimensions)
     {
-        GLfloat data[12] =
+        GLfloat camData[12] =
 		{
 			0.0f, 0.0f, 0.0f,
 			0.0f, 1.0f, 0.0f,
@@ -41,83 +42,40 @@ namespace PaintingRegistration
 			1.0f, 1.0f, 0.0f
 		};
         
-        GLfloat textureData[8] =
+        float u0 = 0.0f;
+        float u1 = (float)frameDimensions.getX() / (float)textureDimensions.getX();
+        float v0 = 0.0f;
+        float v1 = (float)frameDimensions.getY() / (float)textureDimensions.getY();
+        GLfloat camTextureData[8] =
 		{
-			0.0f, 0.0f,
-			0.0f, 1.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f
+			u0, v1,
+			u1, v1,
+			u0, v0,
+			u1, v0
 		};
         
-        vbo = new GLVbo(GL_TRIANGLE_STRIP, GL_DYNAMIC_DRAW, data, 4, textureData);
-        borderVbo = new GLVbo(GL_LINE_LOOP, GL_DYNAMIC_DRAW, data, 4);
+        camVbo = new GLVbo(GL_TRIANGLE_STRIP, GL_STATIC_DRAW, camData, 4, camTextureData);
         textureBlock = new TextureBlock("tex%i.jpg", 1, 10, 1.0f);
     }
     
     PaintingRenderer::~PaintingRenderer(void)
     {
-        NDELETE(vbo);
+        NDELETE(camVbo);
         NDELETE(textureBlock);
     }
     
     void PaintingRenderer::render(void) const
     {
-        /*
-        float w = WindowingUtils::getWindowDimensions().getX();
-        float h = WindowingUtils::getWindowDimensions().getY();
-        float ratio = h / w;
-        
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glScalef(1.0f, ratio, 1.0f);
-        
-        UIElement::GREY.use();
-        GLPrimitives::getInstance()->renderSquare();
-        
-        textureBlock->bind();
-        vbo->render();
-        textureBlock->unbind();
-
-        glEnable(GL_BLEND);
-        glEnable(GL_LINE_SMOOTH);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        
-        glLineWidth(5.0f);
-        UIElement::BLUE.use();
-        borderVbo->render();
-        
-        glDisable(GL_BLEND);
-        glPopMatrix();
-        */
-        
-        float w = WindowingUtils::getWindowDimensions().getX();
-        float h = WindowingUtils::getWindowDimensions().getY();
-
-        glMatrixMode(GL_PROJECTION);
-        glPushMatrix();
-        glLoadIdentity();
-        glViewport(0, 0, w, h);
-        glOrtho(0.0f, 640.0f, 0.0f, 480.0f, -100.0f, 100.0f);
-        
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glMultMatrixd(matrix);
-
-        glColor3f(1.0f, 1.0f, 1.0f);
-        glBegin(GL_QUADS);
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(640.0f, 0.0f, 0.0f);
-        glVertex3f(640.0f, 480.0f, 0.0f);
-        glVertex3f(0.0f, 480.0f, 0.0f);
-        glEnd();
-        
-        glPopMatrix();
-        
-        glMatrixMode(GL_PROJECTION);
-        glPopMatrix();
+        renderCameraImage();
+        renderPerspective();
     }
     
-    void PaintingRenderer::setMatrix(const double *matrix)
+    void PaintingRenderer::setCameraTexture(GLuint cameraTexture)
+    {
+        this->cameraTexture = cameraTexture;
+    }
+    
+    void PaintingRenderer::setMatrix(const float *matrix)
     {
         this->matrix = matrix;
     }
@@ -127,27 +85,72 @@ namespace PaintingRegistration
         textureBlock->setPosition(position);
     }
     
-    void PaintingRenderer::setVertices(const Point2f *vertices)
+    /* Private */
+    void PaintingRenderer::renderCameraImage(void) const
     {
-        this->vertices = vertices;
+        float x = getSizef(position.getX());
+		float y	= getSizef(position.getY());
+		float h	= getSizef(dimensions.getY());
+		float w	= getSizef(dimensions.getX());
         
-        GLfloat data[12] =
-        {
-            vertices[0].getX(), vertices[0].getY(), 0.0f,
-            vertices[3].getX(), vertices[3].getY(), 0.0f,
-            vertices[1].getX(), vertices[1].getY(), 0.0f,
-            vertices[2].getX(), vertices[2].getY(), 0.0f,
-		};
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glTranslatef(x, y, 0.0f);
+		glScalef(w, h, 1.0f);
         
-        GLfloat bData[12] =
-        {
-            vertices[0].getX(), vertices[0].getY(), 0.0f,
-            vertices[1].getX(), vertices[1].getY(), 0.0f,
-            vertices[2].getX(), vertices[2].getY(), 0.0f,
-            vertices[3].getX(), vertices[3].getY(), 0.0f,
-		};
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, cameraTexture);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         
-        vbo->update(GL_TRIANGLE_STRIP, GL_DYNAMIC_DRAW, data, 4);
-        borderVbo->update(GL_LINE_LOOP, GL_DYNAMIC_DRAW, bData, 4);
+        camVbo->render();
+        
+        glDisable(GL_TEXTURE_2D);
+        glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+        
+        GLPrimitives::getInstance()->renderSquare();
+        
+        glDisable(GL_BLEND);
+        glPopMatrix();
+    }
+    
+    void PaintingRenderer::renderPerspective(void) const
+    {
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        glOrtho(0.0f, 480.0f, 640.0f, 0.0f, -100.0f, 100.0f);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+        glMultMatrixf((float *)matrix);
+        glScalef(720.0f, 1060.0f, 1.0f); // HACK: magic numbers for image size, should scale homography
+        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        
+        textureBlock->bind();
+        GLPrimitives::getInstance()->renderSquare();
+        textureBlock->unbind();
+        
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(5.0f);
+        
+        UIElement::BLUE.use();
+        GLPrimitives::getInstance()->renderSquareOutline();
+        
+        glDisable(GL_LINE_SMOOTH);
+        glDisable(GL_BLEND);
+        glPopMatrix();
+        
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
     }
 }

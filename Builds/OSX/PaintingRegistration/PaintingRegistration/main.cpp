@@ -51,6 +51,7 @@ void captureFakeiPhoneImage(void)
 {
     cv::Mat img;
     capture->read(img);
+    cv::flip(img, img, 1);
     cv::transpose(img, img);
     cv::cvtColor(img, img, CV_BGR2BGRA);
 

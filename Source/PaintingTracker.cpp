@@ -47,7 +47,7 @@ namespace PaintingRegistration
         matcher = new cv::BFMatcher(cv::NORM_L2, false);
         vertices = new Point2f[VERTEX_COUNT];
         loadedData = NULL;
-        glMatrix = new double[16];
+        glMatrix = new float[16];
 
         detector = new cv::SiftFeatureDetector();
         extractor = new cv::SiftDescriptorExtractor();
@@ -70,10 +70,7 @@ namespace PaintingRegistration
         cv::Mat camImage(fHeight, fWidth, CV_8UC4, (unsigned char *)fData, 0);
         cv::cvtColor(camImage, greyImage, CV_BGRA2GRAY);
         cv::transpose(greyImage, greyImage);
-
-#ifdef IOS_WINDOWING
         cv::flip(greyImage, greyImage, 2);
-#endif
         
         detector->detect(greyImage, cameraKeyPoints);
         extractor->compute(greyImage, cameraKeyPoints, cameraDescriptors);
@@ -124,26 +121,26 @@ namespace PaintingRegistration
             vertices[1].setPosition(cameraCorners[1].x / (float)greyImage.cols, cameraCorners[1].y / (float)greyImage.rows);
             vertices[2].setPosition(cameraCorners[2].x / (float)greyImage.cols, cameraCorners[2].y / (float)greyImage.rows);
             vertices[3].setPosition(cameraCorners[3].x / (float)greyImage.cols, cameraCorners[3].y / (float)greyImage.rows);
-            
+
             float area = getArea();
             if(area > AREA_THRESHOLD)
             {
-                glMatrix[0] = homography.at<double>(0);
-                glMatrix[4] = homography.at<double>(1);
-                glMatrix[12] = homography.at<double>(2);
-                glMatrix[1] = homography.at<double>(3);
-                glMatrix[5] = homography.at<double>(4);
-                glMatrix[13] = homography.at<double>(5);
-                glMatrix[3] = homography.at<double>(6);
-                glMatrix[7] = homography.at<double>(7);
-                glMatrix[15] = homography.at<double>(8);
-                glMatrix[2] = 0.0;
-                glMatrix[6] = 0.0;
-                glMatrix[8] = 0.0;
-                glMatrix[9] = 0.0;
-                glMatrix[10] = 0.0;
-                glMatrix[11] = 0.0;
-                glMatrix[14] = 0.0;
+                for(int i = 0; i < 16; i++)
+                {
+                    if(i % 5 != 0) glMatrix[i] = 0.0f;
+                    else glMatrix[i] = 1.0f;
+                }
+                
+                double *matrix = (double *)homography.data;
+                glMatrix[0]	= matrix[0];
+                glMatrix[4]	= matrix[1];
+                glMatrix[12] = matrix[2];
+                glMatrix[1]	= matrix[3];
+                glMatrix[5]	= matrix[4];
+                glMatrix[13] = matrix[5];
+                glMatrix[3]	= matrix[6];
+                glMatrix[7]	= matrix[7];
+                glMatrix[15] = matrix[8];
                 
                 hasTarget = true;
             }
@@ -181,7 +178,7 @@ namespace PaintingRegistration
         return hasTarget;
     }
     
-    const double *PaintingTracker::getGlMatrix(void) const
+    const float *PaintingTracker::getGlMatrix(void) const
     {
         return glMatrix;
     }

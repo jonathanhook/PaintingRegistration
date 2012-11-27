@@ -27,11 +27,12 @@
 namespace PaintingRegistration
 {
     /* Public */
-    Browser::Browser(const Point2i &position, const Point2i &dimensions) :
+    Browser::Browser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
         UIElement(position, dimensions)
     {
         clicked = NULL;
-        painting = new PaintingRenderer();
+        
+        painting = new PaintingRenderer(position, dimensions,frameDimensions, textureDimensions);
         
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;

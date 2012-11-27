@@ -19,12 +19,11 @@
  */
 #pragma once
 #include <opencv2/core/core.hpp>
+#include "UIElement.h"
 
 namespace JDHUtility
 {
-    class GLTexture;
     class GLVbo;
-    class Point2f;
     class TextureBlock;
 }
 
@@ -32,22 +31,26 @@ using namespace JDHUtility;
 
 namespace PaintingRegistration
 {
-    class PaintingRenderer
+    class PaintingRenderer :
+        public UIElement
     {
     public:
-        PaintingRenderer(void);
+        PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
         ~PaintingRenderer(void);
         
         void render(void) const;
-        void setMatrix(const double *matrix);
+        void setCameraTexture(GLuint handle);
+        void setMatrix(const float *matrix);
         void setPosition(float position);
-        void setVertices(const Point2f *vertices);
         
     private:
-        GLVbo *borderVbo;
-        GLVbo *vbo;
+        GLuint cameraTexture;
+        GLVbo *camVbo;
         const Point2f *vertices;
         TextureBlock *textureBlock;
-        const double *matrix;
+        const float *matrix;
+        
+        void renderCameraImage(void) const;
+        void renderPerspective(void) const;
     };
 }

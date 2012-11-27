@@ -35,7 +35,7 @@ namespace PaintingRegistration
         public UIElement
     {
     public:
-        Browser(const Point2i &position, const Point2i &dimensions);
+        Browser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
         ~Browser(void);
         
         bool contains (const FingerEventArgs &e) const;

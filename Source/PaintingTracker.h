@@ -44,7 +44,7 @@ namespace PaintingRegistration
         
         bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
-        const double *getGlMatrix(void) const;
+        const float *getGlMatrix(void) const;
         const Point2f *getVertices(void) const;
         void loadFeatures(void);
         void saveFeatures(void) const;
@@ -61,7 +61,7 @@ namespace PaintingRegistration
         double minDist;
         Point2f *vertices;
         unsigned char *loadedData;
-        double *glMatrix;
+        float *glMatrix;
         
         cv::Mat cameraDescriptors;
         cv::Mat greyImage;
