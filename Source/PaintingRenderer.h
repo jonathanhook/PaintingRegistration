@@ -49,6 +49,7 @@ namespace PaintingRegistration
         const Point2f *vertices;
         TextureBlock *textureBlock;
         const float *matrix;
+        Point2i frameDimensions;
         
         void renderCameraImage(void) const;
         void renderPerspective(void) const;

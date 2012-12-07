@@ -68,6 +68,8 @@ namespace PaintingRegistration
     
     bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
     {
+        unsigned int start = CrossPlatformTime::getTimeMillis();
+        
         cv::Mat camImage(fHeight, fWidth, CV_8UC4, (unsigned char *)fData, 0);
         cv::cvtColor(camImage, greyImage, CV_BGRA2GRAY);
         cv::transpose(greyImage, greyImage);
@@ -176,6 +178,9 @@ namespace PaintingRegistration
         matches.clear();
         t.clear();
         
+        unsigned int end = CrossPlatformTime::getTimeMillis();
+        printf("%d\r\n", end - start);
+        
         return hasTarget;
     }
     
@@ -219,7 +224,8 @@ namespace PaintingRegistration
         cv::FileStorage fs(path, cv::FileStorage::READ);
         cv::FileNode node = fs[KEY_POINT_LABEL];
         cv::read(node, targetKeyPoints);
-        fs[DESCRIPTOR_LABEL] >> targetDescriptors;
+        cv::FileNode node1 = fs[DESCRIPTOR_LABEL];
+        cv::read(node1, targetDescriptors);
         fs.release();
     }
     
@@ -239,26 +245,23 @@ namespace PaintingRegistration
     
     void PaintingTracker::train(const std::string &image)
     {
-        // TODO: make saving and loading model work on iOS
+        std::string path = FileLocationUtility::getFileInResourcePath(image);
+        int x, y, n;
+        unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 1);
+        targetImage = cv::Mat(y, x, CV_8UC1, (unsigned char *)data, 0);
         
-        //std::string sPath = FileLocationUtility::getFileInDocumentsPath(SAVE_FILE);
-        //if(fopen(sPath.c_str(), "r") == NULL)
-        //{
-            std::string path = FileLocationUtility::getFileInResourcePath(image);
-        
-            int x, y, n;
-            unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 1);
-            targetImage = cv::Mat(y, x, CV_8UC1, (unsigned char *)data, 0);
-        
+        std::string sPath = FileLocationUtility::getFileInDocumentsPath(SAVE_FILE);
+        if(fopen(sPath.c_str(), "r") == NULL)
+        {
             detector->detect(targetImage, targetKeyPoints);
             extractor->compute(targetImage, targetKeyPoints, targetDescriptors);
             
-        //    saveFeatures();
-        //}
-        //else
-        //{
-        //    loadFeatures();
-        //}
+            saveFeatures();
+        }
+        else
+        {
+            loadFeatures();
+        }
     }
     
     void PaintingTracker::throwCompletedEvent(bool result)

@@ -43,15 +43,18 @@ namespace PaintingRegistration
     public:
         enum UIMode { CAMERA, BROWSER };
         
-        App(unsigned int width, unsigned int height, std::string resourcePath, std::string documentsPath);
+        App(unsigned int width, unsigned int height, unsigned int cameraWidth, unsigned int cameraHeight, std::string resourcePath, std::string documentsPath);
         ~App(void);
         
+        bool getIsProcessing(void) const;
         void render(void) const;
-        void setLatestFrame(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
+        void setLatestFrame(const unsigned char *fData);
         void train(void);
         void update(void);
         
     private:
+        static const unsigned int TEXTURE_DIM = 1024;
+        
         Browser *browser;
         Camera *camera;
         GLuint cameraTexture;
@@ -59,10 +62,10 @@ namespace PaintingRegistration
         PaintingTracker *tracker;
         GLTexture *texture;
         UIMode uiMode;
-        
+        bool isProcessing;
+        unsigned int cameraWidth;
+        unsigned int cameraHeight;
         const unsigned char *fData;
-        unsigned int fWidth;
-        unsigned int fHeight;
         
         void browser_Clicked(UIElement *e);
         void camera_Clicked(UIElement *e);

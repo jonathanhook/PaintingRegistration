@@ -18,6 +18,7 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #import <opencv2/opencv.hpp>
+#import "JDHUtility/CrossPlatformTime.h"
 #import "ViewController.h"
 #include "App.h"
 
@@ -34,7 +35,10 @@
 
 @implementation ViewController
 
-const unsigned int BUFFER_SIZE = 640 * 480 * 4;
+const unsigned int CAM_WIDTH = 480;
+const unsigned int CAM_HEIGHT = 360;
+const unsigned int BUFFER_SIZE = CAM_WIDTH * CAM_HEIGHT * 4;
+const unsigned int PROCESSING_RENDER_RATE = 1000;
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
@@ -42,6 +46,7 @@ uchar *frameData = new uchar[BUFFER_SIZE];
 PaintingRegistration::App *app;
 unsigned int frameWidth = 0;
 unsigned int frameHeight = 0;
+unsigned int lastProcessingRender = 0;
 
 - (void)dealloc
 {
@@ -81,7 +86,7 @@ unsigned int frameHeight = 0;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
     
-    app = new PaintingRegistration::App(winX, winY, [resourcePath UTF8String], [documentsPath UTF8String]);
+    app = new PaintingRegistration::App(winX, winY, CAM_WIDTH, CAM_HEIGHT, [resourcePath UTF8String], [documentsPath UTF8String]);
     app->train();
 
     [self initVideoCapture];
@@ -118,12 +123,27 @@ unsigned int frameHeight = 0;
 
 - (void)update
 {
-    app->update();
+    if(!app->getIsProcessing())
+    {
+        app->update();
+    }
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    app->render();
+    if(!app->getIsProcessing())
+    {
+        app->render();
+    }
+    else
+    {
+        unsigned int now = CrossPlatformTime::getTimeMillis();
+        if(now - lastProcessingRender > PROCESSING_RENDER_RATE)
+        {
+            app->render();
+            lastProcessingRender = CrossPlatformTime::getTimeMillis();
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -173,7 +193,8 @@ unsigned int frameHeight = 0;
     NSError *error;
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
-    session.sessionPreset = AVCaptureSessionPreset640x480;
+    //session.sessionPreset = AVCaptureSessionPreset640x480;
+    session.sessionPreset = AVCaptureSessionPresetMedium;
     
     AVCaptureDevice *device = [self findBackFacingCamera];
     
@@ -216,21 +237,24 @@ unsigned int frameHeight = 0;
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    NSAutoreleasePool* localpool = [[NSAutoreleasePool alloc] init];
-    CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    CGRect videoRect = CGRectMake(0.0f, 0.0f, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
+    if(!app->getIsProcessing())
+    {
+        NSAutoreleasePool* localpool = [[NSAutoreleasePool alloc] init];
+        CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        CGRect videoRect = CGRectMake(0.0f, 0.0f, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer));
     
-    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
-    void *baseaddress = CVPixelBufferGetBaseAddress(pixelBuffer);
+        CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+        void *baseaddress = CVPixelBufferGetBaseAddress(pixelBuffer);
 
-    frameWidth = videoRect.size.width;
-    frameHeight = videoRect.size.height;
-    memcpy(frameData, baseaddress, sizeof(unsigned char) * BUFFER_SIZE);
+        frameWidth = videoRect.size.width;
+        frameHeight = videoRect.size.height;
+        memcpy(frameData, baseaddress, sizeof(unsigned char) * BUFFER_SIZE);
     
-    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 
-    [localpool drain];
+        [localpool drain];
     
-    app->setLatestFrame(frameData, frameWidth, frameHeight);
+        app->setLatestFrame(frameData);
+    }
 }
 @end

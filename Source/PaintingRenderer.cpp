@@ -34,6 +34,8 @@ namespace PaintingRegistration
     PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
         UIElement(position, dimensions)
     {
+        this->frameDimensions = frameDimensions;
+        
         GLfloat camData[12] =
 		{
 			0.0f, 0.0f, 0.0f,
@@ -125,7 +127,7 @@ namespace PaintingRegistration
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
         glLoadIdentity();
-        glOrtho(0.0f, 480.0f, 640.0f, 0.0f, -100.0f, 100.0f);
+        glOrtho(0.0f, frameDimensions.getY(), frameDimensions.getX(), 0.0f, -100.0f, 100.0f);
         
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();

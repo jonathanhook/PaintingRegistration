@@ -32,13 +32,17 @@
 namespace PaintingRegistration
 {
     /* Public */
-    App::App(unsigned int width, unsigned height, std::string resourcePath, std::string documentsPath)
-    {        
+    App::App(unsigned int width, unsigned height, unsigned int cameraWidth, unsigned int cameraHeight, std::string resourcePath, std::string documentsPath)
+    {
+        this->cameraWidth = cameraWidth;
+        this->cameraHeight = cameraHeight;
+        
         FileLocationUtility::setResourcePath(resourcePath);
         FileLocationUtility::setDocumentsPath(documentsPath);
         WindowingUtils::DEVICE_WINDOW_WIDTH = width;
         WindowingUtils::DEVICE_WINDOW_HEIGHT = height;
     
+        isProcessing = false;
         fData = NULL;
         texture = new GLTexture("texture.jpg");
         tracker = new PaintingTracker();
@@ -55,6 +59,11 @@ namespace PaintingRegistration
         NDELETE(browser);
         NDELETE(texture);
         NDELETE(tracker);
+    }
+    
+    bool App::getIsProcessing(void) const
+    {
+        return isProcessing;
     }
     
     void App::render(void) const
@@ -81,11 +90,9 @@ namespace PaintingRegistration
         processing->render();
     }
     
-    void App::setLatestFrame(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
+    void App::setLatestFrame(const unsigned char *fData)
     {
         this->fData = fData;
-        this->fWidth = fWidth;
-        this->fHeight = fHeight;
     }
     
     void App::train(void)
@@ -110,8 +117,9 @@ namespace PaintingRegistration
         registerEventHandler(processing);
         unregisterEventHandler(camera);
         
+        isProcessing = true;
         processing->setIsVisible(true);
-        tracker->computeAsync(fData, fWidth, fHeight);
+        tracker->computeAsync(fData, cameraWidth, cameraHeight);
     }
     
     void App::initScene(unsigned int width, unsigned height)
@@ -136,11 +144,11 @@ namespace PaintingRegistration
     {
         uiMode = CAMERA;
         
-        camera = new Camera(Point2i(0, 0), Point2i(width, height), Point2i(640, 480), Point2i(1024, 1024));
+        camera = new Camera(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
         
-        browser = new Browser(Point2i(0, 0), Point2i(width, height), Point2i(640, 480), Point2i(1024, 1024));
+        browser = new Browser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
         browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         
         processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));
@@ -171,6 +179,7 @@ namespace PaintingRegistration
             registerEventHandler(camera);
         }
         
+        isProcessing = false;
         processing->setIsVisible(false);
     }
     
@@ -185,8 +194,8 @@ namespace PaintingRegistration
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1024, 1024, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
-            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, fWidth, fHeight, GL_BGRA, GL_UNSIGNED_BYTE, fData);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXTURE_DIM, TEXTURE_DIM, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, cameraWidth, cameraHeight, GL_BGRA, GL_UNSIGNED_BYTE, fData);
             glDisable(GL_TEXTURE_2D);
         }
     }
