@@ -53,7 +53,7 @@ namespace PaintingRegistration
         void update(void);
         
     private:
-        static const unsigned int TEXTURE_DIM = 1024;
+        static const unsigned int TEXTURE_DIM = 512;
         
         Browser *browser;
         Camera *camera;
