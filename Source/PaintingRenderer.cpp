@@ -30,6 +30,9 @@
 
 namespace PaintingRegistration
 {
+    /* Constants */
+    const std::string PaintingRenderer::TEXTURE_FILENAME_FORMAT = "%i.png";
+    
     /* Public */
     PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
         UIElement(position, dimensions)
@@ -57,7 +60,7 @@ namespace PaintingRegistration
 		};
         
         camVbo = new GLVbo(GL_TRIANGLE_STRIP, GL_STATIC_DRAW, camData, 4, camTextureData);
-        textureBlock = new TextureBlock("tex%i.jpg", 1, 10, 1.0f);
+        textureBlock = new TextureBlock(TEXTURE_FILENAME_FORMAT, 1, 24, 1.0f);
     }
     
     PaintingRenderer::~PaintingRenderer(void)

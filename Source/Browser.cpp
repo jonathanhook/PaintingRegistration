@@ -31,19 +31,6 @@ namespace PaintingRegistration
         UIElement(position, dimensions)
     {
         clicked = NULL;
-        
-        painting = new PaintingRenderer(position, dimensions,frameDimensions, textureDimensions);
-        
-        int px = position.getX();
-        int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
-        int dx = dimensions.getX();
-        int dy = CONTROL_BAR_HEIGHT;
-        
-        controls = new BrowserControls(Point2i(px, py), Point2i(dx, dy));
-        controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
-        controls->setPositionChangedCallback(MakeDelegate(this, &Browser::controls_PositionChanged));
-        registerEventHandler(controls);
-        
         texture = new GLTexture("frame.png");
     }
     
@@ -95,10 +82,5 @@ namespace PaintingRegistration
         {
             clicked(e);
         }
-    }
-    
-    void Browser::controls_PositionChanged(float position)
-    {
-        painting->setPosition(position);
     }
 }

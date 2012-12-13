@@ -18,32 +18,24 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-
 #include "UIElement.h"
 
 namespace PaintingRegistration
 {
     class ExitButton;
-    class Slider;
     
     class BrowserControls :
         public UIElement
     {
     public:
-        typedef FastDelegate1<float> PositionChangedCallback;
-        
         BrowserControls(const Point2i &position, const Point2i &dimensions);
         ~BrowserControls(void);
         
-        void render(void) const;
-        void setPositionChangedCallback(PositionChangedCallback positionChanged);
+        virtual void render(void) const;
         
-    private:
+    protected:
         ExitButton *exit;
-        Slider *slider;
-        PositionChangedCallback positionChanged;
         
         void exit_Clicked(UIElement *e);
-        void slider_ValueChanged(float value);
     };
 }

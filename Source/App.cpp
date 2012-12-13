@@ -22,7 +22,7 @@
 #include "JDHUtility/Ndelete.h"
 #include "JDHUtility/OpenGL.h"
 #include "JDHUtility/WindowingUtils.h"
-#include "Browser.h"
+#include "SlideBrowser.h"
 #include "Camera.h"
 #include "Overlay.h"
 #include "PaintingRenderer.h"
@@ -148,7 +148,7 @@ namespace PaintingRegistration
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
         
-        browser = new Browser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
+        browser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
         browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         
         processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));

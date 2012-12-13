@@ -17,35 +17,19 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "JDHUtility/Ndelete.h"
-#include "ExitButton.h"
-#include "BrowserControls.h"
+#pragma once
+#include "Browser.h"
 
 namespace PaintingRegistration
 {
-    /* Public */
-    BrowserControls::BrowserControls(const Point2i &position, const Point2i &dimensions) :
-        UIElement(position, dimensions)
+    class SlideBrowser :
+        public Browser
     {
-        clicked = NULL;
-    }
-    
-    BrowserControls::~BrowserControls(void)
-    {
-        NDELETE(exit);
-    }
-    
-    void BrowserControls::render(void) const
-    {
-        exit->render();
-    }
-    
-    /* Protected */
-    void BrowserControls::exit_Clicked(UIElement *e)
-    {
-        if(clicked != NULL)
-        {
-            clicked(e);
-        }
-    }
+    public:
+        SlideBrowser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
+        ~SlideBrowser(void);
+        
+    private:
+        void controls_PositionChanged(float position);
+    };
 }

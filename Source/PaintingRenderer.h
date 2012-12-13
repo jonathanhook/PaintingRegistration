@@ -19,6 +19,7 @@
  */
 #pragma once
 #include <opencv2/core/core.hpp>
+#include "JDHUtility/OpenGL.h"
 #include "UIElement.h"
 
 namespace JDHUtility
@@ -44,6 +45,8 @@ namespace PaintingRegistration
         void setPosition(float position);
         
     private:
+        static const std::string TEXTURE_FILENAME_FORMAT;
+        
         GLuint cameraTexture;
         GLVbo *camVbo;
         const Point2f *vertices;

@@ -42,12 +42,11 @@ namespace PaintingRegistration
         PaintingRenderer *getPainting(void);
         void render(void) const;
 
-    private:
+    protected:
         BrowserControls *controls;
         PaintingRenderer *painting;
         GLTexture *texture;
-
+        
         void controls_Clicked(UIElement *e);
-        void controls_PositionChanged(float position);
     };
 }
