@@ -18,35 +18,17 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-
-#include "UIElement.h"
-
-namespace JDHUtility
-{
-    class GLTexture;
-}
+#include "PaintingRenderer.h"
 
 namespace PaintingRegistration
 {
-    class BrowserControls;
-    class PaintingRenderer;
-    
-    class Browser :
-        public UIElement
+    class RubPaintingRenderer :
+        public PaintingRenderer
     {
     public:
-        Browser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
-        ~Browser(void);
+        RubPaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
+        ~RubPaintingRenderer(void);
         
-        virtual bool contains (const FingerEventArgs &e) const;
-        PaintingRenderer *getPainting(void);
-        void render(void) const;
-
-    protected:
-        BrowserControls *controls;
-        PaintingRenderer *painting;
-        GLTexture *texture;
-        
-        void controls_Clicked(UIElement *e);
+        void fingerUpdated(const FingerEventArgs &e);
     };
 }

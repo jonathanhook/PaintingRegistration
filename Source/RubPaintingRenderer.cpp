@@ -17,36 +17,24 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
-
-#include "UIElement.h"
-
-namespace JDHUtility
-{
-    class GLTexture;
-}
+#include "RubPaintingRenderer.h"
 
 namespace PaintingRegistration
 {
-    class BrowserControls;
-    class PaintingRenderer;
-    
-    class Browser :
-        public UIElement
+    /* Public */
+    RubPaintingRenderer::RubPaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
+        PaintingRegistration::PaintingRenderer(position, dimensions, frameDimensions, textureDimensions)
     {
-    public:
-        Browser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
-        ~Browser(void);
         
-        virtual bool contains (const FingerEventArgs &e) const;
-        PaintingRenderer *getPainting(void);
-        void render(void) const;
-
-    protected:
-        BrowserControls *controls;
-        PaintingRenderer *painting;
-        GLTexture *texture;
+    }
+    
+    RubPaintingRenderer::~RubPaintingRenderer(void)
+    {
         
-        void controls_Clicked(UIElement *e);
-    };
+    }
+    
+    void RubPaintingRenderer::fingerUpdated(const FingerEventArgs &e)
+    {
+        
+    }
 }

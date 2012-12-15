@@ -27,7 +27,10 @@
 #include "Overlay.h"
 #include "PaintingRenderer.h"
 #include "PaintingTracker.h"
+#include "RubBrowser.h"
 #include "App.h"
+
+//#define SLIDE
 
 namespace PaintingRegistration
 {
@@ -148,7 +151,11 @@ namespace PaintingRegistration
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
         
+#ifdef SLIDE
         browser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
+#else
+        browser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
+#endif
         browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         
         processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));

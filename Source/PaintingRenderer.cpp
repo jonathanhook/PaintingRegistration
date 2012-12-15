@@ -31,7 +31,7 @@
 namespace PaintingRegistration
 {
     /* Constants */
-    const std::string PaintingRenderer::TEXTURE_FILENAME_FORMAT = "%i.png";
+    const std::string PaintingRenderer::TEXTURE_FILENAME_FORMAT = "%i.jpg";
     
     /* Public */
     PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
@@ -67,6 +67,11 @@ namespace PaintingRegistration
     {
         NDELETE(camVbo);
         NDELETE(textureBlock);
+    }
+    
+    const float *PaintingRenderer::getMatrix(void) const
+    {
+        return matrix;
     }
     
     void PaintingRenderer::render(void) const

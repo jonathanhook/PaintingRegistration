@@ -17,37 +17,30 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "SlideBrowserControls.h"
-#include "SlidePaintingRenderer.h"
-#include "SlideBrowser.h"
+#include "RubBrowserControls.h"
+#include "RubPaintingRenderer.h"
+#include "RubBrowser.h"
 
 namespace PaintingRegistration
 {
     /* Public */
-    SlideBrowser::SlideBrowser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
-        Browser(position, dimensions, textureDimensions, textureDimensions)
+    RubBrowser::RubBrowser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
+        Browser(position, dimensions, frameDimensions, textureDimensions)
     {
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
         int dx = dimensions.getX();
         int dy = CONTROL_BAR_HEIGHT;
         
-        controls = new SlideBrowserControls(Point2i(px, py), Point2i(dx, dy));
+        controls = new RubBrowserControls(Point2i(px, py), Point2i(dx, dy));
         controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
-        ((SlideBrowserControls *)controls)->setPositionChangedCallback(MakeDelegate(this, &SlideBrowser::controls_PositionChanged));
         registerEventHandler(controls);
         
-        painting = new SlidePaintingRenderer(position, dimensions,frameDimensions, textureDimensions);
+        painting = new RubPaintingRenderer(position, dimensions,frameDimensions, textureDimensions);
+        registerEventHandler(painting);
     }
     
-    SlideBrowser::~SlideBrowser(void)
+    RubBrowser::~RubBrowser(void)
     {
-        
-    }
-    
-    /* Private */
-    void SlideBrowser::controls_PositionChanged(float position)
-    {
-        painting->setPosition(position);
     }
 }

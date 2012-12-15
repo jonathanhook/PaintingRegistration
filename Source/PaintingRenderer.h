@@ -39,6 +39,7 @@ namespace PaintingRegistration
         PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
         ~PaintingRenderer(void);
         
+        const float *getMatrix(void) const;
         void render(void) const;
         void setCameraTexture(GLuint handle);
         void setMatrix(const float *matrix);
