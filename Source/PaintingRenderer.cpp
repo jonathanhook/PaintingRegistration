@@ -34,10 +34,15 @@ namespace PaintingRegistration
     const std::string PaintingRenderer::TEXTURE_FILENAME_FORMAT = "%i.jpg";
     
     /* Public */
-    PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
-        UIElement(position, dimensions)
+    PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+        UIElement(position, dims)
     {
-        this->frameDimensions = frameDimensions;
+        this->frameDimensions = frameDims;
+        this->targetDimensions = targetDims;
+        
+        projection = new GLfloat[16];
+        modelview = new GLfloat[16];
+        viewport = new GLint[4];
         
         GLfloat camData[12] =
 		{
@@ -48,9 +53,9 @@ namespace PaintingRegistration
 		};
         
         float u0 = 0.0f;
-        float u1 = (float)frameDimensions.getX() / (float)textureDimensions.getX();
+        float u1 = (float)frameDims.getX() / (float)textureDims.getX();
         float v0 = 0.0f;
-        float v1 = (float)frameDimensions.getY() / (float)textureDimensions.getY();
+        float v1 = (float)frameDims.getY() / (float)textureDims.getY();
         GLfloat camTextureData[8] =
 		{
 			u0, v1,
@@ -67,9 +72,13 @@ namespace PaintingRegistration
     {
         NDELETE(camVbo);
         NDELETE(textureBlock);
+        
+        NDELETE_ARRAY(projection);
+        NDELETE_ARRAY(modelview);
+        NDELETE_ARRAY(viewport);
     }
     
-    const float *PaintingRenderer::getMatrix(void) const
+    const Matrixf *PaintingRenderer::getMatrix(void) const
     {
         return matrix;
     }
@@ -85,7 +94,7 @@ namespace PaintingRegistration
         this->cameraTexture = cameraTexture;
     }
     
-    void PaintingRenderer::setMatrix(const float *matrix)
+    void PaintingRenderer::setMatrix(const Matrixf *matrix)
     {
         this->matrix = matrix;
     }
@@ -140,9 +149,13 @@ namespace PaintingRegistration
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
-        glMultMatrixf((float *)matrix);
-        glScalef(720.0f, 1060.0f, 1.0f); // HACK: magic numbers for image size, should scale homography
+        glMultMatrixf((float *)matrix->getPtr());
+        glScalef(targetDimensions.getX(), targetDimensions.getY(), 1.0f);
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        
+        glGetFloatv(GL_PROJECTION_MATRIX, projection);
+        glGetFloatv(GL_MODELVIEW_MATRIX, modelview);
+        glGetIntegerv(GL_VIEWPORT, viewport);
         
         textureBlock->bind();
         GLPrimitives::getInstance()->renderSquare();

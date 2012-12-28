@@ -47,6 +47,7 @@ namespace PaintingRegistration
         ~App(void);
         
         bool getIsProcessing(void) const;
+        
         void render(void) const;
         void setLatestFrame(const unsigned char *fData);
         void train(void);

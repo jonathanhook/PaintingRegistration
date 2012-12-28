@@ -19,6 +19,7 @@
  */
 #pragma once
 #include <opencv2/core/core.hpp>
+#include "JDHUtility/Matrixf.h"
 #include "JDHUtility/OpenGL.h"
 #include "UIElement.h"
 
@@ -36,26 +37,32 @@ namespace PaintingRegistration
         public UIElement
     {
     public:
-        PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
+        PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions, const Point2i &layerDims);
         ~PaintingRenderer(void);
         
-        const float *getMatrix(void) const;
+        const Matrixf *getMatrix(void) const;
         void render(void) const;
         void setCameraTexture(GLuint handle);
-        void setMatrix(const float *matrix);
+        void setMatrix(const Matrixf *matrix);
         void setPosition(float position);
+        
+    protected:
+        GLfloat *modelview;
+        GLfloat *projection;
+        GLint *viewport;
+        const Matrixf *matrix;
         
     private:
         static const std::string TEXTURE_FILENAME_FORMAT;
         
         GLuint cameraTexture;
         GLVbo *camVbo;
-        const Point2f *vertices;
+        Point2i targetDimensions;
         TextureBlock *textureBlock;
-        const float *matrix;
         Point2i frameDimensions;
+        const Point2f *vertices;
         
         void renderCameraImage(void) const;
-        void renderPerspective(void) const;
+        virtual void renderPerspective(void) const;
     };
 }

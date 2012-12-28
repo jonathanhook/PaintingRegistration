@@ -55,6 +55,7 @@
 		FC4CA1FE165B9D17002E58C9 /* Point3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F4165B9D17002E58C9 /* Point3f.cpp */; };
 		FC4CA1FF165B9D17002E58C9 /* Vector2f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */; };
 		FC4CA220165BA349002E58C9 /* PaintingTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */; };
+		FC68072C168DF5C900C5AC13 /* Matrixf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC68072A168DF5C900C5AC13 /* Matrixf.cpp */; };
 		FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = FC73B1DD165F918000AF9DCB /* stb_image.c */; };
 		FC8E4ABD165CFE8000B4B64D /* Colour3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB8165CFE8000B4B64D /* Colour3f.cpp */; };
 		FC8E4ABE165CFE8000B4B64D /* GLPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB9165CFE8000B4B64D /* GLPrimitives.cpp */; };
@@ -158,6 +159,8 @@
 		FC4CA1F5165B9D17002E58C9 /* Vector2f.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2f.cpp; sourceTree = "<group>"; };
 		FC4CA21E165BA349002E58C9 /* PaintingTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintingTracker.h; sourceTree = "<group>"; };
 		FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintingTracker.cpp; sourceTree = "<group>"; };
+		FC68072A168DF5C900C5AC13 /* Matrixf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrixf.cpp; sourceTree = "<group>"; };
+		FC68072B168DF5C900C5AC13 /* Matrixf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrixf.h; sourceTree = "<group>"; };
 		FC73B1DC165F918000AF9DCB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		FC73B1DD165F918000AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		FC8E4AB3165CFE8000B4B64D /* Colour3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colour3f.h; sourceTree = "<group>"; };
@@ -389,6 +392,8 @@
 		FCACCDBC165B96DF00CD0644 /* JDHUtility */ = {
 			isa = PBXGroup;
 			children = (
+				FC68072A168DF5C900C5AC13 /* Matrixf.cpp */,
+				FC68072B168DF5C900C5AC13 /* Matrixf.h */,
 				FC73B1DC165F918000AF9DCB /* stb_image.h */,
 				FC73B1DD165F918000AF9DCB /* stb_image.c */,
 				FC8E4AB3165CFE8000B4B64D /* Colour3f.h */,
@@ -588,6 +593,7 @@
 				FCD110D8167BC17400C76336 /* RubBrowserControls.cpp in Sources */,
 				FCFC365F167CE4940063E53C /* SlidePaintingRenderer.cpp in Sources */,
 				FCFC3663167CE6760063E53C /* RubPaintingRenderer.cpp in Sources */,
+				FC68072C168DF5C900C5AC13 /* Matrixf.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +684,10 @@
 				HEADER_SEARCH_PATHS = "../../../Source/**";
 				INFOPLIST_FILE = "PaintingRegistration/PaintingRegistration-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
+				);
 				PRODUCT_NAME = Pentimento;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -698,6 +708,10 @@
 				HEADER_SEARCH_PATHS = "../../../Source/**";
 				INFOPLIST_FILE = "PaintingRegistration/PaintingRegistration-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
+				);
 				PRODUCT_NAME = Pentimento;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

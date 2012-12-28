@@ -20,6 +20,7 @@
 #pragma once
 #include <vector>
 #include "JDHUtility/GLTexture.h"
+#include "JDHUtility/Point2i.h"
 
 using namespace JDHUtility;
 
@@ -32,6 +33,7 @@ namespace PaintingRegistration
         ~TextureBlock(void);
         
         void bind(void) const;
+        const Point2i &getDimensions(void) const;
         void setPosition(float position);
         void unbind(void) const;
         
@@ -42,6 +44,7 @@ namespace PaintingRegistration
         unsigned int currentTexture;
         std::string format;
         std::vector<GLTexture> textures;
+        Point2i dimensions;
         
         void loadAll(void);
         void loadTexture(unsigned int i);

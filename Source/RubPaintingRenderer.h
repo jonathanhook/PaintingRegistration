@@ -26,9 +26,17 @@ namespace PaintingRegistration
         public PaintingRenderer
     {
     public:
-        RubPaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
+        RubPaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims);
         ~RubPaintingRenderer(void);
         
         void fingerUpdated(const FingerEventArgs &e);
+        void renderPerspective(void) const;
+        
+    private:
+        Matrixf *inverse;
+        
+        static void calculateInverse(float *m, float *i);
+        static float calculateDeterminant(float *m);
+        static void transform(float *matrix, float x, float y, float z, float &rx, float &ry, float &rz);
     };
 }

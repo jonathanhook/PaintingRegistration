@@ -17,11 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef GLTexture_H
-#define GLTexture_H
-
-#include <JDHUtility/OpenGL.h>
+#pragma once
 #include <string>
+#include "OpenGL.h"
 
 namespace JDHUtility
 {
@@ -38,13 +36,16 @@ namespace JDHUtility
 								GLenum wrapT		= GL_CLAMP_TO_EDGE) const;
         void            unbind(void) const;
 		unsigned int	getId(void) const;
+        unsigned int    getWidth(void) const;
+        unsigned int    getHeight(void) const;
 		bool			isTexture(void) const;
 
 	private:
 		static const unsigned int INVALID_TEXTURE;
 
 		unsigned int id;
+        unsigned int width;
+        unsigned int height;
 	};
 }
-#endif
 

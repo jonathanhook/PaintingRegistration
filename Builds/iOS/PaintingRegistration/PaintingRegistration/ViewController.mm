@@ -65,11 +65,6 @@ unsigned int lastProcessingRender = 0;
 {
     [super viewDidLoad];
     self.context = [[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1] autorelease];
-
-    if (!self.context)
-    {
-        NSLog(@"Failed to create ES context");
-    }
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -87,8 +82,6 @@ unsigned int lastProcessingRender = 0;
     NSString *documentsPath = [paths objectAtIndex:0];
     
     app = new PaintingRegistration::App(winX, winY, CAM_WIDTH, CAM_HEIGHT, [resourcePath UTF8String], [documentsPath UTF8String]);
-    app->train();
-
     [self initVideoCapture];
 }
 
@@ -193,7 +186,6 @@ unsigned int lastProcessingRender = 0;
     NSError *error;
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
-    //session.sessionPreset = AVCaptureSessionPreset640x480;
     session.sessionPreset = AVCaptureSessionPresetMedium;
     
     AVCaptureDevice *device = [self findBackFacingCamera];

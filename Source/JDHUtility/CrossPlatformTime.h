@@ -17,8 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CrossPlatformTime_H
-#define CrossPlatformTime_H
+#pragma once
 
 namespace JDHUtility
 {
@@ -28,5 +27,4 @@ namespace JDHUtility
 		static int getTimeMillis(void);
 	};
 }
-#endif
 

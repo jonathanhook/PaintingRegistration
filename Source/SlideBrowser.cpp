@@ -24,8 +24,8 @@
 namespace PaintingRegistration
 {
     /* Public */
-    SlideBrowser::SlideBrowser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
-        Browser(position, dimensions, textureDimensions, textureDimensions)
+    SlideBrowser::SlideBrowser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+        Browser(position, dims, textureDims, textureDims, targetDims)
     {
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
@@ -37,7 +37,7 @@ namespace PaintingRegistration
         ((SlideBrowserControls *)controls)->setPositionChangedCallback(MakeDelegate(this, &SlideBrowser::controls_PositionChanged));
         registerEventHandler(controls);
         
-        painting = new SlidePaintingRenderer(position, dimensions,frameDimensions, textureDimensions);
+        painting = new SlidePaintingRenderer(position, dims,frameDims, textureDims, targetDims);
     }
     
     SlideBrowser::~SlideBrowser(void)

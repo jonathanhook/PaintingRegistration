@@ -50,6 +50,7 @@ namespace PaintingRegistration
         texture = new GLTexture("texture.jpg");
         tracker = new PaintingTracker();
         tracker->setCompletedCallback(MakeDelegate(this, &App::tracker_Completed));
+        tracker->train("target.jpg");
 
         initScene(width, height);
         initUI(width, height);
@@ -152,9 +153,9 @@ namespace PaintingRegistration
         registerEventHandler(camera);
         
 #ifdef SLIDE
-        browser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
+        browser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
 #else
-        browser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
+        browser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
 #endif
         browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         

@@ -18,7 +18,7 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <math.h>
-#include <JDHUtility/Point2f.h>
+#include "Point2f.h"
 #include "Vector2f.h"
 
 namespace JDHUtility

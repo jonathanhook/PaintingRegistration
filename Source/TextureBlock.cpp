@@ -46,6 +46,11 @@ namespace PaintingRegistration
         t.bind(GL_REPLACE);
     }
     
+    const Point2i &TextureBlock::getDimensions(void) const
+    {
+        return dimensions;
+    }
+    
     void TextureBlock::setPosition(float position)
     {
         this->position = position;
@@ -73,7 +78,10 @@ namespace PaintingRegistration
     {
         char buffer[1024];
         sprintf(buffer, format.c_str(), i);
+        
         GLTexture t(buffer);
+        dimensions.setX(t.getWidth());
+        dimensions.setY(t.getHeight());
         textures.push_back(t);
     }
 }

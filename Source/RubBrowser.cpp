@@ -24,8 +24,8 @@
 namespace PaintingRegistration
 {
     /* Public */
-    RubBrowser::RubBrowser(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
-        Browser(position, dimensions, frameDimensions, textureDimensions)
+    RubBrowser::RubBrowser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+        Browser(position, dims, frameDims, textureDims, targetDims)
     {
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
@@ -36,7 +36,7 @@ namespace PaintingRegistration
         controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
         registerEventHandler(controls);
         
-        painting = new RubPaintingRenderer(position, dimensions,frameDimensions, textureDimensions);
+        painting = new RubPaintingRenderer(position, dims,frameDims, textureDims, targetDims);
         registerEventHandler(painting);
     }
     

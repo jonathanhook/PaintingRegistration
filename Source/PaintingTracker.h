@@ -26,12 +26,14 @@
 #include <opencv2/nonfree/nonfree.hpp>
 #include "MultiTouchEvents/FastDelegate.h"
 #include "JDHUtility/Point3f.h"
+#include "JDHUtility/Point2i.h"
 
 using namespace fastdelegate;
 
 namespace JDHUtility
 {
     class Point2f;
+    class Matrixf;
 }
 using namespace JDHUtility;
 
@@ -58,7 +60,8 @@ namespace PaintingRegistration
         bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         void computeAsync(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
-        const float *getGlMatrix(void) const;
+        const Matrixf *getGlMatrix(void) const;
+        const Point2i &getTargetDimensions(void) const;
         const Point2f *getVertices(void) const;
         void loadFeatures(void);
         void saveFeatures(void) const;
@@ -77,7 +80,8 @@ namespace PaintingRegistration
         double minDist;
         Point2f *vertices;
         unsigned char *loadedData;
-        float *glMatrix;
+        Matrixf *glMatrix;
+        Point2i targetDimensions;
         
         cv::Mat cameraDescriptors;
         cv::Mat greyImage;

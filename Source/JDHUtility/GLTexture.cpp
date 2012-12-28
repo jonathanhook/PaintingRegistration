@@ -37,6 +37,8 @@ namespace JDHUtility
         
         int x, y, n;
         unsigned char *data = stbi_load(resPath.c_str(), &x, &y, &n, 0);
+        width = x;
+        height = y;
         
         glEnable(GL_TEXTURE_2D);
         glGenTextures(1, &id);
@@ -79,6 +81,16 @@ namespace JDHUtility
 		return id;
 	}
 
+    unsigned int GLTexture::getWidth(void) const
+    {
+        return width;
+    }
+    
+    unsigned int GLTexture::getHeight(void) const
+    {
+        return height;
+    }
+    
 	bool GLTexture::isTexture(void) const
 	{
 		return id != INVALID_TEXTURE;

@@ -17,10 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef Vector2f_H
-#define Vector2f_H
-
-#include <JDHUtility/Point2f.h>
+#pragma once
+#include "Point2f.h"
 
 namespace JDHUtility
 {
@@ -43,4 +41,3 @@ namespace JDHUtility
 		void		normalise		(void);
 	};
 }
-#endif

@@ -17,10 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef Point3f_H
-#define Point3f_H
-
-#include <JDHUtility/Point2f.h>
+#pragma once
+#include "Point2f.h"
 
 namespace JDHUtility
 {
@@ -42,4 +40,3 @@ namespace JDHUtility
 
 	};
 }
-#endif

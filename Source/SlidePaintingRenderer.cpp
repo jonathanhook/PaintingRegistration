@@ -22,8 +22,8 @@
 namespace PaintingRegistration
 {
     /* Public */
-    SlidePaintingRenderer::SlidePaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
-        PaintingRenderer(position, dimensions, frameDimensions, textureDimensions)
+    SlidePaintingRenderer::SlidePaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims) :
+        PaintingRenderer(position, dims, frameDims, textureDims, layerDims)
     {
         
     }

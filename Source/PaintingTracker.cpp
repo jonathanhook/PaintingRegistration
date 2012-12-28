@@ -29,6 +29,7 @@
 #include "JDHUtility/Ndelete.h"
 #include "JDHUtility/OpenGL.h"
 #include "JDHUtility/Point2f.h"
+#include "JDHUtility/Matrixf.h"
 #include "PaintingTracker.h"
 
 using namespace JDHUtility;
@@ -48,7 +49,7 @@ namespace PaintingRegistration
         matcher = new cv::BFMatcher(cv::NORM_L2, false);
         vertices = new Point2f[VERTEX_COUNT];
         loadedData = NULL;
-        glMatrix = new float[16];
+        glMatrix = new Matrixf(4, 4);
 
         detector = new cv::SiftFeatureDetector();
         extractor = new cv::SiftDescriptorExtractor();
@@ -63,7 +64,7 @@ namespace PaintingRegistration
         NDELETE(extractor);
         NDELETE(matcher);
         NDELETE_ARRAY(vertices);
-        NDELETE_ARRAY(glMatrix);
+        NDELETE(glMatrix);
     }
     
     bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
@@ -128,22 +129,24 @@ namespace PaintingRegistration
             float area = getArea();
             if(area > AREA_THRESHOLD)
             {
+                float *gm = glMatrix->getPtr();
+                
                 for(int i = 0; i < 16; i++)
                 {
-                    if(i % 5 != 0) glMatrix[i] = 0.0f;
-                    else glMatrix[i] = 1.0f;
+                    if(i % 5 != 0) gm[i] = 0.0f;
+                    else gm[i] = 1.0f;
                 }
                 
                 double *matrix = (double *)homography.data;
-                glMatrix[0]	= matrix[0];
-                glMatrix[4]	= matrix[1];
-                glMatrix[12] = matrix[2];
-                glMatrix[1]	= matrix[3];
-                glMatrix[5]	= matrix[4];
-                glMatrix[13] = matrix[5];
-                glMatrix[3]	= matrix[6];
-                glMatrix[7]	= matrix[7];
-                glMatrix[15] = matrix[8];
+                gm[0] = matrix[0];
+                gm[4] = matrix[1];
+                gm[12] = matrix[2];
+                gm[1] = matrix[3];
+                gm[5] = matrix[4];
+                gm[13] = matrix[5];
+                gm[3] = matrix[6];
+                gm[7] = matrix[7];
+                gm[15] = matrix[8];
                 
                 hasTarget = true;
             }
@@ -203,9 +206,14 @@ namespace PaintingRegistration
         pthread_create(&thread, NULL, run, (void *)this);
     }
     
-    const float *PaintingTracker::getGlMatrix(void) const
+    const Matrixf *PaintingTracker::getGlMatrix(void) const
     {
         return glMatrix;
+    }
+    
+    const Point2i &PaintingTracker::getTargetDimensions(void) const
+    {
+        return targetDimensions;
     }
     
     bool PaintingTracker::getHasVertices(void) const
@@ -249,6 +257,9 @@ namespace PaintingRegistration
         int x, y, n;
         unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 1);
         targetImage = cv::Mat(y, x, CV_8UC1, (unsigned char *)data, 0);
+        
+        targetDimensions.setX(x);
+        targetDimensions.setY(y);
         
         std::string sPath = FileLocationUtility::getFileInDocumentsPath(SAVE_FILE);
         if(fopen(sPath.c_str(), "r") == NULL)
