@@ -40,10 +40,6 @@ namespace PaintingRegistration
         this->frameDimensions = frameDims;
         this->targetDimensions = targetDims;
         
-        projection = new GLfloat[16];
-        modelview = new GLfloat[16];
-        viewport = new GLint[4];
-        
         GLfloat camData[12] =
 		{
 			0.0f, 0.0f, 0.0f,
@@ -72,10 +68,6 @@ namespace PaintingRegistration
     {
         NDELETE(camVbo);
         NDELETE(textureBlock);
-        
-        NDELETE_ARRAY(projection);
-        NDELETE_ARRAY(modelview);
-        NDELETE_ARRAY(viewport);
     }
     
     const Matrixf *PaintingRenderer::getMatrix(void) const
@@ -152,10 +144,6 @@ namespace PaintingRegistration
         glMultMatrixf((float *)matrix->getPtr());
         glScalef(targetDimensions.getX(), targetDimensions.getY(), 1.0f);
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        
-        glGetFloatv(GL_PROJECTION_MATRIX, projection);
-        glGetFloatv(GL_MODELVIEW_MATRIX, modelview);
-        glGetIntegerv(GL_VIEWPORT, viewport);
         
         textureBlock->bind();
         GLPrimitives::getInstance()->renderSquare();

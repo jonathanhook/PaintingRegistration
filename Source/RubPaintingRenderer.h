@@ -31,12 +31,9 @@ namespace PaintingRegistration
         
         void fingerUpdated(const FingerEventArgs &e);
         void renderPerspective(void) const;
+        void setMatrix(const Matrixf *matrix);
         
     private:
         Matrixf *inverse;
-        
-        static void calculateInverse(float *m, float *i);
-        static float calculateDeterminant(float *m);
-        static void transform(float *matrix, float x, float y, float z, float &rx, float &ry, float &rz);
     };
 }

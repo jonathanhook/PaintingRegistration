@@ -124,25 +124,26 @@ namespace JDHUtility
     /* Adapted from the MESA implementation of gluInvertMatrix */
     Matrixf Matrixf::getInverse(void) const
     {
-        assert(width * height == 16); // only words for OpenGL matrices
+        // NOTE: only words for OpenGL matrices
+        assert(width == 4 && height == 4);
         
         Matrixf result(width, height);
         float *m = matrix;
         float *inv = result.getPtr();
-            
-        inv[0] = m[5]  * m[10] * m[15] -
-        m[5]  * m[11] * m[14] -
-        m[9]  * m[6]  * m[15] +
-        m[9]  * m[7]  * m[14] +
-        m[13] * m[6]  * m[11] -
-        m[13] * m[7]  * m[10];
+        
+        inv[0] = m[5] * m[10] * m[15] -
+        m[5] * m[11] * m[14] -
+        m[9] * m[6] * m[15] +
+        m[9] * m[7] * m[14] +
+        m[13] * m[6] * m[11] -
+        m[13] * m[7] * m[10];
             
         inv[4] = -m[4]  * m[10] * m[15] +
-        m[4]  * m[11] * m[14] +
-        m[8]  * m[6]  * m[15] -
-        m[8]  * m[7]  * m[14] -
-        m[12] * m[6]  * m[11] +
-        m[12] * m[7]  * m[10];
+        m[4] * m[11] * m[14] +
+        m[8] * m[6] * m[15] -
+        m[8] * m[7] * m[14] -
+        m[12] * m[6] * m[11] +
+        m[12] * m[7] * m[10];
             
         inv[8] = m[4]  * m[9] * m[15] -
         m[4]  * m[11] * m[13] -

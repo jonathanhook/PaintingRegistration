@@ -37,29 +37,26 @@ namespace PaintingRegistration
         public UIElement
     {
     public:
-        PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions, const Point2i &layerDims);
+        PaintingRenderer(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions, const Point2i &targetDims);
         ~PaintingRenderer(void);
         
         const Matrixf *getMatrix(void) const;
         void render(void) const;
         void setCameraTexture(GLuint handle);
-        void setMatrix(const Matrixf *matrix);
+        virtual void setMatrix(const Matrixf *matrix);
         void setPosition(float position);
         
     protected:
-        GLfloat *modelview;
-        GLfloat *projection;
-        GLint *viewport;
+        Point2i frameDimensions;
         const Matrixf *matrix;
+        Point2i targetDimensions;
         
     private:
         static const std::string TEXTURE_FILENAME_FORMAT;
         
         GLuint cameraTexture;
         GLVbo *camVbo;
-        Point2i targetDimensions;
         TextureBlock *textureBlock;
-        Point2i frameDimensions;
         const Point2f *vertices;
         
         void renderCameraImage(void) const;
