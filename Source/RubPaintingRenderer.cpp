@@ -41,17 +41,23 @@ namespace PaintingRegistration
     
     void RubPaintingRenderer::fingerUpdated(const FingerEventArgs &e)
     {
+        float wx = WindowingUtils::getWindowDimensions().getX();
+        float wy = WindowingUtils::getWindowDimensions().getY();
+        float ratio = wy / wx;
         float x = e.getX();
-        float y = e.getY();
+        float y = (e.getY() / ratio);
         
-        x *= (float)frameDimensions.getY();
-        y *= (float)frameDimensions.getY();
+        float fx = (float)frameDimensions.getY() * x;
+        float fy = (float)frameDimensions.getX() * y;
         
-        Point3f p(x, y, 0.0f);
+        Point3f p(fx, fy, 0.0f);
         p = inverse->transform(p);
         
-        _s_x = p.getX() / (float)targetDimensions.getX();
-        _s_y = p.getY() / (float)targetDimensions.getY();
+        float scale = p.getZ() + 1.0f;
+        p.scale(scale, scale);
+        
+        _s_x = p.getX() / ((float)targetDimensions.getX());
+        _s_y = p.getY() / ((float)targetDimensions.getY());
     }
     
     void RubPaintingRenderer::renderPerspective(void) const
