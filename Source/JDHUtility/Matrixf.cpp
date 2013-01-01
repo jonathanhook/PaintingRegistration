@@ -19,6 +19,7 @@
  */
 #include <assert.h>
 #include <exception>
+#include <stdio.h>
 #include "Ndelete.h"
 #include "Matrixf.h"
 
@@ -120,143 +121,6 @@ namespace JDHUtility
 	{
 		return height;
 	}
-    
-    /* Adapted from the MESA implementation of gluInvertMatrix */
-    Matrixf Matrixf::getInverse(void) const
-    {
-        // NOTE: only words for OpenGL matrices
-        assert(width == 4 && height == 4);
-        
-        Matrixf result(width, height);
-        float *m = matrix;
-        float *inv = result.getPtr();
-        
-        inv[0] = m[5] * m[10] * m[15] -
-        m[5] * m[11] * m[14] -
-        m[9] * m[6] * m[15] +
-        m[9] * m[7] * m[14] +
-        m[13] * m[6] * m[11] -
-        m[13] * m[7] * m[10];
-            
-        inv[4] = -m[4]  * m[10] * m[15] +
-        m[4] * m[11] * m[14] +
-        m[8] * m[6] * m[15] -
-        m[8] * m[7] * m[14] -
-        m[12] * m[6] * m[11] +
-        m[12] * m[7] * m[10];
-            
-        inv[8] = m[4]  * m[9] * m[15] -
-        m[4]  * m[11] * m[13] -
-        m[8]  * m[5] * m[15] +
-        m[8]  * m[7] * m[13] +
-        m[12] * m[5] * m[11] -
-        m[12] * m[7] * m[9];
-            
-        inv[12] = -m[4]  * m[9] * m[14] +
-        m[4]  * m[10] * m[13] +
-        m[8]  * m[5] * m[14] -
-        m[8]  * m[6] * m[13] -
-        m[12] * m[5] * m[10] +
-        m[12] * m[6] * m[9];
-            
-        inv[1] = -m[1]  * m[10] * m[15] +
-        m[1]  * m[11] * m[14] +
-        m[9]  * m[2] * m[15] -
-        m[9]  * m[3] * m[14] -
-        m[13] * m[2] * m[11] +
-        m[13] * m[3] * m[10];
-            
-        inv[5] = m[0]  * m[10] * m[15] -
-        m[0]  * m[11] * m[14] -
-        m[8]  * m[2] * m[15] +
-        m[8]  * m[3] * m[14] +
-        m[12] * m[2] * m[11] -
-        m[12] * m[3] * m[10];
-            
-        inv[9] = -m[0]  * m[9] * m[15] +
-        m[0]  * m[11] * m[13] +
-        m[8]  * m[1] * m[15] -
-        m[8]  * m[3] * m[13] -
-        m[12] * m[1] * m[11] +
-        m[12] * m[3] * m[9];
-            
-        inv[13] = m[0]  * m[9] * m[14] -
-        m[0]  * m[10] * m[13] -
-        m[8]  * m[1] * m[14] +
-        m[8]  * m[2] * m[13] +
-        m[12] * m[1] * m[10] -
-        m[12] * m[2] * m[9];
-            
-        inv[2] = m[1]  * m[6] * m[15] -
-        m[1]  * m[7] * m[14] -
-        m[5]  * m[2] * m[15] +
-        m[5]  * m[3] * m[14] +
-        m[13] * m[2] * m[7] -
-        m[13] * m[3] * m[6];
-            
-        inv[6] = -m[0]  * m[6] * m[15] +
-        m[0]  * m[7] * m[14] +
-        m[4]  * m[2] * m[15] -
-        m[4]  * m[3] * m[14] -
-        m[12] * m[2] * m[7] +
-        m[12] * m[3] * m[6];
-            
-        inv[10] = m[0]  * m[5] * m[15] -
-        m[0]  * m[7] * m[13] -
-        m[4]  * m[1] * m[15] +
-        m[4]  * m[3] * m[13] +
-        m[12] * m[1] * m[7] -
-        m[12] * m[3] * m[5];
-            
-        inv[14] = -m[0]  * m[5] * m[14] +
-        m[0]  * m[6] * m[13] +
-        m[4]  * m[1] * m[14] -
-        m[4]  * m[2] * m[13] -
-        m[12] * m[1] * m[6] +
-        m[12] * m[2] * m[5];
-            
-        inv[3] = -m[1] * m[6] * m[11] +
-        m[1] * m[7] * m[10] +
-        m[5] * m[2] * m[11] -
-        m[5] * m[3] * m[10] -
-        m[9] * m[2] * m[7] +
-        m[9] * m[3] * m[6];
-            
-        inv[7] = m[0] * m[6] * m[11] -
-        m[0] * m[7] * m[10] -
-        m[4] * m[2] * m[11] +
-        m[4] * m[3] * m[10] +
-        m[8] * m[2] * m[7] -
-        m[8] * m[3] * m[6];
-            
-        inv[11] = -m[0] * m[5] * m[11] +
-        m[0] * m[7] * m[9] +
-        m[4] * m[1] * m[11] -
-        m[4] * m[3] * m[9] -
-        m[8] * m[1] * m[7] +
-        m[8] * m[3] * m[5];
-            
-        inv[15] = m[0] * m[5] * m[10] -
-        m[0] * m[6] * m[9] -
-        m[4] * m[1] * m[10] +
-        m[4] * m[2] * m[9] +
-        m[8] * m[1] * m[6] -
-        m[8] * m[2] * m[5];
-            
-        float det = m[0] * inv[0] + m[1] * inv[4] + m[2] * inv[8] + m[3] * inv[12];
-            
-        if (det != 0)
-        {
-            det = 1.0 / det;
-            
-            for (unsigned int i = 0; i < 16; i++)
-            {
-                inv[i] = inv[i] * det;
-            }
-        }
-        
-        return result;
-    }
 
 	float *Matrixf::getPtr(void)
 	{
@@ -282,6 +146,18 @@ namespace JDHUtility
     {
         Matrixf result = multiply(*this, m);
         setValues(result);
+    }
+    
+    void Matrixf::print(void) const
+    {
+        for(unsigned int i = 0; i < height; i++)
+        {
+            for(unsigned int j = 0; j < width; j++)
+            {
+                printf("%f\t", matrix[width * j + i]);
+            }
+            printf("\n");
+        }
     }
     
     void Matrixf::scale(float s)
@@ -329,7 +205,7 @@ namespace JDHUtility
             
         float vx = matrix[0] * a + matrix[4] * b + matrix[8] * c + matrix[12] * d;
         float vy = matrix[1] * a + matrix[5] * b + matrix[9] * c + matrix[13] * d;
-        float vz = matrix[3] * a + matrix[6] * b + matrix[10] * c + matrix[14] * d;
+        float vz = matrix[2] * a + matrix[6] * b + matrix[10] * c + matrix[14] * d;
 
         Point3f result(vx, vy, vz);
         return result;

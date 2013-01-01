@@ -28,12 +28,18 @@ namespace PaintingRegistration
     RubPaintingRenderer::RubPaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
         PaintingRegistration::PaintingRenderer(position, dims, frameDims, textureDims, targetDims)
     {
-        inverse = new Matrixf(4, 4);
+        unsigned int size = targetDims.getX() * targetDims.getY();
+        mask = new float[size];
+        
+        for(unsigned int i = 0; i < size; i++)
+        {
+            mask[i] = 1.0f;
+        }
     }
     
     RubPaintingRenderer::~RubPaintingRenderer(void)
     {
-        NDELETE(inverse);
+        NDELETE_ARRAY(mask);
     }
     
     static float _s_x = 1.0f;
@@ -58,6 +64,11 @@ namespace PaintingRegistration
         
         _s_x = p.getX() / ((float)targetDimensions.getX());
         _s_y = p.getY() / ((float)targetDimensions.getY());
+        
+        Point3f sp(1.0f, 0.0f, 0.0f);
+        sp = matrix->transform(sp);
+     
+        updateMask((int)p.getX(), (int)p.getY(), (int)sp.getX());
     }
     
     void RubPaintingRenderer::renderPerspective(void) const
@@ -96,13 +107,43 @@ namespace PaintingRegistration
         glPopMatrix();
     }
     
-    void RubPaintingRenderer::setMatrix(const Matrixf *matrix)
+    void RubPaintingRenderer::setMatrixInverse(const Matrixf *inverse)
     {
-        PaintingRenderer::setMatrix(matrix);
-        Matrixf result = matrix->getInverse();
-        inverse->setValues(result);
+        this->inverse = inverse;
     }
     
+    /* Private */
+    void RubPaintingRenderer::updateMask(int x, int y, float size)
+    {
+        if(isWithinPainting(x, y))
+        {
+            int limit = size / 2;
+            int stride = targetDimensions.getX();
+            
+            for(int i = -limit; i < limit; i++)
+            {
+                for(int j = -limit; j < limit; j++)
+                {
+                    if(isWithinPainting(i, j))
+                    {
+                        int index = i * stride + j;
+                        float v = mask[index] - 0.1f;
+                        
+                        if(v >= 0.0f)
+                        {
+                            mask[index] = v;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-
+    bool RubPaintingRenderer::isWithinPainting(int x, int y) const
+    {
+        return x >= 0 &&
+            x < targetDimensions.getX() &&
+            y >= 0 &&
+            y < targetDimensions.getY();
+    }
 }

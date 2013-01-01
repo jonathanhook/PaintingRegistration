@@ -28,6 +28,7 @@
 #include "PaintingRenderer.h"
 #include "PaintingTracker.h"
 #include "RubBrowser.h"
+#include "RubPaintingRenderer.h"
 #include "App.h"
 
 //#define SLIDE
@@ -176,6 +177,11 @@ namespace PaintingRegistration
             uiMode = BROWSER;
             
             browser->getPainting()->setMatrix(tracker->getGlMatrix());
+            
+#ifndef SLIDE
+            ((RubPaintingRenderer *)browser->getPainting())->setMatrixInverse(tracker->getGlMatrixInverse());
+#endif
+            
             unregisterEventHandler(camera);
             
             unregisterEventHandler(processing);

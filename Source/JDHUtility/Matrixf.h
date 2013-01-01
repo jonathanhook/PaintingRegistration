@@ -36,12 +36,12 @@ namespace JDHUtility
 
 		void add(Matrixf &m);
 		unsigned int getHeight(void) const;
-        Matrixf getInverse(void) const;
 		float *getPtr(void);
         const float *getPtr(void) const;
 		float getValue(unsigned int x, unsigned int y) const;
 		unsigned int getWidth(void) const;
 		void multiply(Matrixf &m);
+        void print(void) const;
         void scale(float s);
 		void setValue(float value, unsigned int x, unsigned int y);
         void setValues(const Matrixf &m);
@@ -49,9 +49,7 @@ namespace JDHUtility
         Point2f transform(const Point2f &p) const;
 		Point3f transform(const Point3f &p) const;
 
-	protected:
-		Matrixf(void);
-
+	private:
 		unsigned int width;
 		float *matrix;
 		unsigned int height;

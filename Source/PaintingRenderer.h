@@ -43,7 +43,7 @@ namespace PaintingRegistration
         const Matrixf *getMatrix(void) const;
         void render(void) const;
         void setCameraTexture(GLuint handle);
-        virtual void setMatrix(const Matrixf *matrix);
+        void setMatrix(const Matrixf *matrix);
         void setPosition(float position);
         
     protected:

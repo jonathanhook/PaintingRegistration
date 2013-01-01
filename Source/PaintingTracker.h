@@ -61,6 +61,7 @@ namespace PaintingRegistration
         void computeAsync(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         bool getHasVertices(void) const;
         const Matrixf *getGlMatrix(void) const;
+        const Matrixf *getGlMatrixInverse(void) const;
         const Point2i &getTargetDimensions(void) const;
         const Point2f *getVertices(void) const;
         void loadFeatures(void);
@@ -81,6 +82,7 @@ namespace PaintingRegistration
         Point2f *vertices;
         unsigned char *loadedData;
         Matrixf *glMatrix;
+        Matrixf *glMatrixInverse;
         Point2i targetDimensions;
         
         cv::Mat cameraDescriptors;
@@ -109,5 +111,6 @@ namespace PaintingRegistration
         CompletedCallback completed;
         
         float getArea(void) const;
+        Matrixf getOpenGLMatrix(const cv::Mat &m);
     };
 }

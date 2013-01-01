@@ -31,9 +31,13 @@ namespace PaintingRegistration
         
         void fingerUpdated(const FingerEventArgs &e);
         void renderPerspective(void) const;
-        void setMatrix(const Matrixf *matrix);
+        void setMatrixInverse(const Matrixf *matrix);
         
     private:
-        Matrixf *inverse;
+        const Matrixf *inverse;
+        float *mask;
+        
+        void updateMask(int x, int y, float size);
+        bool isWithinPainting(int x, int y) const;
     };
 }

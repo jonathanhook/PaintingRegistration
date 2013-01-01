@@ -50,6 +50,7 @@ namespace PaintingRegistration
         vertices = new Point2f[VERTEX_COUNT];
         loadedData = NULL;
         glMatrix = new Matrixf(4, 4);
+        glMatrixInverse = new Matrixf(4, 4);
 
         detector = new cv::SiftFeatureDetector();
         extractor = new cv::SiftDescriptorExtractor();
@@ -65,6 +66,7 @@ namespace PaintingRegistration
         NDELETE(matcher);
         NDELETE_ARRAY(vertices);
         NDELETE(glMatrix);
+        NDELETE(glMatrixInverse);
     }
     
     bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
@@ -128,25 +130,13 @@ namespace PaintingRegistration
 
             float area = getArea();
             if(area > AREA_THRESHOLD)
-            {
-                float *gm = glMatrix->getPtr();
+            {                
+                Matrixf m = getOpenGLMatrix(homography);
+                glMatrix->setValues(m);
                 
-                for(int i = 0; i < 16; i++)
-                {
-                    if(i % 5 != 0) gm[i] = 0.0f;
-                    else gm[i] = 1.0f;
-                }
-                
-                double *matrix = (double *)homography.data;
-                gm[0] = matrix[0];
-                gm[4] = matrix[1];
-                gm[12] = matrix[2];
-                gm[1] = matrix[3];
-                gm[5] = matrix[4];
-                gm[13] = matrix[5];
-                gm[3] = matrix[6];
-                gm[7] = matrix[7];
-                gm[15] = matrix[8];
+                cv::Mat inverse = homography.inv();
+                Matrixf i = getOpenGLMatrix(inverse);
+                glMatrixInverse->setValues(i);
                 
                 hasTarget = true;
             }
@@ -209,6 +199,11 @@ namespace PaintingRegistration
     const Matrixf *PaintingTracker::getGlMatrix(void) const
     {
         return glMatrix;
+    }
+    
+    const Matrixf *PaintingTracker::getGlMatrixInverse(void) const
+    {
+        return glMatrixInverse;
     }
     
     const Point2i &PaintingTracker::getTargetDimensions(void) const
@@ -300,6 +295,31 @@ namespace PaintingRegistration
             
             result += area;
         }
+        
+        return result;
+    }
+    
+    Matrixf PaintingTracker::getOpenGLMatrix(const cv::Mat &m)
+    {
+        Matrixf result(4, 4);
+        float *gm = result.getPtr();
+
+        for(int i = 0; i < 16; i++)
+        {
+            if(i % 5 != 0) gm[i] = 0.0f;
+            else gm[i] = 1.0f;
+        }
+        
+        double *matrix = (double *)m.data;
+        gm[0] = matrix[0];
+        gm[4] = matrix[1];
+        gm[12] = matrix[2];
+        gm[1] = matrix[3];
+        gm[5] = matrix[4];
+        gm[13] = matrix[5];
+        gm[3] = matrix[6];
+        gm[7] = matrix[7];
+        gm[15] = matrix[8];
         
         return result;
     }
