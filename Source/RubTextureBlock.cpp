@@ -17,36 +17,34 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
-#include <vector>
-#include "JDHUtility/GLTexture.h"
-#include "JDHUtility/Point2i.h"
-
-using namespace JDHUtility;
+#include "RubTextureBlock.h"
 
 namespace PaintingRegistration
 {
-    class TextureBlock
+    /* Public */
+    RubTextureBlock::RubTextureBlock(std::string format, unsigned int start, unsigned int end, float position) :
+        TextureBlock(format, start, end, position)
     {
-    public:
-        TextureBlock(std::string format, unsigned int start, unsigned int end, float position);
-        ~TextureBlock(void);
         
-        virtual void bind(void) const;
-        const Point2i &getDimensions(void) const;
-        void setPosition(float position);
-        virtual void unbind(void) const;
+    }
+    
+    RubTextureBlock::~RubTextureBlock(void)
+    {
         
-    private:
-        unsigned int start;
-        unsigned int end;
-        float position;
-        unsigned int currentTexture;
-        std::string format;
-        std::vector<GLTexture> textures;
-        Point2i dimensions;
+    }
+    
+    void RubTextureBlock::bind(void) const
+    {
         
-        void loadAll(void);
-        void loadTexture(unsigned int i);
-    };
+    }
+    
+    void RubTextureBlock::unbind(void) const
+    {
+        
+    }
+    
+    void RubTextureBlock::update(int x, int y, int cursorSize)
+    {
+        
+    }
 }
