@@ -136,6 +136,21 @@ namespace JDHUtility
 	{
 		return matrix[(height * x) + y];
 	}
+    
+    float Matrixf::getW(const Point3f &p) const
+    {
+        float a = p.getX();
+        float b = p.getY();
+        float c = p.getZ();
+        float d = 1.0f;
+        
+        float vx = matrix[0] * a + matrix[4] * b + matrix[8] * c + matrix[12] * d;
+        float vy = matrix[1] * a + matrix[5] * b + matrix[9] * c + matrix[13] * d;
+        float vz = matrix[2] * a + matrix[6] * b + matrix[10] * c + matrix[14] * d;
+        float vd = matrix[3] * a + matrix[7] * b + matrix[11] * c + matrix[15] * d;
+        
+        return vd;
+    }
 
 	unsigned int Matrixf::getWidth(void) const
 	{
@@ -206,7 +221,8 @@ namespace JDHUtility
         float vx = matrix[0] * a + matrix[4] * b + matrix[8] * c + matrix[12] * d;
         float vy = matrix[1] * a + matrix[5] * b + matrix[9] * c + matrix[13] * d;
         float vz = matrix[2] * a + matrix[6] * b + matrix[10] * c + matrix[14] * d;
-
+        float vd = matrix[3] * a + matrix[7] * b + matrix[11] * c + matrix[15] * d;
+        
         Point3f result(vx, vy, vz);
         return result;
     }

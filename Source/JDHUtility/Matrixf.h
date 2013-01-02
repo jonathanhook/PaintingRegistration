@@ -39,6 +39,7 @@ namespace JDHUtility
 		float *getPtr(void);
         const float *getPtr(void) const;
 		float getValue(unsigned int x, unsigned int y) const;
+        float getW(const Point3f &p) const;
 		unsigned int getWidth(void) const;
 		void multiply(Matrixf &m);
         void print(void) const;

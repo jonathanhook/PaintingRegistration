@@ -47,16 +47,17 @@ namespace PaintingRegistration
         void setPosition(float position);
         
     protected:
+        static const std::string TEXTURE_FILENAME_FORMAT;
+        static const unsigned int NUM_TEXTURES;
+        
         Point2i frameDimensions;
         const Matrixf *matrix;
         Point2i targetDimensions;
+        TextureBlock *textureBlock;
         
     private:
-        static const std::string TEXTURE_FILENAME_FORMAT;
-        
         GLuint cameraTexture;
         GLVbo *camVbo;
-        TextureBlock *textureBlock;
         const Point2f *vertices;
         
         void renderCameraImage(void) const;

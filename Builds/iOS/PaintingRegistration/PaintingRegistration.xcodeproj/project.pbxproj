@@ -84,6 +84,7 @@
 		FCD110D8167BC17400C76336 /* RubBrowserControls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD110D6167BC17300C76336 /* RubBrowserControls.cpp */; };
 		FCD42FF91660F31F0068FDDA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FF81660F31F0068FDDA /* Default.png */; };
 		FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FFB1660F5CB0068FDDA /* Default@2x.png */; };
+		FCDE3E6B16943F3D0014F8DF /* SlideTextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */; };
 		FCE6FCDB1663B6B5008BB2FD /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE6FCDA1663B6B5008BB2FD /* target.jpg */; };
 		FCE6FCDF1663C211008BB2FD /* TextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE6FCDD1663C211008BB2FD /* TextureBlock.cpp */; };
 		FCF0DAB51679018500E7F76F /* SlideBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCF0DAB31679018500E7F76F /* SlideBrowser.cpp */; };
@@ -213,6 +214,8 @@
 		FCD110D7167BC17300C76336 /* RubBrowserControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubBrowserControls.h; sourceTree = "<group>"; };
 		FCD42FF81660F31F0068FDDA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		FCD42FFB1660F5CB0068FDDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlideTextureBlock.cpp; sourceTree = "<group>"; };
+		FCDE3E6A16943F3D0014F8DF /* SlideTextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideTextureBlock.h; sourceTree = "<group>"; };
 		FCE6FCDA1663B6B5008BB2FD /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
 		FCE6FCDD1663C211008BB2FD /* TextureBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureBlock.cpp; sourceTree = "<group>"; };
 		FCE6FCDE1663C211008BB2FD /* TextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureBlock.h; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 				FCFC3662167CE6750063E53C /* RubPaintingRenderer.h */,
 				FCB70AAD169372FA007B48E9 /* RubTextureBlock.cpp */,
 				FCB70AAE169372FA007B48E9 /* RubTextureBlock.h */,
+				FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */,
+				FCDE3E6A16943F3D0014F8DF /* SlideTextureBlock.h */,
 			);
 			name = Source;
 			path = ../../../../Source;
@@ -600,6 +605,7 @@
 				FCFC3663167CE6760063E53C /* RubPaintingRenderer.cpp in Sources */,
 				FC68072C168DF5C900C5AC13 /* Matrixf.cpp in Sources */,
 				FCB70AAF169372FA007B48E9 /* RubTextureBlock.cpp in Sources */,
+				FCDE3E6B16943F3D0014F8DF /* SlideTextureBlock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

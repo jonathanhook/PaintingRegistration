@@ -25,25 +25,15 @@
 namespace PaintingRegistration
 {
     /* Public */
-    TextureBlock::TextureBlock(std::string format, unsigned int start, unsigned int end, float position)
+    TextureBlock::TextureBlock(std::string format, unsigned int start, unsigned int end)
     {
         this->format = format;
         this->start = start;
         this->end = end;
-        this->position = position;
-        
-        setPosition(position);
-        loadAll();
     }
     
     TextureBlock::~TextureBlock(void)
     {
-    }
-    
-    void TextureBlock::bind(void) const
-    {
-        const GLTexture &t = textures[currentTexture];
-        t.bind(GL_REPLACE);
     }
     
     const Point2i &TextureBlock::getDimensions(void) const
@@ -51,37 +41,12 @@ namespace PaintingRegistration
         return dimensions;
     }
     
-    void TextureBlock::setPosition(float position)
-    {
-        this->position = position;
-        currentTexture = (unsigned int)(position * (float)(end - start));
-    }
-    
-    void TextureBlock::unbind(void) const
-    {
-        const GLTexture &t = textures[currentTexture];
-        t.unbind();
-    }
-    
-    /* Private */
+    /* Protected */
     void TextureBlock::loadAll(void)
     {
-        textures.clear();
-        
         for(unsigned int i = start; i <= end; i++)
         {
             loadTexture(i);
         }
-    }
-    
-    void TextureBlock::loadTexture(unsigned int i)
-    {
-        char buffer[1024];
-        sprintf(buffer, format.c_str(), i);
-        
-        GLTexture t(buffer);
-        dimensions.setX(t.getWidth());
-        dimensions.setY(t.getHeight());
-        textures.push_back(t);
     }
 }

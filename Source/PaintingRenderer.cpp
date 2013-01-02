@@ -24,6 +24,7 @@
 #include "JDHUtility/OpenGL.h"
 #include "JDHUtility/Point2f.h"
 #include "JDHUtility/WindowingUtils.h"
+#include "SlideTextureBlock.h"
 #include "TextureBlock.h"
 #include "UIElement.h"
 #include "PaintingRenderer.h"
@@ -32,6 +33,7 @@ namespace PaintingRegistration
 {
     /* Constants */
     const std::string PaintingRenderer::TEXTURE_FILENAME_FORMAT = "%i.jpg";
+    const unsigned int PaintingRenderer::NUM_TEXTURES = 24;
     
     /* Public */
     PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
@@ -61,7 +63,6 @@ namespace PaintingRegistration
 		};
         
         camVbo = new GLVbo(GL_TRIANGLE_STRIP, GL_STATIC_DRAW, camData, 4, camTextureData);
-        textureBlock = new TextureBlock(TEXTURE_FILENAME_FORMAT, 1, 24, 1.0f);
     }
     
     PaintingRenderer::~PaintingRenderer(void)
@@ -93,7 +94,8 @@ namespace PaintingRegistration
     
     void PaintingRenderer::setPosition(float position)
     {
-        textureBlock->setPosition(position);
+        // HACK: shows problem in architecture...
+        ((SlideTextureBlock *)textureBlock)->setPosition(position);
     }
     
     /* Private */

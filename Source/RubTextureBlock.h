@@ -18,6 +18,7 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
+#include <vector>
 #include "TextureBlock.h"
 
 namespace PaintingRegistration
@@ -26,11 +27,25 @@ namespace PaintingRegistration
         public TextureBlock
     {
     public:
-        RubTextureBlock(std::string format, unsigned int start, unsigned int end, float position);
+        RubTextureBlock(std::string format, unsigned int start, unsigned int end);
         ~RubTextureBlock(void);
         
         void bind(void) const;
         void unbind(void) const;
-        void update(int x, int y, int cursorSize);
+        void update(float x, float y, float cursorSize);
+        
+    private:
+        static const float RUB_DECREMENT;
+        
+        float *mask;
+        GLuint texture;
+        std::vector<unsigned char *> textures;
+        unsigned int bpp;
+
+        void initMask(void);
+        void initTexture(void);
+        void loadTexture(unsigned int i);
+        bool isWithinPainting(int x, int y) const;
+        void updatePixels(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
     };
 }

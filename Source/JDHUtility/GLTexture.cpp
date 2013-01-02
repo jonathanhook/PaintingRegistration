@@ -18,6 +18,7 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "JDHUtility/FileLocationUtility.h"
+#include "JDHUtility/Ndelete.h"
 #include "JDHUtility/stb_image.h"
 #include "GLTexture.h"
 
@@ -50,6 +51,8 @@ namespace JDHUtility
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glTexImage2D(GL_TEXTURE_2D, 0, n == 4 ? GL_RGBA : GL_RGB, x, y, 0, n == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);
         glDisable(GL_TEXTURE_2D);
+        
+        free(data);
 	}
 
 	GLTexture::~GLTexture(void)

@@ -18,25 +18,26 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-#include "PaintingRenderer.h"
+#include "TextureBlock.h"
 
 namespace PaintingRegistration
 {
-    class RubPaintingRenderer :
-        public PaintingRenderer
+    class SlideTextureBlock :
+        public TextureBlock
     {
     public:
-        RubPaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims);
-        ~RubPaintingRenderer(void);
+        SlideTextureBlock(std::string format, unsigned int start, unsigned int end, float position);
+        ~SlideTextureBlock(void);
         
-        void fingerUpdated(const FingerEventArgs &e);
-        void renderPerspective(void) const;
-        void setMatrixInverse(const Matrixf *matrix);
+        void bind(void) const;
+        void setPosition(float position);
+        void unbind(void) const;
         
     private:
-        static const float MAX_CURSOR_SIZE;
+        unsigned int currentTexture;
+        float position;
+        std::vector<GLTexture> textures;
         
-        const Matrixf *inverse;
-
+        void loadTexture(unsigned int i);
     };
 }

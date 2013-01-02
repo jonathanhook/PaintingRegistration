@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "SlideTextureBlock.h"
 #include "SlidePaintingRenderer.h"
 
 namespace PaintingRegistration
@@ -25,7 +26,7 @@ namespace PaintingRegistration
     SlidePaintingRenderer::SlidePaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims) :
         PaintingRenderer(position, dims, frameDims, textureDims, layerDims)
     {
-        
+        textureBlock = new SlideTextureBlock(TEXTURE_FILENAME_FORMAT, 1, NUM_TEXTURES, 1.0f);
     }
     
     SlidePaintingRenderer::~SlidePaintingRenderer(void)
