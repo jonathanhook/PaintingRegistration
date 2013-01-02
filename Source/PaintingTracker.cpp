@@ -71,8 +71,6 @@ namespace PaintingRegistration
     
     bool PaintingTracker::compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight)
     {
-        unsigned int start = CrossPlatformTime::getTimeMillis();
-        
         cv::Mat camImage(fHeight, fWidth, CV_8UC4, (unsigned char *)fData, 0);
         cv::cvtColor(camImage, greyImage, CV_BGRA2GRAY);
         cv::transpose(greyImage, greyImage);
@@ -135,48 +133,7 @@ namespace PaintingRegistration
                 glMatrix->setValues(m);
                 
                 cv::Mat inverse = homography.inv();
-                //Matrixf i = getOpenGLMatrix(inverse);
-                //glMatrixInverse->setValues(i);
-            
-                hasTarget = true;
-                
-                /// Tests
-                std::vector<cv::Point2f> inPts, outPts;
-                inPts.push_back(cv::Point2f(721.0, 1060.0));
-                perspectiveTransform(inPts, outPts, homography);
-                printf("%f\t%f\n", outPts[0].x, outPts[0].y);
-        
-                std::vector<cv::Point2f> _inPts, _outPts;
-                _inPts.push_back(outPts[0]);
-                perspectiveTransform(_inPts, _outPts, inverse);
-                printf("%f\t%f\n", _outPts[0].x, _outPts[0].y);
-                
-                double *matrix = (double *)homography.data;
-                float a = 721.0f;
-                float b = 1060.0f;
-                float c = 1.0f;
-                
-                float vx = matrix[0] * a + matrix[1] * b + matrix[2] * c;
-                float vy = matrix[3] * a + matrix[4] * b + matrix[5] * c;
-                float vz = matrix[6] * a + matrix[7] * b + matrix[8] * c;
-                vx /= vz;
-                vy /= vz;
-                
-                printf("%f\t%f\n", vx, vy);
-                
                 double *_matrix = (double *)inverse.data;
-                float _a = vx;
-                float _b = vy;
-                float _c = 1.0f;
-                
-                float _vx = _matrix[0] * _a + _matrix[1] * _b + _matrix[2] * _c;
-                float _vy = _matrix[3] * _a + _matrix[4] * _b + _matrix[5] * _c;
-                float _vz = _matrix[6] * _a + _matrix[7] * _b + _matrix[8] * _c;
-                _vx /= _vz;
-                _vy /= _vz;
-                
-                printf("%f\t%f\n", _vx, _vy);
-                
                 float *invPtr = glMatrixInverse->getPtr();
                 invPtr[0] = _matrix[0];
                 invPtr[1] = _matrix[1];
@@ -187,6 +144,8 @@ namespace PaintingRegistration
                 invPtr[6] = _matrix[6];
                 invPtr[7] = _matrix[7];
                 invPtr[8] = _matrix[8];
+                
+                hasTarget = true;
             }
             else
             {
@@ -218,10 +177,7 @@ namespace PaintingRegistration
         goodMatches.clear();
         matches.clear();
         t.clear();
-        
-        unsigned int end = CrossPlatformTime::getTimeMillis();
-        printf("%d\r\n", end - start);
-        
+
         return hasTarget;
     }
     
@@ -242,6 +198,26 @@ namespace PaintingRegistration
         
         pthread_t thread;
         pthread_create(&thread, NULL, run, (void *)this);
+    }
+    
+    float PaintingTracker::getArea(void) const
+    {
+        float result = 0.0f;
+        for(int i = 0; i < VERTEX_COUNT; i++)
+        {
+            float x0 = vertices[i].getX();
+            float y0 = vertices[i].getY();
+            float x1 = vertices[(i + 1) % VERTEX_COUNT].getX();
+            float y1 = vertices[(i + 1) % VERTEX_COUNT].getY();
+            
+            float ay = (y0 + y1) / 2.0f;
+            float dx = (x0 - x1);
+            float area = dx * ay;
+            
+            result += area;
+        }
+        
+        return result;
     }
     
     const Matrixf *PaintingTracker::getGlMatrix(void) const
@@ -327,26 +303,6 @@ namespace PaintingRegistration
     }
     
     /* Private */
-    float PaintingTracker::getArea(void) const
-    {
-        float result = 0.0f;
-        for(int i = 0; i < VERTEX_COUNT; i++)
-        {
-            float x0 = vertices[i].getX();
-            float y0 = vertices[i].getY();
-            float x1 = vertices[(i + 1) % VERTEX_COUNT].getX();
-            float y1 = vertices[(i + 1) % VERTEX_COUNT].getY();
-            
-            float ay = (y0 + y1) / 2.0f;
-            float dx = (x0 - x1);
-            float area = dx * ay;
-            
-            result += area;
-        }
-        
-        return result;
-    }
-    
     Matrixf PaintingTracker::getOpenGLMatrix(const cv::Mat &m)
     {
         Matrixf result(4, 4);

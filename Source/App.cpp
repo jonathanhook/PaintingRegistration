@@ -180,6 +180,7 @@ namespace PaintingRegistration
             
 #ifndef SLIDE
             ((RubPaintingRenderer *)browser->getPainting())->setMatrixInverse(tracker->getGlMatrixInverse());
+            ((RubPaintingRenderer *)browser->getPainting())->setPaintingArea(tracker->getArea());
 #endif
             
             unregisterEventHandler(camera);

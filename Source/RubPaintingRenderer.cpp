@@ -26,7 +26,7 @@
 namespace PaintingRegistration
 {
     /* Static */
-    const float RubPaintingRenderer::MAX_CURSOR_SIZE = 100.0f;
+    const float RubPaintingRenderer::CURSOR_SIZE = 75.0f;
     
     /* Public */
     RubPaintingRenderer::RubPaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
@@ -54,55 +54,27 @@ namespace PaintingRegistration
         float b = fy;
         float c = 1.0f;
         
-        const float *matrix = inverse->getPtr();
-        float vx = matrix[0] * a + matrix[1] * b + matrix[2] * c;
-        float vy = matrix[3] * a + matrix[4] * b + matrix[5] * c;
-        float vz = matrix[6] * a + matrix[7] * b + matrix[8] * c;
+        const float *iPtr = inverse->getPtr();
+        float vx = iPtr[0] * a + iPtr[1] * b + iPtr[2] * c;
+        float vy = iPtr[3] * a + iPtr[4] * b + iPtr[5] * c;
+        float vz = iPtr[6] * a + iPtr[7] * b + iPtr[8] * c;
         vx /= vz;
         vy /= vz;
         
         float nx = vx / ((float)targetDimensions.getX());
         float ny = vy / ((float)targetDimensions.getY());
+        float nc = CURSOR_SIZE / (float)frameDimensions.getX();
+        
+        ((RubTextureBlock *)textureBlock)->update(nx, ny, nc);
+    }
 
-        ((RubTextureBlock *)textureBlock)->update(nx, ny, 0.1f);
-    }
-    
-    void RubPaintingRenderer::renderPerspective(void) const
-    {
-        glMatrixMode(GL_PROJECTION);
-        glPushMatrix();
-        glLoadIdentity();
-        glOrtho(0.0f, frameDimensions.getY(), frameDimensions.getX(), 0.0f, -100.0f, 100.0f);
-        
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glLoadIdentity();
-        glMultMatrixf((float *)matrix->getPtr());
-        glScalef(targetDimensions.getX(), targetDimensions.getY(), 1.0f);
-        glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        
-        textureBlock->bind();
-        GLPrimitives::getInstance()->renderSquare();
-        textureBlock->unbind();
-        
-        glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_LINE_SMOOTH);
-        glLineWidth(5.0f);
-        
-        UIElement::BLUE.use();
-        GLPrimitives::getInstance()->renderSquareOutline();
-        
-        glDisable(GL_LINE_SMOOTH);
-        glDisable(GL_BLEND);
-        glPopMatrix();
-        
-        glMatrixMode(GL_PROJECTION);
-        glPopMatrix();
-    }
-    
     void RubPaintingRenderer::setMatrixInverse(const Matrixf *inverse)
     {
         this->inverse = inverse;
+    }
+    
+    void  RubPaintingRenderer::setPaintingArea(float paintingArea)
+    {
+        this->paintingArea = paintingArea;
     }
 }

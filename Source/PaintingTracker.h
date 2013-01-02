@@ -59,6 +59,7 @@ namespace PaintingRegistration
         
         bool compute(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
         void computeAsync(const unsigned char *fData, unsigned int fWidth, unsigned int fHeight);
+        float getArea(void) const;
         bool getHasVertices(void) const;
         const Matrixf *getGlMatrix(void) const;
         const Matrixf *getGlMatrixInverse(void) const;
@@ -109,8 +110,7 @@ namespace PaintingRegistration
         Point3f translation;
         
         CompletedCallback completed;
-        
-        float getArea(void) const;
+    
         Matrixf getOpenGLMatrix(const cv::Mat &m);
     };
 }

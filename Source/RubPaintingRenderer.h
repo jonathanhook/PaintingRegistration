@@ -30,13 +30,14 @@ namespace PaintingRegistration
         ~RubPaintingRenderer(void);
         
         void fingerUpdated(const FingerEventArgs &e);
-        void renderPerspective(void) const;
         void setMatrixInverse(const Matrixf *matrix);
+        void setPaintingArea(float paintingArea);
         
     private:
-        static const float MAX_CURSOR_SIZE;
+        static const float CURSOR_SIZE;
         
         const Matrixf *inverse;
+        float paintingArea;
 
     };
 }
