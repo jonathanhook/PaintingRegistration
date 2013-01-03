@@ -31,6 +31,7 @@ namespace PaintingRegistration
         ~RubTextureBlock(void);
         
         void bind(void) const;
+        void reset(void);
         void unbind(void) const;
         void update(float x, float y, float cursorSize);
         

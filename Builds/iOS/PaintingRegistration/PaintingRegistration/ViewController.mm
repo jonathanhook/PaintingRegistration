@@ -47,6 +47,7 @@ PaintingRegistration::App *app;
 unsigned int frameWidth = 0;
 unsigned int frameHeight = 0;
 unsigned int lastProcessingRender = 0;
+bool loaded = false;
 
 - (void)dealloc
 {
@@ -64,25 +65,31 @@ unsigned int lastProcessingRender = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.context = [[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1] autorelease];
     
-    GLKView *view = (GLKView *)self.view;
-    view.context = self.context;
-    view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    if(!loaded)
+    {
+        self.context = [[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1] autorelease];
     
-    [self setupGL];
+        GLKView *view = (GLKView *)self.view;
+        view.context = self.context;
+        view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGSize screenSize = CGSizeMake(screenBounds.size.width, screenBounds.size.height);
-    winX = screenSize.width;
-    winY = screenSize.height;
+        [self setupGL];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
+        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        CGSize screenSize = CGSizeMake(screenBounds.size.width, screenBounds.size.height);
+        winX = screenSize.width;
+        winY = screenSize.height;
     
-    app = new PaintingRegistration::App(winX, winY, CAM_WIDTH, CAM_HEIGHT, [resourcePath UTF8String], [documentsPath UTF8String]);
-    [self initVideoCapture];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsPath = [paths objectAtIndex:0];
+    
+        app = new PaintingRegistration::App(winX, winY, CAM_WIDTH, CAM_HEIGHT, [resourcePath UTF8String], [documentsPath UTF8String]);
+        [self initVideoCapture];
+    
+        loaded = true;
+    }
 }
 
 - (void)didReceiveMemoryWarning

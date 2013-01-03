@@ -30,6 +30,7 @@ namespace PaintingRegistration
         ~RubPaintingRenderer(void);
         
         void fingerUpdated(const FingerEventArgs &e);
+        void reset(void);
         void setMatrixInverse(const Matrixf *matrix);
         void setPaintingArea(float paintingArea);
         

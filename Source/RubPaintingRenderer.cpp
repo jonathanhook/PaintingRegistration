@@ -67,6 +67,11 @@ namespace PaintingRegistration
         
         ((RubTextureBlock *)textureBlock)->update(nx, ny, nc);
     }
+    
+    void RubPaintingRenderer::reset(void)
+    {
+        ((RubTextureBlock *)textureBlock)->reset();
+    }
 
     void RubPaintingRenderer::setMatrixInverse(const Matrixf *inverse)
     {

@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <assert.h>
 #include <math.h>
 #include "JDHUtility/FileLocationUtility.h"
 #include "JDHUtility/Ndelete.h"
@@ -34,6 +35,8 @@ namespace PaintingRegistration
     {
         loadAll();
         initTexture();
+        
+        mask = new float[dimensions.getX() * dimensions.getY()];
         initMask();
     }
     
@@ -65,48 +68,56 @@ namespace PaintingRegistration
 		glBindTexture(GL_TEXTURE_2D, NULL);
     }
     
+    void RubTextureBlock::reset(void)
+    {
+        initMask();
+        updatePixels(0, 0, dimensions.getX(), dimensions.getY());
+    }
+    
     void RubTextureBlock::update(float fx, float fy, float fcs)
     {
         int x = (int)(fx * (float)dimensions.getX());
         int y = (int)(fy * (float)dimensions.getY());
-        int cursorSize = (int)(fcs * (float)dimensions.getX());
-        int limit = cursorSize / 2;
         
-        int stride = dimensions.getX();
-        for(int i = y - limit; i < y + limit; i++)
+        if(x > 0 && x < dimensions.getX() && y > 0 && y < dimensions.getY())
         {
-            float fd = (float)limit - (float)abs(i - y);
-            fd = (fd / (float)limit) * (M_PI / 2.0f);
-            fd = sin(fd);
-            fd *= limit;
-                
-            int d = (int)fd;
-            for(int j = x - d; j < x + d; j++)
+            int cursorSize = (int)(fcs * (float)dimensions.getX());
+            int limit = cursorSize / 2;
+        
+            int stride = dimensions.getX();
+            for(int i = y - limit; i < y + limit; i++)
             {
-                if(isWithinPainting(j, i))
+                float fd = (float)limit - (float)abs(i - y);
+                fd = (fd / (float)limit) * (M_PI / 2.0f);
+                fd = sin(fd);
+                fd *= limit;
+                
+                int d = (int)fd;
+                for(int j = x - d; j < x + d; j++)
                 {
-                    int index = i * stride + j;
-                    float v = mask[index] - RUB_DECREMENT;
-                    
-                    if(v < 0.0f)
+                    if(isWithinPainting(j, i))
                     {
-                        v = 0.0f;
-                    }
+                        int index = i * stride + j;
+                        float v = mask[index] - RUB_DECREMENT;
                     
-                    mask[index] = v;
+                        if(v < 0.0f)
+                        {
+                            v = 0.0f;
+                        }
+                    
+                        mask[index] = v;
+                    }
                 }
             }
+            
+            updatePixels(x - limit, y - limit, cursorSize, cursorSize);
         }
-        
-        updatePixels(x - limit, y - limit, cursorSize, cursorSize);
     }
     
     /* Private */
     void RubTextureBlock::initMask(void)
     {
         unsigned int size = dimensions.getX() * dimensions.getY();
-        mask = new float[size];
-        
         for(unsigned int i = 0; i < size; i++)
         {
             mask[i] = 1.0f;
@@ -158,7 +169,8 @@ namespace PaintingRegistration
     void RubTextureBlock::updatePixels(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
     {
         unsigned int imageWidth = dimensions.getX();
-        unsigned char data[width * height * bpp];
+        unsigned int cursorSize = width * height * bpp;
+        unsigned char *data = new unsigned char[cursorSize];
         unsigned int ptr = 0;
         
         for(unsigned int i = y; i < y + height; i++)
@@ -168,11 +180,16 @@ namespace PaintingRegistration
                 float m = mask[j + (i * imageWidth)];
                 unsigned int tId = (unsigned int)(m * (float)(textures.size() - 1));
                 unsigned char *t = textures[tId];
-
+                
                 unsigned int index = (j * bpp) + (i * imageWidth * bpp);
-                data[ptr++] = t[index];
-                data[ptr++] = t[index + 1];
-                data[ptr++] = t[index + 2];
+                unsigned char r = t[index];
+                unsigned char g = t[index + 1];
+                unsigned char b = t[index + 2];
+                
+                data[ptr] = r;
+                data[ptr + 1] = g;
+                data[ptr + 2] = b;
+                ptr += 3;
             }
         }
         
@@ -186,5 +203,7 @@ namespace PaintingRegistration
         glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height, bpp == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);
         glBindTexture(GL_TEXTURE_2D, NULL);
         glDisable(GL_TEXTURE_2D);
+        
+        NDELETE_ARRAY(data);
     }
 }
