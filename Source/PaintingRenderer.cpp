@@ -104,7 +104,6 @@ namespace PaintingRegistration
         float x = getSizef(position.getX());
 		float y	= getSizef(position.getY());
 		float w	= getSizef(dimensions.getX());
-        float h	= getSizef(dimensions.getY());
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
         
         float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
@@ -141,12 +140,11 @@ namespace PaintingRegistration
     void PaintingRenderer::renderPerspective(void) const
     {
 		float h	= getSizef(dimensions.getY());
-		float w	= getSizef(dimensions.getX());
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
         float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
         float a = fh / h;
         float fw = fh / r;
-        float ft = (fw - w) / 2.0f;
+        float b = ((fw - 1.0f) / 2.0f) * (float)frameDimensions.getY();
     
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
@@ -156,11 +154,12 @@ namespace PaintingRegistration
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
-        glMultMatrixf((float *)matrix->getPtr());
-        glScalef(targetDimensions.getX(), targetDimensions.getY(), 1.0f);
-        glTranslatef(-ft, 0.0f, 0.0f);
+        glTranslatef(-b, 0.0f, 0.0f);
         glScalef(fw, a, 1.0f);
         
+        glMultMatrixf((float *)matrix->getPtr());
+        glScalef(targetDimensions.getX(), targetDimensions.getY(), 1.0f);
+
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         textureBlock->bind();
         GLPrimitives::getInstance()->renderSquare();

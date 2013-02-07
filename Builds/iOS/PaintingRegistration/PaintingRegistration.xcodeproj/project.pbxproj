@@ -712,7 +712,7 @@
 					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
 				);
 				PRODUCT_NAME = Pentimento;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -738,7 +738,7 @@
 					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
 				);
 				PRODUCT_NAME = Pentimento;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

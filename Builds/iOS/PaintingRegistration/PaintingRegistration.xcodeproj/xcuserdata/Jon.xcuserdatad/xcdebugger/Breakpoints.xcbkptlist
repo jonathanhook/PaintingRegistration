@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381948148.189333"
+         timestampString = "381950344.527902"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
          landmarkName = "PaintingRenderer::renderCameraImage(void)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381948424.239834"
+         timestampString = "381950344.527902"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
          landmarkName = "PaintingRenderer::renderPerspective(void)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381948424.239834"
+         timestampString = "381950344.527902"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
          landmarkName = "PaintingRenderer::renderPerspective(void)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381948424.239834"
+         timestampString = "381950344.527902"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "156"
-         endingLineNumber = "156"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
+         landmarkName = "PaintingRenderer::renderPerspective(void)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../../Source/PaintingRenderer.cpp"
+         timestampString = "381950344.527902"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
+         landmarkName = "PaintingRenderer::renderPerspective(void)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../../Source/PaintingRenderer.cpp"
+         timestampString = "381950372.722579"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
          landmarkName = "PaintingRenderer::renderPerspective(void)"
          landmarkType = "5">
       </FileBreakpoint>
