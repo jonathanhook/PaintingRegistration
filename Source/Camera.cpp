@@ -30,6 +30,8 @@ namespace PaintingRegistration
     Camera::Camera(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions) :
         UIElement(position, dimensions)
     {
+        this->frameDimensions = frameDimensions;
+        
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
         int dx = dimensions.getX();
@@ -81,11 +83,16 @@ namespace PaintingRegistration
 		float y	= getSizef(position.getY());
 		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());
+        float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
+        
+        float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
+        float fw = fh / r;
+        float ft = (fw - w) / 2.0f;
         
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
-		glTranslatef(x, y, 0.0f);
-		glScalef(w, h, 1.0f);
+		glTranslatef(x - ft, y, 0.0f);
+		glScalef(fw, fh, 1.0f);
         
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, cameraTexture);
@@ -100,8 +107,6 @@ namespace PaintingRegistration
         
         glDisable(GL_TEXTURE_2D);
         glPopMatrix();
-        
-        float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
         
         glPushMatrix();
 		glTranslatef(x, y, 0.0f);

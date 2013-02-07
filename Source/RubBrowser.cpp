@@ -33,7 +33,7 @@ namespace PaintingRegistration
         int dy = CONTROL_BAR_HEIGHT;
         
         controls = new RubBrowserControls(Point2i(px, py), Point2i(dx, dy));
-        controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
+        controls->setClickedCallback(MakeDelegate(this, &RubBrowser::controls_Clicked));
         registerEventHandler(controls);
         
         painting = new RubPaintingRenderer(position, dims,frameDims, textureDims, targetDims);

@@ -33,7 +33,7 @@ namespace PaintingRegistration
         int dy = CONTROL_BAR_HEIGHT;
         
         controls = new SlideBrowserControls(Point2i(px, py), Point2i(dx, dy));
-        controls->setClickedCallback(MakeDelegate(this, &Browser::controls_Clicked));
+        controls->setClickedCallback(MakeDelegate(this, &SlideBrowser::controls_Clicked));
         ((SlideBrowserControls *)controls)->setPositionChangedCallback(MakeDelegate(this, &SlideBrowser::controls_PositionChanged));
         registerEventHandler(controls);
         

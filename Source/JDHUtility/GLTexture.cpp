@@ -52,7 +52,8 @@ namespace JDHUtility
         glTexImage2D(GL_TEXTURE_2D, 0, n == 4 ? GL_RGBA : GL_RGB, x, y, 0, n == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, data);
         glDisable(GL_TEXTURE_2D);
         
-        free(data);
+        //free(data);
+        delete data;
 	}
 
 	GLTexture::~GLTexture(void)

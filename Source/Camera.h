@@ -47,6 +47,7 @@ namespace PaintingRegistration
         CameraControls *controls;
         GLTexture *texture;
         GLVbo *vbo;
+        Point2i frameDimensions;
         
         void controls_Clicked(UIElement *e);
     };

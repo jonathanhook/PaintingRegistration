@@ -31,7 +31,7 @@
 #include "RubPaintingRenderer.h"
 #include "App.h"
 
-//#define SLIDE
+#define SLIDE
 
 namespace PaintingRegistration
 {

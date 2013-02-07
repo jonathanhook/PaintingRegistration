@@ -57,6 +57,8 @@
 		FC4CA220165BA349002E58C9 /* PaintingTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA21F165BA349002E58C9 /* PaintingTracker.cpp */; };
 		FC68072C168DF5C900C5AC13 /* Matrixf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC68072A168DF5C900C5AC13 /* Matrixf.cpp */; };
 		FC73B1DE165F918000AF9DCB /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = FC73B1DD165F918000AF9DCB /* stb_image.c */; };
+		FC8AD44B16C2A2FF0048FC48 /* debug_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8AD44A16C2A2FF0048FC48 /* debug_frame.png */; };
+		FC8AD44E16C2A8690048FC48 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8AD44D16C2A8690048FC48 /* Default-568h@2x.png */; };
 		FC8E4ABD165CFE8000B4B64D /* Colour3f.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB8165CFE8000B4B64D /* Colour3f.cpp */; };
 		FC8E4ABE165CFE8000B4B64D /* GLPrimitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4AB9165CFE8000B4B64D /* GLPrimitives.cpp */; };
 		FC8E4ABF165CFE8000B4B64D /* Point2i.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ABA165CFE8000B4B64D /* Point2i.cpp */; };
@@ -87,13 +89,13 @@
 		FCDE3E6B16943F3D0014F8DF /* SlideTextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */; };
 		FCE6FCDB1663B6B5008BB2FD /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE6FCDA1663B6B5008BB2FD /* target.jpg */; };
 		FCE6FCDF1663C211008BB2FD /* TextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE6FCDD1663C211008BB2FD /* TextureBlock.cpp */; };
+		FCE9206A16C3F97000D176A2 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE9206916C3F97000D176A2 /* opencv2.framework */; };
 		FCF0DAB51679018500E7F76F /* SlideBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCF0DAB31679018500E7F76F /* SlideBrowser.cpp */; };
 		FCF0DAB8167907D500E7F76F /* BrowserControls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCF0DAB6167907D500E7F76F /* BrowserControls.cpp */; };
 		FCFC2435166525F8005611E3 /* Overlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFC2433166525F8005611E3 /* Overlay.cpp */; };
 		FCFC243816653503005611E3 /* processing.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC243716653503005611E3 /* processing.png */; };
 		FCFC365F167CE4940063E53C /* SlidePaintingRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFC365D167CE4940063E53C /* SlidePaintingRenderer.cpp */; };
 		FCFC3663167CE6760063E53C /* RubPaintingRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFC3661167CE6750063E53C /* RubPaintingRenderer.cpp */; };
-		FCFE873B165D4EBE004177F5 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFE8739165D4E31004177F5 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +167,8 @@
 		FC68072B168DF5C900C5AC13 /* Matrixf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrixf.h; sourceTree = "<group>"; };
 		FC73B1DC165F918000AF9DCB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		FC73B1DD165F918000AF9DCB /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		FC8AD44A16C2A2FF0048FC48 /* debug_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debug_frame.png; sourceTree = "<group>"; };
+		FC8AD44D16C2A8690048FC48 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		FC8E4AB3165CFE8000B4B64D /* Colour3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colour3f.h; sourceTree = "<group>"; };
 		FC8E4AB4165CFE8000B4B64D /* GLPrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPrimitives.h; sourceTree = "<group>"; };
 		FC8E4AB5165CFE8000B4B64D /* Point2i.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point2i.h; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 		FCE6FCDA1663B6B5008BB2FD /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
 		FCE6FCDD1663C211008BB2FD /* TextureBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureBlock.cpp; sourceTree = "<group>"; };
 		FCE6FCDE1663C211008BB2FD /* TextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureBlock.h; sourceTree = "<group>"; };
+		FCE9206916C3F97000D176A2 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../../ios/opencv2.framework; sourceTree = "<group>"; };
 		FCF0DAB31679018500E7F76F /* SlideBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlideBrowser.cpp; sourceTree = "<group>"; };
 		FCF0DAB41679018500E7F76F /* SlideBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideBrowser.h; sourceTree = "<group>"; };
 		FCF0DAB6167907D500E7F76F /* BrowserControls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrowserControls.cpp; sourceTree = "<group>"; };
@@ -230,7 +235,6 @@
 		FCFC365E167CE4940063E53C /* SlidePaintingRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidePaintingRenderer.h; sourceTree = "<group>"; };
 		FCFC3661167CE6750063E53C /* RubPaintingRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RubPaintingRenderer.cpp; sourceTree = "<group>"; };
 		FCFC3662167CE6750063E53C /* RubPaintingRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubPaintingRenderer.h; sourceTree = "<group>"; };
-		FCFE8739165D4E31004177F5 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Library/Frameworks/opencv2.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,7 +242,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCFE873B165D4EBE004177F5 /* opencv2.framework in Frameworks */,
 				FC33FEE31655645B00B1FC69 /* CoreMedia.framework in Frameworks */,
 				FC33FEE11655645300B1FC69 /* CoreVideo.framework in Frameworks */,
 				FC33FEDF1655643000B1FC69 /* AVFoundation.framework in Frameworks */,
@@ -247,6 +250,7 @@
 				FC33FEAE16555EDC00B1FC69 /* CoreGraphics.framework in Frameworks */,
 				FC33FEB016555EDC00B1FC69 /* GLKit.framework in Frameworks */,
 				FC33FEB216555EDC00B1FC69 /* OpenGLES.framework in Frameworks */,
+				FCE9206A16C3F97000D176A2 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +277,7 @@
 		FC33FEA816555EDC00B1FC69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FCFE8739165D4E31004177F5 /* opencv2.framework */,
+				FCE9206916C3F97000D176A2 /* opencv2.framework */,
 				FC33FEE21655645B00B1FC69 /* CoreMedia.framework */,
 				FC33FEE01655645300B1FC69 /* CoreVideo.framework */,
 				FC33FEDE1655643000B1FC69 /* AVFoundation.framework */,
@@ -307,6 +311,7 @@
 				FC2B02FD1662A890007BB3C6 /* icon_retina.png */,
 				FC2B02FA1662A88B007BB3C6 /* icon.png */,
 				FCD42FFB1660F5CB0068FDDA /* Default@2x.png */,
+				FC8AD44D16C2A8690048FC48 /* Default-568h@2x.png */,
 				FCD42FF81660F31F0068FDDA /* Default.png */,
 				FC33FEB516555EDC00B1FC69 /* PaintingRegistration-Info.plist */,
 				FC33FEB616555EDC00B1FC69 /* InfoPlist.strings */,
@@ -372,6 +377,7 @@
 				FCE6FCE01663C536008BB2FD /* Textures */,
 				FCFC243716653503005611E3 /* processing.png */,
 				FCE6FCDA1663B6B5008BB2FD /* target.jpg */,
+				FC8AD44A16C2A2FF0048FC48 /* debug_frame.png */,
 				FC956B5C1660E2C6004438D0 /* bar.png */,
 				FC956B5D1660E2C6004438D0 /* exit.png */,
 				FC956B5E1660E2C6004438D0 /* slider.png */,
@@ -555,6 +561,8 @@
 				FC3521E1167A4751006ADE06 /* 22.jpg in Resources */,
 				FC3521E2167A4751006ADE06 /* 23.jpg in Resources */,
 				FC3521E3167A4751006ADE06 /* 24.jpg in Resources */,
+				FC8AD44B16C2A2FF0048FC48 /* debug_frame.png in Resources */,
+				FC8AD44E16C2A8690048FC48 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +635,7 @@
 			);
 			name = ViewController.xib;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 /* End PBXVariantGroup section */
 
@@ -690,18 +699,20 @@
 					"\"$(SRCROOT)/../../../Source\"",
 					"\"$(SRCROOT)/../../../Dependencies\"",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../../../ios\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PaintingRegistration/PaintingRegistration-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../../../Source/**";
 				INFOPLIST_FILE = "PaintingRegistration/PaintingRegistration-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
 				);
 				PRODUCT_NAME = Pentimento;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -714,18 +725,20 @@
 					"\"$(SRCROOT)/../../../Source\"",
 					"\"$(SRCROOT)/../../../Dependencies\"",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../../../ios\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PaintingRegistration/PaintingRegistration-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../../../Source/**";
 				INFOPLIST_FILE = "PaintingRegistration/PaintingRegistration-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
 				);
 				PRODUCT_NAME = Pentimento;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

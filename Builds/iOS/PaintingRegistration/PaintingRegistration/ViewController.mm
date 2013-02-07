@@ -20,6 +20,9 @@
 #import <opencv2/opencv.hpp>
 #import "JDHUtility/CrossPlatformTime.h"
 #import "ViewController.h"
+#include "JDHUtility/stb_image.h"
+#include "JDHUtility/FileLocationUtility.h"
+#include "TargetConditionals.h"
 #include "App.h"
 
 @interface ViewController ()
@@ -81,12 +84,21 @@ bool loaded = false;
         CGSize screenSize = CGSizeMake(screenBounds.size.width, screenBounds.size.height);
         winX = screenSize.width;
         winY = screenSize.height;
-    
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsPath = [paths objectAtIndex:0];
     
         app = new PaintingRegistration::App(winX, winY, CAM_WIDTH, CAM_HEIGHT, [resourcePath UTF8String], [documentsPath UTF8String]);
+        
+#if TARGET_IPHONE_SIMULATOR
+        std::string path = FileLocationUtility::getFileInResourcePath("debug_frame.png");
+        int x, y, n;
+        unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 0);
+        memcpy(frameData, data, sizeof(unsigned char) * BUFFER_SIZE);
+        app->setLatestFrame(frameData);
+#else
         [self initVideoCapture];
+#endif
     
         loaded = true;
     }
