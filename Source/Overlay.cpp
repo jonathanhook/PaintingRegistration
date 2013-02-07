@@ -50,18 +50,39 @@ namespace PaintingRegistration
             float x = getSizef(position.getX());
             float y	= getSizef(position.getY());
             float w	= getSizef(dimensions.getX());
-            float fh = getSizef(dimensions.getY());
-        
+            float h	= getSizef(dimensions.getY());
+            
+            float tw = getSizef(texture->getWidth());
+            float th = getSizef(texture->getHeight());
+            float tx = (w / 2.0f) - (tw / 2.0f);
+            float ty = (h / 2.25f) - (th / 2.0f);
+
+            glMatrixMode(GL_MODELVIEW);
             glPushMatrix();
-            glTranslatef(x, y, 0.0f);
-            glScalef(w, fh, 1.0f);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glTranslatef(x, y, 0.0f);
+
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glScalef(w, h, 1.0f);
+            
+            glColor4f(1.0f, 1.0f, 1.0f, 0.25f);
+            GLPrimitives::getInstance()->renderSquare();
+            
+            glPopMatrix();
+            
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glTranslatef(tx, ty, 0.0f);
+            glScalef(tw, th, 1.0f);
         
             texture->bind(GL_REPLACE);
             GLPrimitives::getInstance()->renderSquare();
             texture->unbind();
         
+            glPopMatrix();
+            
             glDisable(GL_BLEND);
             glPopMatrix();
         }

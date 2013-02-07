@@ -43,13 +43,18 @@ namespace PaintingRegistration
 		float y	= getSizef(position.getY());
 		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());
+        float tw = getSizef(texture->getWidth());
+        float tx = (w / 2.0f) - (tw / 2.0f);
         
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glTranslatef(x, y, 0.0f);
-		glScalef(w, h, 1.0f);
         glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+        glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+        glScalef(w, h, 1.0f);
         
         if(selected)
         {
@@ -62,10 +67,39 @@ namespace PaintingRegistration
         
         GLPrimitives::getInstance()->renderSquare();
         
+        glPopMatrix();
+        
+        glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+        glTranslatef(0.0, 0.0f, 0.0f);
+        glScalef(tx, h, 1.0f);
+        
+        glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+        GLPrimitives::getInstance()->renderSquare();
+        
+        glPopMatrix();
+        
+        glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+        glTranslatef(tx + tw, 0.0f, 0.0f);
+        glScalef(tx, h, 1.0f);
+        
+        glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+        GLPrimitives::getInstance()->renderSquare();
+        
+        glPopMatrix();
+        
+        glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+        glTranslatef(tx, 0.0f, 0.0f);
+        glScalef(tw, h, 1.0f);
+        
         texture->bind(GL_REPLACE);
         GLPrimitives::getInstance()->renderSquare();
         texture->unbind();
 
+        glPopMatrix();
+        
         glDisable(GL_BLEND);
         glPopMatrix();
     }
