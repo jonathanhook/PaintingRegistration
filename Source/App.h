@@ -31,7 +31,8 @@ using namespace JDHUtility;
 
 namespace PaintingRegistration
 {
-    class Browser;
+    class SlideBrowser;
+    class RubBrowser;
     class Camera;
     class Overlay;
     class PaintingTracker;
@@ -56,7 +57,8 @@ namespace PaintingRegistration
     private:
         static const unsigned int TEXTURE_DIM = 512;
         
-        Browser *browser;
+        SlideBrowser *slideBrowser;
+        RubBrowser *rubBrowser;
         Camera *camera;
         GLuint cameraTexture;
         Overlay *processing;
@@ -67,6 +69,7 @@ namespace PaintingRegistration
         unsigned int cameraWidth;
         unsigned int cameraHeight;
         const unsigned char *fData;
+        bool browserMode;
         
         void browser_Clicked(UIElement *e);
         void camera_Clicked(UIElement *e);
@@ -75,5 +78,6 @@ namespace PaintingRegistration
         void initTextureHandle(void);
         void tracker_Completed(bool result);
         void updateTexture(void) const;
+        void setBrowser(bool mode);
     };
 }

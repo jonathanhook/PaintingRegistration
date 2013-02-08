@@ -23,6 +23,7 @@
 #include "JDHUtility/Ndelete.h"
 #include "CameraControls.h"
 #include "Camera.h"
+#include "ModeToggle.h"
 
 namespace PaintingRegistration
 {
@@ -34,14 +35,16 @@ namespace PaintingRegistration
         
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
-        int dx = dimensions.getX();
+        int dx = dimensions.getX() - 75;
         int dy = CONTROL_BAR_HEIGHT;
         
         controls = new CameraControls(Point2i(px, py), Point2i(dx, dy));
         controls->setClickedCallback(MakeDelegate(this, &Camera::controls_Clicked));
         registerEventHandler(controls);
         
-        texture = new GLTexture("frame.png");
+        mode = new ModeToggle(Point2i(dx, py), Point2i(75, dy), "switch_slide.png", "switch_rub.png");
+        mode->setClickedCallback(MakeDelegate(this, &Camera::mode_Clicked));
+        registerEventHandler(mode);
         
         GLfloat data[12] =
 		{
@@ -69,7 +72,7 @@ namespace PaintingRegistration
     Camera::~Camera(void)
     {
         NDELETE(controls);
-        NDELETE(texture);
+        NDELETE(mode);
     }
     
     bool Camera::contains(const FingerEventArgs &e) const
@@ -77,11 +80,15 @@ namespace PaintingRegistration
         return false;
     }
     
+    bool Camera::getMode(void) const
+    {
+        return mode->getIsToggled();
+    }
+    
     void Camera::render(void) const
     {
         float x = getSizef(position.getX());
 		float y	= getSizef(position.getY());
-		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
         
@@ -108,20 +115,8 @@ namespace PaintingRegistration
         glDisable(GL_TEXTURE_2D);
         glPopMatrix();
         
-        glPushMatrix();
-		glTranslatef(x, y, 0.0f);
-		glScalef(w, fh, 1.0f);
-        glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        
-        texture->bind(GL_REPLACE);
-        GLPrimitives::getInstance()->renderSquare();
-        texture->unbind();
-        
-        glDisable(GL_BLEND);
-        glPopMatrix();
-        
         controls->render();
+        mode->render();
     }
     
     void Camera::setCameraTexture(GLuint cameraTexture)
@@ -136,5 +131,10 @@ namespace PaintingRegistration
         {
             clicked(this);
         }
+    }
+    
+    void Camera::mode_Clicked(UIElement *e)
+    {
+
     }
 }

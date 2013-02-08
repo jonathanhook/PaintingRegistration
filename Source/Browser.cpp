@@ -31,13 +31,11 @@ namespace PaintingRegistration
         UIElement(position, dims)
     {
         clicked = NULL;
-        texture = new GLTexture("frame.png");
     }
     
     Browser::~Browser(void)
     {
         NDELETE(painting);
-        NDELETE(texture);
     }
     
     bool Browser::contains(const FingerEventArgs &e) const
@@ -53,25 +51,6 @@ namespace PaintingRegistration
     void Browser::render(void) const
     {
         painting->render();
-        
-        float x = getSizef(position.getX());
-		float y	= getSizef(position.getY());
-		float w	= getSizef(dimensions.getX());
-        float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
-        
-        glPushMatrix();
-		glTranslatef(x, y, 0.0f);
-		glScalef(w, fh, 1.0f);
-        glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        
-        texture->bind(GL_REPLACE);
-        GLPrimitives::getInstance()->renderSquare();
-        texture->unbind();
-        
-        glDisable(GL_BLEND);
-        glPopMatrix();
-        
         controls->render();
     }
     

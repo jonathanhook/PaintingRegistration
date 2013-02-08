@@ -45,7 +45,6 @@ namespace PaintingRegistration
     protected:
         BrowserControls *controls;
         PaintingRenderer *painting;
-        GLTexture *texture;
         
         void controls_Clicked(UIElement *e);
     };

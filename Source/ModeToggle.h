@@ -18,40 +18,29 @@
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-#include "JDHUtility/OpenGL.h"
 #include "UIElement.h"
 
 namespace JDHUtility
 {
     class GLTexture;
-    class GLVbo;
 }
 
 namespace PaintingRegistration
 {
-    class CameraControls;
-    class ModeToggle;
-    
-    class Camera :
+    class ModeToggle :
         public UIElement
     {
     public:
-        Camera(const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions);
-        ~Camera(void);
+        ModeToggle(const Point2i &position, const Point2i &dimensions, const std::string &t0, const std::string &t1);
+        ~ModeToggle(void);
         
-        bool contains(const FingerEventArgs &e) const;
-        bool getMode(void) const;
+        bool getIsToggled(void) const;
+        void fingerRemoved(const FingerEventArgs &e);
         void render(void) const;
-        void setCameraTexture(GLuint handle);
         
     private:
-        GLuint cameraTexture;
-        CameraControls *controls;
-        GLVbo *vbo;
-        Point2i frameDimensions;
-        ModeToggle *mode;
-        
-        void controls_Clicked(UIElement *e);
-        void mode_Clicked(UIElement *e);
+        GLTexture *texture0;
+        GLTexture *texture1;
+        bool isToggled;
     };
 }

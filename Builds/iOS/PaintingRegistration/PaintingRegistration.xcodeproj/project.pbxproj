@@ -46,6 +46,7 @@
 		FC3521E1167A4751006ADE06 /* 22.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC3521C9167A4751006ADE06 /* 22.jpg */; };
 		FC3521E2167A4751006ADE06 /* 23.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC3521CA167A4751006ADE06 /* 23.jpg */; };
 		FC3521E3167A4751006ADE06 /* 24.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC3521CB167A4751006ADE06 /* 24.jpg */; };
+		FC3A084E16C546F500E224B4 /* ModeToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC3A084C16C546F400E224B4 /* ModeToggle.cpp */; };
 		FC4CA1E0165B9C78002E58C9 /* PaintingRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1DF165B9C78002E58C9 /* PaintingRenderer.cpp */; };
 		FC4CA1F6165B9D17002E58C9 /* CrossPlatformTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1EC165B9D17002E58C9 /* CrossPlatformTime.cpp */; };
 		FC4CA1F7165B9D17002E58C9 /* FileLocationUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC4CA1ED165B9D17002E58C9 /* FileLocationUtility.cpp */; };
@@ -79,9 +80,10 @@
 		FC956B631660E2C6004438D0 /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5D1660E2C6004438D0 /* exit.png */; };
 		FC956B641660E2C6004438D0 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5E1660E2C6004438D0 /* slider.png */; };
 		FC956B651660E2C6004438D0 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5F1660E2C6004438D0 /* camera.png */; };
-		FC956B661660E2C6004438D0 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B601660E2C6004438D0 /* frame.png */; };
 		FCACCDBA165B956F00CD0644 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCACCDB8165B956F00CD0644 /* App.cpp */; };
 		FCB70AAF169372FA007B48E9 /* RubTextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCB70AAD169372FA007B48E9 /* RubTextureBlock.cpp */; };
+		FCD044EA16C54C0700271CC2 /* switch_slide.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD044E916C54C0700271CC2 /* switch_slide.png */; };
+		FCD044EC16C54C1700271CC2 /* switch_rub.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD044EB16C54C1700271CC2 /* switch_rub.png */; };
 		FCD110D4167BBEE300C76336 /* RubBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD110D2167BBEE300C76336 /* RubBrowser.cpp */; };
 		FCD110D8167BC17400C76336 /* RubBrowserControls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD110D6167BC17300C76336 /* RubBrowserControls.cpp */; };
 		FCD42FF91660F31F0068FDDA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FF81660F31F0068FDDA /* Default.png */; };
@@ -143,6 +145,8 @@
 		FC3521C9167A4751006ADE06 /* 22.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 22.jpg; sourceTree = "<group>"; };
 		FC3521CA167A4751006ADE06 /* 23.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 23.jpg; sourceTree = "<group>"; };
 		FC3521CB167A4751006ADE06 /* 24.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 24.jpg; sourceTree = "<group>"; };
+		FC3A084C16C546F400E224B4 /* ModeToggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModeToggle.cpp; sourceTree = "<group>"; };
+		FC3A084D16C546F400E224B4 /* ModeToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeToggle.h; sourceTree = "<group>"; };
 		FC4CA1DD165B97D0002E58C9 /* OpenGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGL.h; sourceTree = "<group>"; };
 		FC4CA1DE165B9C6E002E58C9 /* PaintingRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintingRenderer.h; sourceTree = "<group>"; };
 		FC4CA1DF165B9C78002E58C9 /* PaintingRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintingRenderer.cpp; sourceTree = "<group>"; };
@@ -207,11 +211,12 @@
 		FC956B5D1660E2C6004438D0 /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
 		FC956B5E1660E2C6004438D0 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
 		FC956B5F1660E2C6004438D0 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
-		FC956B601660E2C6004438D0 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		FCACCDB8165B956F00CD0644 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		FCACCDB9165B956F00CD0644 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		FCB70AAD169372FA007B48E9 /* RubTextureBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RubTextureBlock.cpp; sourceTree = "<group>"; };
 		FCB70AAE169372FA007B48E9 /* RubTextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubTextureBlock.h; sourceTree = "<group>"; };
+		FCD044E916C54C0700271CC2 /* switch_slide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_slide.png; sourceTree = "<group>"; };
+		FCD044EB16C54C1700271CC2 /* switch_rub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch_rub.png; sourceTree = "<group>"; };
 		FCD110D2167BBEE300C76336 /* RubBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RubBrowser.cpp; sourceTree = "<group>"; };
 		FCD110D3167BBEE300C76336 /* RubBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubBrowser.h; sourceTree = "<group>"; };
 		FCD110D6167BC17300C76336 /* RubBrowserControls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RubBrowserControls.cpp; sourceTree = "<group>"; };
@@ -366,6 +371,8 @@
 				FCB70AAE169372FA007B48E9 /* RubTextureBlock.h */,
 				FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */,
 				FCDE3E6A16943F3D0014F8DF /* SlideTextureBlock.h */,
+				FC3A084C16C546F400E224B4 /* ModeToggle.cpp */,
+				FC3A084D16C546F400E224B4 /* ModeToggle.h */,
 			);
 			name = Source;
 			path = ../../../../Source;
@@ -374,6 +381,8 @@
 		FC4CA213165BA19D002E58C9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FCD044EB16C54C1700271CC2 /* switch_rub.png */,
+				FCD044E916C54C0700271CC2 /* switch_slide.png */,
 				FCE6FCE01663C536008BB2FD /* Textures */,
 				FCFC243716653503005611E3 /* processing.png */,
 				FCE6FCDA1663B6B5008BB2FD /* target.jpg */,
@@ -382,7 +391,6 @@
 				FC956B5D1660E2C6004438D0 /* exit.png */,
 				FC956B5E1660E2C6004438D0 /* slider.png */,
 				FC956B5F1660E2C6004438D0 /* camera.png */,
-				FC956B601660E2C6004438D0 /* frame.png */,
 			);
 			name = Resources;
 			path = ../../../../Resources;
@@ -530,7 +538,6 @@
 				FC956B631660E2C6004438D0 /* exit.png in Resources */,
 				FC956B641660E2C6004438D0 /* slider.png in Resources */,
 				FC956B651660E2C6004438D0 /* camera.png in Resources */,
-				FC956B661660E2C6004438D0 /* frame.png in Resources */,
 				FCD42FF91660F31F0068FDDA /* Default.png in Resources */,
 				FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */,
 				FC2B02FB1662A88B007BB3C6 /* icon.png in Resources */,
@@ -563,6 +570,8 @@
 				FC3521E3167A4751006ADE06 /* 24.jpg in Resources */,
 				FC8AD44B16C2A2FF0048FC48 /* debug_frame.png in Resources */,
 				FC8AD44E16C2A8690048FC48 /* Default-568h@2x.png in Resources */,
+				FCD044EA16C54C0700271CC2 /* switch_slide.png in Resources */,
+				FCD044EC16C54C1700271CC2 /* switch_rub.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +623,7 @@
 				FC68072C168DF5C900C5AC13 /* Matrixf.cpp in Sources */,
 				FCB70AAF169372FA007B48E9 /* RubTextureBlock.cpp in Sources */,
 				FCDE3E6B16943F3D0014F8DF /* SlideTextureBlock.cpp in Sources */,
+				FC3A084E16C546F500E224B4 /* ModeToggle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

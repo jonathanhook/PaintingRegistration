@@ -17,29 +17,93 @@
  * You should have received a copy of the GNU General Public License
  * along with PaintingRegistration.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "JDHUtility/GLPrimitives.h"
-#include "JDHUtility/FileLocationUtility.h"
 #include "JDHUtility/GLTexture.h"
 #include "JDHUtility/Ndelete.h"
-#include "CameraControls.h"
+#include "JDHUtility/GLPrimitives.h"
+#include "ModeToggle.h"
 
 namespace PaintingRegistration
 {
     /* Public */
-    CameraControls::CameraControls(const Point2i &position, const Point2i &dimensions) :
+    ModeToggle::ModeToggle(const Point2i &position, const Point2i &dimensions, const std::string &t0, const std::string &t1) :
         UIElement(position, dimensions)
     {
-        texture = new GLTexture("camera.png");
+        texture0 = new GLTexture(t0);
+        texture1 = new GLTexture(t1);
+        isToggled = false;
     }
     
-    CameraControls::~CameraControls(void)
+    ModeToggle::~ModeToggle(void)
     {
-        NDELETE(texture);
+        NDELETE(texture0);
+        NDELETE(texture1);
     }
     
-    void CameraControls::render(void) const
+    bool ModeToggle::getIsToggled(void) const
     {
-        float x = getSizef(position.getX()) + getSizef(37);
+        return isToggled;
+    }
+    
+    void ModeToggle::fingerRemoved(const FingerEventArgs &e)
+	{
+		if(captured && capturedId == e.getId())
+		{
+			captured	= false;
+			selected	= false;
+            
+			if(released != NULL)
+			{
+				released(this);
+			}
+            
+			if(clicked != NULL && contains(e))
+			{
+				clicked(this);
+			}
+            
+            isToggled = !isToggled;
+		}
+	}
+    
+    void ModeToggle::render(void) const
+    {
+        float x = getSizef(position.getX());
+		float y	= getSizef(position.getY());
+		float h	= getSizef(dimensions.getY());
+		float w	= getSizef(dimensions.getX());
+        
+        glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glTranslatef(x, y, 0.0f);
+        glScalef(w, h, 1.0f);    
+        
+        glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+        
+        if(selected)
+        {
+            BLUE.use();
+        }
+        else
+        {
+            GREY.use();
+        }
+        
+        GLPrimitives::getInstance()->renderSquare();
+        
+        const GLTexture *t = isToggled ? texture0 : texture1;
+        
+        t->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        t->unbind();
+        
+        glDisable(GL_BLEND);
+        glPopMatrix();
+        
+        
+        /*
+        float x = getSizef(position.getX());
 		float y	= getSizef(position.getY());
 		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());
@@ -97,10 +161,10 @@ namespace PaintingRegistration
         texture->bind(GL_REPLACE);
         GLPrimitives::getInstance()->renderSquare();
         texture->unbind();
-
+        
         glPopMatrix();
         
         glDisable(GL_BLEND);
-        glPopMatrix();
+        glPopMatrix();*/
     }
 }

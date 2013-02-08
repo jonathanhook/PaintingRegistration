@@ -31,8 +31,6 @@
 #include "RubPaintingRenderer.h"
 #include "App.h"
 
-#define SLIDE
-
 namespace PaintingRegistration
 {
     /* Public */
@@ -52,6 +50,7 @@ namespace PaintingRegistration
         tracker = new PaintingTracker();
         tracker->setCompletedCallback(MakeDelegate(this, &App::tracker_Completed));
         tracker->train("target.jpg");
+        browserMode = false;
 
         initScene(width, height);
         initUI(width, height);
@@ -61,7 +60,8 @@ namespace PaintingRegistration
     App::~App(void)
     {
         NDELETE(camera);
-        NDELETE(browser);
+        NDELETE(slideBrowser);
+        NDELETE(rubBrowser);
         NDELETE(texture);
         NDELETE(tracker);
     }
@@ -88,6 +88,7 @@ namespace PaintingRegistration
         }
         else if(uiMode == BROWSER)
         {
+            Browser *browser = browserMode ? (Browser *)slideBrowser : (Browser *)rubBrowser;
             browser->getPainting()->setCameraTexture(cameraTexture);
             browser->render();
         }
@@ -114,7 +115,8 @@ namespace PaintingRegistration
     {
         uiMode = CAMERA;
         registerEventHandler(camera);
-        unregisterEventHandler(browser);
+        unregisterEventHandler(slideBrowser);
+        unregisterEventHandler(rubBrowser);
     }
     
     void App::camera_Clicked(UIElement *e)
@@ -149,18 +151,16 @@ namespace PaintingRegistration
     {
         uiMode = CAMERA;
         
+        processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));
         camera = new Camera(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
+
+        slideBrowser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
+        slideBrowser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         
-#ifdef SLIDE
-        browser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
-#else
-        browser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
-#endif
-        browser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
-        
-        processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));
+        rubBrowser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
+        rubBrowser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
     }
     
     void App::initTextureHandle(void)
@@ -174,20 +174,23 @@ namespace PaintingRegistration
     {
         if(result)
         {
-            uiMode = BROWSER;
-            
+            browserMode = camera->getMode();
+
+            Browser *browser = browserMode ? (Browser *)slideBrowser : (Browser *)rubBrowser;
             browser->getPainting()->setMatrix(tracker->getGlMatrix());
             
-#ifndef SLIDE
-            ((RubPaintingRenderer *)browser->getPainting())->setMatrixInverse(tracker->getGlMatrixInverse());
-            ((RubPaintingRenderer *)browser->getPainting())->setPaintingArea(tracker->getArea());
-            ((RubPaintingRenderer *)browser->getPainting())->reset();
-#endif
+            if(!browserMode)
+            {
+                ((RubPaintingRenderer *)browser->getPainting())->setMatrixInverse(tracker->getGlMatrixInverse());
+                ((RubPaintingRenderer *)browser->getPainting())->setPaintingArea(tracker->getArea());
+                ((RubPaintingRenderer *)browser->getPainting())->reset();
+            }
             
             unregisterEventHandler(camera);
-            
             unregisterEventHandler(processing);
             registerEventHandler(browser);
+            
+            uiMode = BROWSER;
         }
         else
         {
@@ -215,4 +218,5 @@ namespace PaintingRegistration
             glDisable(GL_TEXTURE_2D);
         }
     }
+
 }
