@@ -50,7 +50,9 @@ namespace PaintingRegistration
         ValueChangedCallback valueChanged;
         
         GLTexture *barTexture;
-        GLTexture *texture;
+        GLTexture *middleTexture;
+        GLTexture *startTexture;
+        GLTexture *endTexture;
         
         void updateSliderValue(float x);
     };

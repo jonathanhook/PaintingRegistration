@@ -78,7 +78,7 @@
 		FC8E4AE5165CFEAE00B4B64D /* UIElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */; };
 		FC956B621660E2C6004438D0 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5C1660E2C6004438D0 /* bar.png */; };
 		FC956B631660E2C6004438D0 /* exit.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5D1660E2C6004438D0 /* exit.png */; };
-		FC956B641660E2C6004438D0 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5E1660E2C6004438D0 /* slider.png */; };
+		FC956B641660E2C6004438D0 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5E1660E2C6004438D0 /* start.png */; };
 		FC956B651660E2C6004438D0 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FC956B5F1660E2C6004438D0 /* camera.png */; };
 		FCACCDBA165B956F00CD0644 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCACCDB8165B956F00CD0644 /* App.cpp */; };
 		FCB70AAF169372FA007B48E9 /* RubTextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCB70AAD169372FA007B48E9 /* RubTextureBlock.cpp */; };
@@ -88,6 +88,8 @@
 		FCD110D8167BC17400C76336 /* RubBrowserControls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD110D6167BC17300C76336 /* RubBrowserControls.cpp */; };
 		FCD42FF91660F31F0068FDDA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FF81660F31F0068FDDA /* Default.png */; };
 		FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD42FFB1660F5CB0068FDDA /* Default@2x.png */; };
+		FCDBB6E216CAA886004E17ED /* end.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDBB6E116CAA886004E17ED /* end.png */; };
+		FCDBB6E416CAA985004E17ED /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDBB6E316CAA985004E17ED /* slider.png */; };
 		FCDE3E6B16943F3D0014F8DF /* SlideTextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */; };
 		FCE6FCDB1663B6B5008BB2FD /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCE6FCDA1663B6B5008BB2FD /* target.jpg */; };
 		FCE6FCDF1663C211008BB2FD /* TextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCE6FCDD1663C211008BB2FD /* TextureBlock.cpp */; };
@@ -209,7 +211,7 @@
 		FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
 		FC956B5C1660E2C6004438D0 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
 		FC956B5D1660E2C6004438D0 /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
-		FC956B5E1660E2C6004438D0 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
+		FC956B5E1660E2C6004438D0 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		FC956B5F1660E2C6004438D0 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		FCACCDB8165B956F00CD0644 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		FCACCDB9165B956F00CD0644 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
@@ -223,6 +225,8 @@
 		FCD110D7167BC17300C76336 /* RubBrowserControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubBrowserControls.h; sourceTree = "<group>"; };
 		FCD42FF81660F31F0068FDDA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		FCD42FFB1660F5CB0068FDDA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		FCDBB6E116CAA886004E17ED /* end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = end.png; sourceTree = "<group>"; };
+		FCDBB6E316CAA985004E17ED /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
 		FCDE3E6916943F3D0014F8DF /* SlideTextureBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SlideTextureBlock.cpp; sourceTree = "<group>"; };
 		FCDE3E6A16943F3D0014F8DF /* SlideTextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideTextureBlock.h; sourceTree = "<group>"; };
 		FCE6FCDA1663B6B5008BB2FD /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
@@ -381,6 +385,8 @@
 		FC4CA213165BA19D002E58C9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FCDBB6E316CAA985004E17ED /* slider.png */,
+				FCDBB6E116CAA886004E17ED /* end.png */,
 				FCD044EB16C54C1700271CC2 /* switch_rub.png */,
 				FCD044E916C54C0700271CC2 /* switch_slide.png */,
 				FCE6FCE01663C536008BB2FD /* Textures */,
@@ -389,7 +395,7 @@
 				FC8AD44A16C2A2FF0048FC48 /* debug_frame.png */,
 				FC956B5C1660E2C6004438D0 /* bar.png */,
 				FC956B5D1660E2C6004438D0 /* exit.png */,
-				FC956B5E1660E2C6004438D0 /* slider.png */,
+				FC956B5E1660E2C6004438D0 /* start.png */,
 				FC956B5F1660E2C6004438D0 /* camera.png */,
 			);
 			name = Resources;
@@ -536,7 +542,7 @@
 				FC33FECE16555EDC00B1FC69 /* ViewController.xib in Resources */,
 				FC956B621660E2C6004438D0 /* bar.png in Resources */,
 				FC956B631660E2C6004438D0 /* exit.png in Resources */,
-				FC956B641660E2C6004438D0 /* slider.png in Resources */,
+				FC956B641660E2C6004438D0 /* start.png in Resources */,
 				FC956B651660E2C6004438D0 /* camera.png in Resources */,
 				FCD42FF91660F31F0068FDDA /* Default.png in Resources */,
 				FCD42FFC1660F5CB0068FDDA /* Default@2x.png in Resources */,
@@ -572,6 +578,8 @@
 				FC8AD44E16C2A8690048FC48 /* Default-568h@2x.png in Resources */,
 				FCD044EA16C54C0700271CC2 /* switch_slide.png in Resources */,
 				FCD044EC16C54C1700271CC2 /* switch_rub.png in Resources */,
+				FCDBB6E216CAA886004E17ED /* end.png in Resources */,
+				FCDBB6E416CAA985004E17ED /* slider.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

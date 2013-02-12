@@ -103,16 +103,19 @@ namespace PaintingRegistration
     {
         float x = getSizef(position.getX());
 		float y	= getSizef(position.getY());
-		float w	= getSizef(dimensions.getX());
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
-        
         float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
         float fw = fh / r;
-        float ft = (fw - w) / 2.0f;
         
+        if(fw < 1.0f)
+        {
+            fw = 1.0f;
+            fh = r;
+        }
+
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
-		glTranslatef(x - ft, y, 0.0f);
+		glTranslatef(x, y, 0.0f);
 		glScalef(fw, fh, 1.0f);
         
         glEnable(GL_BLEND);
@@ -139,13 +142,19 @@ namespace PaintingRegistration
     
     void PaintingRenderer::renderPerspective(void) const
     {
-		float h	= getSizef(dimensions.getY());
+        float h	= getSizef(dimensions.getY());
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
         float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
-        float a = fh / h;
         float fw = fh / r;
-        float b = ((fw - 1.0f) / 2.0f) * (float)frameDimensions.getY();
-    
+         
+        if(fw < 1.0f)
+        {
+            fw = 1.0f;
+            fh = r;
+        }
+        
+        float a = fh / h;
+        
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
         glLoadIdentity();
@@ -154,7 +163,6 @@ namespace PaintingRegistration
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
-        glTranslatef(-b, 0.0f, 0.0f);
         glScalef(fw, a, 1.0f);
         
         glMultMatrixf((float *)matrix->getPtr());

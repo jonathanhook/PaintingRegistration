@@ -33,39 +33,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "382300570.706803"
+         filePath = "../../../Source/Slider.cpp"
+         timestampString = "382380652.046598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
-         landmarkName = "PaintingRenderer::renderCameraImage(void)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "382300594.238494"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
-         landmarkName = "PaintingRenderer::renderCameraImage(void)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "382300595.804615"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "115"
-         endingLineNumber = "115"
-         landmarkName = "PaintingRenderer::renderCameraImage(void)"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
+         landmarkName = "Slider::render(void)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

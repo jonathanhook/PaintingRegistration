@@ -48,15 +48,21 @@ namespace PaintingRegistration
         float x = e.getX();
         float y = (e.getY() / ratio);
         
+        float w	= (float)wx;
         float h	= (float)wy;
         float fh = (float)h - UIElement::CONTROL_BAR_HEIGHT;
         float yr = fh / h;
         
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
         float fw = getSizef(fh) / r;
-        float xr = ((fw - 1.0f) / 2.0f);
         
-        x += xr;
+        if(fw < 1.0f)
+        {
+            fw = 1.0f;
+            fh = w * r;
+            yr = fh / h;
+        }
+
         x /= fw;
         y /= yr;
         

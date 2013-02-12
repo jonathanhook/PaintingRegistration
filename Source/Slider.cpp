@@ -35,13 +35,18 @@ namespace PaintingRegistration
         
         valueChanged = NULL;
         
-        texture = new GLTexture("slider.png");
+        middleTexture = new GLTexture("slider.png");
+        startTexture = new GLTexture("start.png");
+        endTexture = new GLTexture("end.png");
         barTexture = new GLTexture("bar.png");
     }
     
     Slider::~Slider(void)
     {
-        NDELETE(texture);
+        NDELETE(middleTexture);
+        NDELETE(startTexture);
+        NDELETE(endTexture);
+        NDELETE(barTexture);
     }
     
     void Slider::fingerAdded(const FingerEventArgs &e)
@@ -67,10 +72,14 @@ namespace PaintingRegistration
 		float y	= getSizef(position.getY());
 		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());
+        float c = getSizef(25);
         
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glTranslatef(x, y, 0.0f);
+        
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
 		glScalef(w, h, 1.0f);
         
         if(selected)
@@ -84,12 +93,40 @@ namespace PaintingRegistration
         
         GLPrimitives::getInstance()->renderSquare();
         
+        glPopMatrix();
+        
         glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         
-        texture->bind(GL_REPLACE);
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glScalef(c, h, 1.0f);
+        
+        startTexture->bind(GL_REPLACE);
         GLPrimitives::getInstance()->renderSquare();
-        texture->unbind();
+        startTexture->unbind();
+        
+        glPopMatrix();
+        
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glTranslatef(w - c, 0.0f, 0.0f);
+        glScalef(c, h, 1.0f);
+        
+        endTexture->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        endTexture->unbind();
+        
+        glPopMatrix();
+        
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glTranslatef(c, 0.0f, 0.0f);
+        glScalef(w - (c * 2.0f), h, 1.0f);
+        
+        middleTexture->bind(GL_REPLACE);
+        GLPrimitives::getInstance()->renderSquare();
+        middleTexture->unbind();
         
         glPopMatrix();
 
@@ -98,13 +135,14 @@ namespace PaintingRegistration
 
         glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
-		glTranslatef(bx, y, 0.0f);
+		glTranslatef(bx, 0.0f, 0.0f);
 		glScalef(b, h, 1.0f);
         
         barTexture->bind();
         GLPrimitives::getInstance()->renderSquare();
         barTexture->unbind();
         
+        glPopMatrix();
         glDisable(GL_BLEND);
         glPopMatrix();
     }

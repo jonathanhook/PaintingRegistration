@@ -89,16 +89,19 @@ namespace PaintingRegistration
     {
         float x = getSizef(position.getX());
 		float y	= getSizef(position.getY());
-		float w	= getSizef(dimensions.getX());
         float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
-        
         float fh = getSizef(dimensions.getY() - UIElement::CONTROL_BAR_HEIGHT);
         float fw = fh / r;
-        float ft = (fw - w) / 2.0f;
-        
+
+        if(fw < 1.0f)
+        {
+            fw = 1.0f;
+            fh = r;
+        }
+
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
-		glTranslatef(x - ft, y, 0.0f);
+		glTranslatef(x, y, 0.0f);
 		glScalef(fw, fh, 1.0f);
         
         glEnable(GL_TEXTURE_2D);
