@@ -43,4 +43,9 @@ namespace PaintingRegistration
     RubBrowser::~RubBrowser(void)
     {
     }
+    
+    void RubBrowser::reset(void)
+    {
+        ((RubPaintingRenderer *)getPainting())->reset();
+    }
 }

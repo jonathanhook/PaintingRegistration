@@ -35,14 +35,14 @@ namespace PaintingRegistration
         
         int px = position.getX();
         int py = position.getY() + dimensions.getY() - CONTROL_BAR_HEIGHT;
-        int dx = dimensions.getX() - 75;
+        int dx = dimensions.getX() - 125;
         int dy = CONTROL_BAR_HEIGHT;
         
         controls = new CameraControls(Point2i(px, py), Point2i(dx, dy));
         controls->setClickedCallback(MakeDelegate(this, &Camera::controls_Clicked));
         registerEventHandler(controls);
         
-        mode = new ModeToggle(Point2i(dx, py), Point2i(75, dy), "switch_slide.png", "switch_rub.png");
+        mode = new ModeToggle(Point2i(dx, py), Point2i(125, dy), "switch_slide.png", "switch_rub.png");
         mode->setClickedCallback(MakeDelegate(this, &Camera::mode_Clicked));
         registerEventHandler(mode);
         

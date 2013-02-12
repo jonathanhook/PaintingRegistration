@@ -31,7 +31,7 @@ namespace PaintingRegistration
     
     /* Public */
     RubTextureBlock::RubTextureBlock(std::string format, unsigned int start, unsigned int end) :
-        TextureBlock(format, start, end)
+    TextureBlock(format, start, end)
     {
         loadAll();
         initTexture();
@@ -83,7 +83,7 @@ namespace PaintingRegistration
         {
             int cursorSize = (int)(fcs * (float)dimensions.getX());
             int limit = cursorSize / 2;
-        
+            
             int stride = dimensions.getX();
             for(int i = y - limit; i < y + limit; i++)
             {
@@ -99,12 +99,12 @@ namespace PaintingRegistration
                     {
                         int index = i * stride + j;
                         float v = mask[index] - RUB_DECREMENT;
-                    
+                        
                         if(v < 0.0f)
                         {
                             v = 0.0f;
                         }
-                    
+                        
                         mask[index] = v;
                     }
                 }
@@ -157,7 +157,7 @@ namespace PaintingRegistration
         dimensions.setY(y);
         bpp = n;
     }
-
+    
     bool RubTextureBlock::isWithinPainting(int x, int y) const
     {
         return x >= 0 &&
@@ -169,6 +169,7 @@ namespace PaintingRegistration
     void RubTextureBlock::updatePixels(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
     {
         unsigned int imageWidth = dimensions.getX();
+        unsigned int imageHeight = dimensions.getY();
         unsigned int cursorSize = width * height * bpp;
         unsigned char *data = new unsigned char[cursorSize];
         unsigned int ptr = 0;
@@ -177,19 +178,22 @@ namespace PaintingRegistration
         {
             for(unsigned int j = x; j < x + width; j++)
             {
-                float m = mask[j + (i * imageWidth)];
-                unsigned int tId = (unsigned int)(m * (float)(textures.size() - 1));
-                unsigned char *t = textures[tId];
+                if(i < imageHeight && j < imageWidth)
+                {
+                    float m = mask[j + (i * imageWidth)];
+                    unsigned int tId = (unsigned int)(m * (float)(textures.size() - 1));
+                    unsigned char *t = textures[tId];
                 
-                unsigned int index = (j * bpp) + (i * imageWidth * bpp);
-                unsigned char r = t[index];
-                unsigned char g = t[index + 1];
-                unsigned char b = t[index + 2];
+                    unsigned int index = (j * bpp) + (i * imageWidth * bpp);
+                    unsigned char r = t[index];
+                    unsigned char g = t[index + 1];
+                    unsigned char b = t[index + 2];
                 
-                data[ptr] = r;
-                data[ptr + 1] = g;
-                data[ptr + 2] = b;
-                ptr += 3;
+                    data[ptr] = r;
+                    data[ptr + 1] = g;
+                    data[ptr + 2] = b;
+                    ptr += 3;
+                }
             }
         }
         

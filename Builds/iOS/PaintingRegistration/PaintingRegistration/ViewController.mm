@@ -45,6 +45,8 @@ const unsigned int PROCESSING_RENDER_RATE = 1000;
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
+CGFloat twX = 1.0f;
+CGFloat twY = 1.0f;
 uchar *frameData = new uchar[BUFFER_SIZE];
 PaintingRegistration::App *app;
 unsigned int frameWidth = 0;
@@ -81,10 +83,13 @@ bool loaded = false;
     
         NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
         CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        CGFloat screenScale = [[UIScreen mainScreen] scale];
         CGSize screenSize = CGSizeMake(screenBounds.size.width, screenBounds.size.height);
-        winX = screenSize.width;
-        winY = screenSize.height;
-        
+        twX = screenSize.width;
+        twY = screenSize.height;
+        winX = screenSize.width * screenScale;
+        winY = screenSize.height * screenScale;
+
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsPath = [paths objectAtIndex:0];
     
@@ -166,8 +171,8 @@ bool loaded = false;
     UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
     CGPoint p = [touch locationInView:(self.view)];
     
-    CGFloat x = p.x / winX;
-    CGFloat y = p.y / winX;
+    CGFloat x = p.x / twX;
+    CGFloat y = p.y / twX;
     
     app->raiseEvent(0, x, y, FingerEventArgs::FINGER_ADDED);
 }
@@ -180,8 +185,8 @@ bool loaded = false;
     UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
     CGPoint p = [touch locationInView:(self.view)];
     
-    CGFloat x = p.x / winX;
-    CGFloat y = p.y / winX;
+    CGFloat x = p.x / twX;
+    CGFloat y = p.y / twX;
     
     app->raiseEvent(0, x, y, FingerEventArgs::FINGER_UPDATED);
 }
@@ -194,8 +199,8 @@ bool loaded = false;
     UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
     CGPoint p = [touch locationInView:(self.view)];
     
-    CGFloat x = p.x / winX;
-    CGFloat y = p.y / winX;
+    CGFloat x = p.x / twX;
+    CGFloat y = p.y / twX;
     
     app->raiseEvent(0, x, y, FingerEventArgs::FINGER_REMOVED);
 }

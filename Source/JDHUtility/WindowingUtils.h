@@ -27,8 +27,8 @@ namespace JDHUtility
 	class WindowingUtils
 	{
 	public:
-		static const Point2f &getWindowPosition(void);
-		static const Vector2f &getWindowDimensions(void);
+		static Point2f getWindowPosition(void);
+		static Vector2f getWindowDimensions(void);
         
         static float DEVICE_WINDOW_WIDTH;
         static float DEVICE_WINDOW_HEIGHT;

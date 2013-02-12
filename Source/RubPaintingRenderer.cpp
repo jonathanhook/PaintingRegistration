@@ -41,11 +41,24 @@ namespace PaintingRegistration
     
     void RubPaintingRenderer::fingerUpdated(const FingerEventArgs &e)
     {
-        float wx = WindowingUtils::getWindowDimensions().getX();
-        float wy = WindowingUtils::getWindowDimensions().getY();
+        Vector2f dims = WindowingUtils::getWindowDimensions();
+        float wx = dims.getX();
+        float wy = dims.getY();
         float ratio = wy / wx;
         float x = e.getX();
         float y = (e.getY() / ratio);
+        
+        float h	= (float)wy;
+        float fh = (float)h - UIElement::CONTROL_BAR_HEIGHT;
+        float yr = fh / h;
+        
+        float r = (float)frameDimensions.getX() / (float)frameDimensions.getY();
+        float fw = getSizef(fh) / r;
+        float xr = ((fw - 1.0f) / 2.0f);
+        
+        x += xr;
+        x /= fw;
+        y /= yr;
         
         float fx = (float)frameDimensions.getY() * x;
         float fy = (float)frameDimensions.getX() * y;

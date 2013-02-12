@@ -20,12 +20,25 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381950344.527902"
+         filePath = "../../../Source/Overlay.cpp"
+         timestampString = "381953866.707537"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
+         landmarkName = "Overlay::render(void)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../../Source/PaintingRenderer.cpp"
+         timestampString = "382300570.706803"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "116"
+         endingLineNumber = "116"
          landmarkName = "PaintingRenderer::renderCameraImage(void)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,12 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381950344.527902"
+         timestampString = "382300594.238494"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "PaintingRenderer::renderPerspective(void)"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
+         landmarkName = "PaintingRenderer::renderCameraImage(void)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -47,64 +60,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381950344.527902"
+         timestampString = "382300595.804615"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
-         landmarkName = "PaintingRenderer::renderPerspective(void)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381950344.527902"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
-         landmarkName = "PaintingRenderer::renderPerspective(void)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381950344.527902"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "147"
-         endingLineNumber = "147"
-         landmarkName = "PaintingRenderer::renderPerspective(void)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../Source/PaintingRenderer.cpp"
-         timestampString = "381950372.722579"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "PaintingRenderer::renderPerspective(void)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../Source/Overlay.cpp"
-         timestampString = "381953866.707537"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
-         landmarkName = "Overlay::render(void)"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
+         landmarkName = "PaintingRenderer::renderCameraImage(void)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

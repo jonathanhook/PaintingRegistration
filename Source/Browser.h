@@ -41,6 +41,7 @@ namespace PaintingRegistration
         virtual bool contains (const FingerEventArgs &e) const;
         PaintingRenderer *getPainting(void);
         void render(void) const;
+        virtual void reset(void) = 0;
 
     protected:
         BrowserControls *controls;

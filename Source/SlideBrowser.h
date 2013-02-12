@@ -29,6 +29,8 @@ namespace PaintingRegistration
         SlideBrowser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims);
         ~SlideBrowser(void);
         
+        void reset(void);
+        
     private:
         void controls_PositionChanged(float position);
     };

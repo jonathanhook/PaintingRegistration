@@ -70,6 +70,7 @@ namespace PaintingRegistration
         unsigned int cameraHeight;
         const unsigned char *fData;
         bool browserMode;
+        bool resetBrowser;
         
         void browser_Clicked(UIElement *e);
         void camera_Clicked(UIElement *e);

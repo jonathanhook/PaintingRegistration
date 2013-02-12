@@ -42,6 +42,8 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>still-camera</string>
+		<string>opengles-2</string>
 	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>

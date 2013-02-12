@@ -45,6 +45,11 @@ namespace PaintingRegistration
         
     }
     
+    void SlideBrowser::reset(void)
+    {
+        
+    }
+    
     /* Private */
     void SlideBrowser::controls_PositionChanged(float position)
     {

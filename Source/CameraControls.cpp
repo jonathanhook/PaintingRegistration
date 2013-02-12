@@ -39,7 +39,7 @@ namespace PaintingRegistration
     
     void CameraControls::render(void) const
     {
-        float x = getSizef(position.getX()) + getSizef(37);
+        float x = getSizef(position.getX()) + getSizef(62);
 		float y	= getSizef(position.getY());
 		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());

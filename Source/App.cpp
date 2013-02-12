@@ -51,6 +51,7 @@ namespace PaintingRegistration
         tracker->setCompletedCallback(MakeDelegate(this, &App::tracker_Completed));
         tracker->train("target.jpg");
         browserMode = false;
+        resetBrowser = true;
 
         initScene(width, height);
         initUI(width, height);
@@ -108,6 +109,12 @@ namespace PaintingRegistration
     
     void App::update(void)
     {
+        if(resetBrowser)
+        {
+            Browser *browser = browserMode ? (Browser *)slideBrowser : (Browser *)rubBrowser;
+            browser->reset();
+            resetBrowser = false;
+        }
     }
     
     /* Private */
@@ -183,13 +190,14 @@ namespace PaintingRegistration
             {
                 ((RubPaintingRenderer *)browser->getPainting())->setMatrixInverse(tracker->getGlMatrixInverse());
                 ((RubPaintingRenderer *)browser->getPainting())->setPaintingArea(tracker->getArea());
-                ((RubPaintingRenderer *)browser->getPainting())->reset();
+                //((RubPaintingRenderer *)browser->getPainting())->reset();
             }
             
             unregisterEventHandler(camera);
             unregisterEventHandler(processing);
             registerEventHandler(browser);
             
+            resetBrowser = true;
             uiMode = BROWSER;
         }
         else

@@ -25,7 +25,7 @@
 namespace PaintingRegistration
 {
     /* Static */
-    const unsigned int Slider::BAR_WIDTH = 30;
+    const unsigned int Slider::BAR_WIDTH = 51;
 
     /* Public */
     Slider::Slider(float value, const Point2i &position, const Point2i &dimensions) :
