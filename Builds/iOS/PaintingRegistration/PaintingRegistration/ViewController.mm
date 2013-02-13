@@ -40,8 +40,8 @@
 
 const unsigned int CAM_WIDTH_IPHONE = 480;
 const unsigned int CAM_HEIGHT_IPHONE = 360;
-const unsigned int CAM_WIDTH_IPAD = 640;
-const unsigned int CAM_HEIGHT_IPAD = 480;
+const unsigned int CAM_WIDTH_IPAD = 480;
+const unsigned int CAM_HEIGHT_IPAD = 360;
 const unsigned int PROCESSING_RENDER_RATE = 1000;
 
 CGFloat winX = 1.0f;
@@ -99,7 +99,7 @@ bool loaded = false;
         unsigned int camHeight = 0;
         
         NSString *deviceType = [UIDevice currentDevice].model;
-        if([deviceType isEqualToString:@"iPhone"])
+        if([deviceType isEqualToString:@"iPhone"] || [deviceType isEqualToString:@"iPhone Simulator"])
         {
             camWidth = CAM_WIDTH_IPHONE;
             camHeight = CAM_HEIGHT_IPHONE;
@@ -118,7 +118,7 @@ bool loaded = false;
         std::string path = FileLocationUtility::getFileInResourcePath("debug_frame.png");
         int x, y, n;
         unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 0);
-        memcpy(frameData, data, sizeof(unsigned char) * BUFFER_SIZE);
+        memcpy(frameData, data, sizeof(unsigned char) * bufferSize);
         app->setLatestFrame(frameData);
 #else
         [self initVideoCapture];
@@ -231,7 +231,7 @@ bool loaded = false;
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
     
     NSString *deviceType = [UIDevice currentDevice].model;
-    if([deviceType isEqualToString:@"iPhone"])
+    if([deviceType isEqualToString:@"iPhone"] || [deviceType isEqualToString:@"iPhone Simulator"])
     {
         session.sessionPreset = AVCaptureSessionPresetMedium;
     }

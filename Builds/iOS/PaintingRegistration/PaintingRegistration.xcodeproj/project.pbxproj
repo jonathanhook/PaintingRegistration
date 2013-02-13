@@ -211,6 +211,7 @@
 		FC8E4ADC165CFEAE00B4B64D /* ExitButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExitButton.cpp; sourceTree = "<group>"; };
 		FC8E4ADD165CFEAE00B4B64D /* Slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Slider.cpp; sourceTree = "<group>"; };
 		FC8E4ADE165CFEAE00B4B64D /* UIElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIElement.cpp; sourceTree = "<group>"; };
+		FC91DB5B16CBEB1E00DB83AC /* BA9ED6FF-9D11-473D-B4B8-B9D965793CC0.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BA9ED6FF-9D11-473D-B4B8-B9D965793CC0.mobileprovision"; path = "../../../../../../Library/MobileDevice/Provisioning Profiles/BA9ED6FF-9D11-473D-B4B8-B9D965793CC0.mobileprovision"; sourceTree = "<group>"; };
 		FC956B5C1660E2C6004438D0 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
 		FC956B5D1660E2C6004438D0 /* exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exit.png; sourceTree = "<group>"; };
 		FC956B5E1660E2C6004438D0 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 		FC33FE9A16555EDC00B1FC69 = {
 			isa = PBXGroup;
 			children = (
+				FC91DB5B16CBEB1E00DB83AC /* BA9ED6FF-9D11-473D-B4B8-B9D965793CC0.mobileprovision */,
 				FC33FEB316555EDC00B1FC69 /* PaintingRegistration */,
 				FC33FEA816555EDC00B1FC69 /* Frameworks */,
 				FC33FEA616555EDC00B1FC69 /* Products */,
@@ -693,6 +695,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Pentimento;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -715,6 +718,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = Pentimento;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -750,6 +754,7 @@
 		FC33FED316555EDC00B1FC69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jonathan Hook";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Source\"",
@@ -768,6 +773,7 @@
 					"\"$(SRCROOT)/../../../Source/JDHUtility/libGLU\"",
 				);
 				PRODUCT_NAME = Pentimento;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BA9ED6FF-9D11-473D-B4B8-B9D965793CC0";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
