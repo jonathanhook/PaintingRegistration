@@ -39,12 +39,12 @@ namespace PaintingRegistration
     
     void CameraControls::render(void) const
     {
-        float x = getSizef(position.getX()) + getSizef(62);
+        float x = getSizef(position.getX());
 		float y	= getSizef(position.getY());
 		float h	= getSizef(dimensions.getY());
 		float w	= getSizef(dimensions.getX());
         float tw = getSizef(texture->getWidth());
-        float tx = (w / 2.0f) - (tw / 2.0f);
+        float tx = (w / 2.0f) - (tw / 2.0f) + getSizef(62);
         
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();

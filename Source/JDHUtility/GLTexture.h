@@ -30,7 +30,7 @@ namespace JDHUtility
 		~GLTexture(void);
 
 		void			bind(	GLenum mode			= GL_MODULATE, 
-								GLenum minFilter	= GL_NEAREST, 
+								GLenum minFilter	= GL_LINEAR,
 								GLenum magFilter	= GL_LINEAR, 
 								GLenum wrapS		= GL_CLAMP_TO_EDGE,
 								GLenum wrapT		= GL_CLAMP_TO_EDGE) const;

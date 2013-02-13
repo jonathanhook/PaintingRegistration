@@ -55,7 +55,7 @@ namespace PaintingRegistration
         void update(void);
         
     private:
-        static const unsigned int TEXTURE_DIM = 512;
+        //static const unsigned int TEXTURE_DIM = 512;
         
         SlideBrowser *slideBrowser;
         RubBrowser *rubBrowser;
@@ -71,6 +71,7 @@ namespace PaintingRegistration
         const unsigned char *fData;
         bool browserMode;
         bool resetBrowser;
+        unsigned int textureDim;
         
         void browser_Clicked(UIElement *e);
         void camera_Clicked(UIElement *e);

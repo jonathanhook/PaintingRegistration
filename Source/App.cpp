@@ -52,6 +52,12 @@ namespace PaintingRegistration
         tracker->train("target.jpg");
         browserMode = false;
         resetBrowser = true;
+        
+        textureDim = 2;
+        while(textureDim < cameraWidth || textureDim < cameraHeight)
+        {
+            textureDim *= 2;
+        }
 
         initScene(width, height);
         initUI(width, height);
@@ -159,14 +165,14 @@ namespace PaintingRegistration
         uiMode = CAMERA;
         
         processing = new Overlay("processing.png", false, Point2i(0, 0), Point2i(width, height));
-        camera = new Camera(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM));
+        camera = new Camera(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim));
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
 
-        slideBrowser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
+        slideBrowser = new SlideBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim), tracker->getTargetDimensions());
         slideBrowser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         
-        rubBrowser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(TEXTURE_DIM, TEXTURE_DIM), tracker->getTargetDimensions());
+        rubBrowser = new RubBrowser(Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim), tracker->getTargetDimensions());
         rubBrowser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
     }
     
@@ -221,7 +227,7 @@ namespace PaintingRegistration
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S , GL_REPEAT);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
             glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXTURE_DIM, TEXTURE_DIM, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureDim, textureDim, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, cameraWidth, cameraHeight, GL_BGRA, GL_UNSIGNED_BYTE, fData);
             glDisable(GL_TEXTURE_2D);
         }

@@ -76,7 +76,7 @@ namespace PaintingRegistration
             glPushMatrix();
             glTranslatef(tx, ty, 0.0f);
             glScalef(tw, th, 1.0f);
-        
+
             texture->bind(GL_REPLACE);
             GLPrimitives::getInstance()->renderSquare();
             texture->unbind();

@@ -38,20 +38,22 @@
 
 @implementation ViewController
 
-const unsigned int CAM_WIDTH = 480;
-const unsigned int CAM_HEIGHT = 360;
-const unsigned int BUFFER_SIZE = CAM_WIDTH * CAM_HEIGHT * 4;
+const unsigned int CAM_WIDTH_IPHONE = 480;
+const unsigned int CAM_HEIGHT_IPHONE = 360;
+const unsigned int CAM_WIDTH_IPAD = 640;
+const unsigned int CAM_HEIGHT_IPAD = 480;
 const unsigned int PROCESSING_RENDER_RATE = 1000;
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
 CGFloat twX = 1.0f;
 CGFloat twY = 1.0f;
-uchar *frameData = new uchar[BUFFER_SIZE];
+uchar *frameData;
 PaintingRegistration::App *app;
 unsigned int frameWidth = 0;
 unsigned int frameHeight = 0;
 unsigned int lastProcessingRender = 0;
+unsigned int bufferSize = 0;
 bool loaded = false;
 
 - (void)dealloc
@@ -92,8 +94,25 @@ bool loaded = false;
 
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsPath = [paths objectAtIndex:0];
+        
+        unsigned int camWidth = 0;
+        unsigned int camHeight = 0;
+        
+        NSString *deviceType = [UIDevice currentDevice].model;
+        if([deviceType isEqualToString:@"iPhone"])
+        {
+            camWidth = CAM_WIDTH_IPHONE;
+            camHeight = CAM_HEIGHT_IPHONE;
+        }
+        else
+        {
+            camWidth = CAM_WIDTH_IPAD;
+            camHeight = CAM_HEIGHT_IPAD;
+        }
     
-        app = new PaintingRegistration::App(winX, winY, CAM_WIDTH, CAM_HEIGHT, [resourcePath UTF8String], [documentsPath UTF8String]);
+        bufferSize = camWidth * camHeight * 4;
+        frameData = new uchar[bufferSize];
+        app = new PaintingRegistration::App(winX, winY, camWidth, camHeight, [resourcePath UTF8String], [documentsPath UTF8String]);
         
 #if TARGET_IPHONE_SIMULATOR
         std::string path = FileLocationUtility::getFileInResourcePath("debug_frame.png");
@@ -210,14 +229,35 @@ bool loaded = false;
     NSError *error;
     
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
-    session.sessionPreset = AVCaptureSessionPresetMedium;
+    
+    NSString *deviceType = [UIDevice currentDevice].model;
+    if([deviceType isEqualToString:@"iPhone"])
+    {
+        session.sessionPreset = AVCaptureSessionPresetMedium;
+    }
+    else
+    {
+        session.sessionPreset = AVCaptureSessionPreset640x480;
+    }
     
     AVCaptureDevice *device = [self findBackFacingCamera];
-    
     [device lockForConfiguration:&error];
-    [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
-    [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
-    [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance];
+    
+    if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus])
+    {
+        [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+    }
+    
+    if([device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure])
+    {
+        [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
+    }
+    
+    if([device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance])
+    {
+        [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance];
+    }
+    
     [device unlockForConfiguration];
     
     AVCaptureDeviceInput *input =[AVCaptureDeviceInput deviceInputWithDevice:device error:&error];    
@@ -264,7 +304,7 @@ bool loaded = false;
 
         frameWidth = videoRect.size.width;
         frameHeight = videoRect.size.height;
-        memcpy(frameData, baseaddress, sizeof(unsigned char) * BUFFER_SIZE);
+        memcpy(frameData, baseaddress, sizeof(unsigned char) * bufferSize);
     
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 
