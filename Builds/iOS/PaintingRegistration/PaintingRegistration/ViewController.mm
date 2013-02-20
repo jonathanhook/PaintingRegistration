@@ -40,8 +40,8 @@
 
 const unsigned int CAM_WIDTH_IPHONE = 480;
 const unsigned int CAM_HEIGHT_IPHONE = 360;
-const unsigned int CAM_WIDTH_IPAD = 480;
-const unsigned int CAM_HEIGHT_IPAD = 360;
+const unsigned int CAM_WIDTH_IPAD = 640;
+const unsigned int CAM_HEIGHT_IPAD = 480;
 const unsigned int PROCESSING_RENDER_RATE = 1000;
 
 CGFloat winX = 1.0f;
