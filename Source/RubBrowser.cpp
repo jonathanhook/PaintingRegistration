@@ -24,7 +24,7 @@
 namespace PaintingRegistration
 {
     /* Public */
-    RubBrowser::RubBrowser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+    RubBrowser::RubBrowser(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
         Browser(position, dims, frameDims, textureDims, targetDims)
     {
         int px = position.getX();
@@ -36,7 +36,7 @@ namespace PaintingRegistration
         controls->setClickedCallback(MakeDelegate(this, &RubBrowser::controls_Clicked));
         registerEventHandler(controls);
         
-        painting = new RubPaintingRenderer(position, dims,frameDims, textureDims, targetDims);
+        painting = new RubPaintingRenderer(textureFilenameFormat, position, dims,frameDims, textureDims, targetDims);
         registerEventHandler(painting);
     }
     

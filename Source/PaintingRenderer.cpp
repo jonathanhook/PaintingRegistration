@@ -32,13 +32,13 @@
 namespace PaintingRegistration
 {
     /* Constants */
-    const std::string PaintingRenderer::TEXTURE_FILENAME_FORMAT = "%i.jpg";
-    const unsigned int PaintingRenderer::NUM_TEXTURES = 24;
+    const unsigned int PaintingRenderer::NUM_TEXTURES = 50;
     
     /* Public */
-    PaintingRenderer::PaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+    PaintingRenderer::PaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
         UIElement(position, dims)
     {
+        this->textureFilenameFormat = textureFilenameFormat;
         this->frameDimensions = frameDims;
         this->targetDimensions = targetDims;
         

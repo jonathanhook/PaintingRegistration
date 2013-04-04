@@ -43,6 +43,8 @@ const unsigned int CAM_HEIGHT_IPHONE = 360;
 const unsigned int CAM_WIDTH_IPAD = 640;
 const unsigned int CAM_HEIGHT_IPAD = 480;
 const unsigned int PROCESSING_RENDER_RATE = 1000;
+const std::string TEXTURE_FORMAT_IPHONE = "%i.jpg";
+const std::string TEXTURE_FORMAT_IPAD = "ipad_%i.jpg";
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
@@ -97,22 +99,25 @@ bool loaded = false;
         
         unsigned int camWidth = 0;
         unsigned int camHeight = 0;
+        std::string textureFilenameFormat = "";
         
         NSString *deviceType = [UIDevice currentDevice].model;
         if([deviceType isEqualToString:@"iPhone"] || [deviceType isEqualToString:@"iPhone Simulator"])
         {
             camWidth = CAM_WIDTH_IPHONE;
             camHeight = CAM_HEIGHT_IPHONE;
+            textureFilenameFormat = TEXTURE_FORMAT_IPHONE;
         }
         else
         {
             camWidth = CAM_WIDTH_IPAD;
             camHeight = CAM_HEIGHT_IPAD;
+            textureFilenameFormat = TEXTURE_FORMAT_IPAD;
         }
     
         bufferSize = camWidth * camHeight * 4;
         frameData = new uchar[bufferSize];
-        app = new PaintingRegistration::App(winX, winY, camWidth, camHeight, [resourcePath UTF8String], [documentsPath UTF8String]);
+        app = new PaintingRegistration::App(winX, winY, camWidth, camHeight, [resourcePath UTF8String], [documentsPath UTF8String], textureFilenameFormat);
         
 #if TARGET_IPHONE_SIMULATOR
         std::string path = FileLocationUtility::getFileInResourcePath("debug_frame.png");

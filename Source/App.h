@@ -44,7 +44,7 @@ namespace PaintingRegistration
     public:
         enum UIMode { CAMERA, BROWSER };
         
-        App(unsigned int width, unsigned int height, unsigned int cameraWidth, unsigned int cameraHeight, std::string resourcePath, std::string documentsPath);
+        App(unsigned int width, unsigned int height, unsigned int cameraWidth, unsigned int cameraHeight, std::string resourcePath, std::string documentsPath, std::string textureFilenameFormat);
         ~App(void);
         
         bool getIsProcessing(void) const;
@@ -76,7 +76,7 @@ namespace PaintingRegistration
         void browser_Clicked(UIElement *e);
         void camera_Clicked(UIElement *e);
         void initScene(unsigned int width, unsigned int height);
-        void initUI(unsigned int width, unsigned int height);
+        void initUI(const std::string &textureFilenameFormat, unsigned int width, unsigned int height);
         void initTextureHandle(void);
         void tracker_Completed(bool result);
         void updateTexture(void) const;

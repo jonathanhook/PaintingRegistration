@@ -29,10 +29,10 @@ namespace PaintingRegistration
     const float RubPaintingRenderer::CURSOR_SIZE = 75.0f;
     
     /* Public */
-    RubPaintingRenderer::RubPaintingRenderer(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
-        PaintingRegistration::PaintingRenderer(position, dims, frameDims, textureDims, targetDims)
+    RubPaintingRenderer::RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+        PaintingRegistration::PaintingRenderer(textureFilenameFormat, position, dims, frameDims, textureDims, targetDims)
     {
-        textureBlock = new RubTextureBlock(TEXTURE_FILENAME_FORMAT, 1, NUM_TEXTURES);
+        textureBlock = new RubTextureBlock(textureFilenameFormat, 1, NUM_TEXTURES);
     }
     
     RubPaintingRenderer::~RubPaintingRenderer(void)

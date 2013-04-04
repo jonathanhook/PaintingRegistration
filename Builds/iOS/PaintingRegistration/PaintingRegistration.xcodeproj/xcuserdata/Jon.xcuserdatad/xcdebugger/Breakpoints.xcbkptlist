@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "64"
          endingLineNumber = "64"
-         landmarkName = "PaintingRenderer::PaintingRenderer(const Point2i &amp;position, const Point2i &amp;dims, const Point2i &amp;frameDims, const Point2i &amp;textureDims, const Point2i &amp;targetDims)"
+         landmarkName = "PaintingRenderer::PaintingRenderer(const std::string textureFilenameFormat, const Point2i &amp;position, const Point2i &amp;dims, const Point2i &amp;frameDims, const Point2i &amp;textureDims, const Point2i &amp;targetDims)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

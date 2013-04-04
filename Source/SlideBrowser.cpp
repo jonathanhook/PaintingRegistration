@@ -24,7 +24,7 @@
 namespace PaintingRegistration
 {
     /* Public */
-    SlideBrowser::SlideBrowser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+    SlideBrowser::SlideBrowser(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
         Browser(position, dims, textureDims, textureDims, targetDims)
     {
         int px = position.getX();
@@ -37,7 +37,7 @@ namespace PaintingRegistration
         ((SlideBrowserControls *)controls)->setPositionChangedCallback(MakeDelegate(this, &SlideBrowser::controls_PositionChanged));
         registerEventHandler(controls);
         
-        painting = new SlidePaintingRenderer(position, dims,frameDims, textureDims, targetDims);
+        painting = new SlidePaintingRenderer(textureFilenameFormat, position, dims,frameDims, textureDims, targetDims);
     }
     
     SlideBrowser::~SlideBrowser(void)
