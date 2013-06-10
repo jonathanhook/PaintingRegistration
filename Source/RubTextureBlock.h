@@ -33,7 +33,7 @@ namespace PaintingRegistration
         void bind(void) const;
         void reset(void);
         void unbind(void) const;
-        void update(float x, float y, float cursorSize);
+        void update(float x, float y, float cursorSize, bool mode);
         
     private:
         static const float RUB_DECREMENT;

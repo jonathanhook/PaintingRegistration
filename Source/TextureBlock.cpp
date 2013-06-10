@@ -44,7 +44,7 @@ namespace PaintingRegistration
     /* Protected */
     void TextureBlock::loadAll(void)
     {
-        for(unsigned int i = start; i <= end; i++)
+        for(unsigned int i = end; i >= start; i--)
         {
             loadTexture(i);
         }

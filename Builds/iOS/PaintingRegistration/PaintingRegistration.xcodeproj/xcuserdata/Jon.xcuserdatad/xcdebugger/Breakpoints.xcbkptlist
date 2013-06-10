@@ -42,5 +42,18 @@
          landmarkName = "Slider::render(void)"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../../Source/SlideTextureBlock.cpp"
+         timestampString = "388344647.919536"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "SlideTextureBlock::SlideTextureBlock(std::string format, unsigned int start, unsigned int end, float position)"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

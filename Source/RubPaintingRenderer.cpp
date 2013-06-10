@@ -29,9 +29,11 @@ namespace PaintingRegistration
     const float RubPaintingRenderer::CURSOR_SIZE = 75.0f;
     
     /* Public */
-    RubPaintingRenderer::RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+    RubPaintingRenderer::RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims, bool mode) :
         PaintingRegistration::PaintingRenderer(textureFilenameFormat, position, dims, frameDims, textureDims, targetDims)
     {
+        this->mode = mode;
+        
         textureBlock = new RubTextureBlock(textureFilenameFormat, 1, NUM_TEXTURES);
     }
     
@@ -84,7 +86,7 @@ namespace PaintingRegistration
         float ny = vy / ((float)targetDimensions.getY());
         float nc = CURSOR_SIZE / (float)frameDimensions.getX();
         
-        ((RubTextureBlock *)textureBlock)->update(nx, ny, nc);
+        ((RubTextureBlock *)textureBlock)->update(nx, ny, nc, mode);
     }
     
     void RubPaintingRenderer::reset(void)
@@ -95,6 +97,11 @@ namespace PaintingRegistration
     void RubPaintingRenderer::setMatrixInverse(const Matrixf *inverse)
     {
         this->inverse = inverse;
+    }
+    
+    void RubPaintingRenderer::setMode(bool mode)
+    {
+        this->mode = mode;
     }
     
     void  RubPaintingRenderer::setPaintingArea(float paintingArea)

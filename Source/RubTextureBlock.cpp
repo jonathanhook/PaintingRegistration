@@ -74,7 +74,7 @@ namespace PaintingRegistration
         updatePixels(0, 0, dimensions.getX(), dimensions.getY());
     }
     
-    void RubTextureBlock::update(float fx, float fy, float fcs)
+    void RubTextureBlock::update(float fx, float fy, float fcs, bool mode)
     {
         int x = (int)(fx * (float)dimensions.getX());
         int y = (int)(fy * (float)dimensions.getY());
@@ -98,11 +98,24 @@ namespace PaintingRegistration
                     if(isWithinPainting(j, i))
                     {
                         int index = i * stride + j;
-                        float v = mask[index] - RUB_DECREMENT;
+                        
+                        float v = 0.0f;
+                        if(mode)
+                        {
+                            v = mask[index] - RUB_DECREMENT;
+                        }
+                        else
+                        {
+                            v = mask[index] + RUB_DECREMENT;
+                        }
                         
                         if(v < 0.0f)
                         {
                             v = 0.0f;
+                        }
+                        else if(v > 1.0f)
+                        {
+                            v = 1.0f;
                         }
                         
                         mask[index] = v;
@@ -143,7 +156,7 @@ namespace PaintingRegistration
     void RubTextureBlock::loadTexture(unsigned int i)
     {
         char buffer[1024];
-        sprintf(buffer, format.c_str(), i);
+        sprintf(buffer, format.c_str(), i, i);
         std::string resPath = FileLocationUtility::getFileInResourcePath(buffer);
         
 #ifdef IOS_WINDOWING

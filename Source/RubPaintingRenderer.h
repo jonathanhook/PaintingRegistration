@@ -26,12 +26,13 @@ namespace PaintingRegistration
         public PaintingRenderer
     {
     public:
-        RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims);
+        RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims, bool mode = true);
         ~RubPaintingRenderer(void);
         
         void fingerUpdated(const FingerEventArgs &e);
         void reset(void);
         void setMatrixInverse(const Matrixf *matrix);
+        void setMode(bool mode);
         void setPaintingArea(float paintingArea);
         
     private:
@@ -39,6 +40,7 @@ namespace PaintingRegistration
         
         const Matrixf *inverse;
         float paintingArea;
+        bool mode;
 
     };
 }

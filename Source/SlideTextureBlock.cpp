@@ -58,7 +58,7 @@ namespace PaintingRegistration
     void SlideTextureBlock::loadTexture(unsigned int i)
     {
         char buffer[1024];
-        sprintf(buffer, format.c_str(), i);
+        sprintf(buffer, format.c_str(), i, i);
         
         GLTexture t(buffer);
         dimensions.setX(t.getWidth());

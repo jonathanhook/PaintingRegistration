@@ -43,8 +43,8 @@ const unsigned int CAM_HEIGHT_IPHONE = 360;
 const unsigned int CAM_WIDTH_IPAD = 640;
 const unsigned int CAM_HEIGHT_IPAD = 480;
 const unsigned int PROCESSING_RENDER_RATE = 1000;
-const std::string TEXTURE_FORMAT_IPHONE = "%i.jpg";
-const std::string TEXTURE_FORMAT_IPAD = "ipad_%i.jpg";
+const std::string TEXTURE_FORMAT_IPHONE = "iphone_%04d_%d.jpg";
+const std::string TEXTURE_FORMAT_IPAD = "ipad_%04d_%d.jpg";
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;

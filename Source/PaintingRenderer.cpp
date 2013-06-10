@@ -32,7 +32,7 @@
 namespace PaintingRegistration
 {
     /* Constants */
-    const unsigned int PaintingRenderer::NUM_TEXTURES = 50;
+    const unsigned int PaintingRenderer::NUM_TEXTURES = 25;
     
     /* Public */
     PaintingRenderer::PaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
