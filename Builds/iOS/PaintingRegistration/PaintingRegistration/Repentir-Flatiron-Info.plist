@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Repentir</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -13,7 +13,12 @@
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
 			<key>CFBundleIconFiles</key>
-			<array/>
+			<array>
+				<string>Icon@2x.png</string>
+				<string>Icon.png</string>
+				<string>Icon-72@2x.png</string>
+				<string>Icon-72.png</string>
+			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
 		</dict>
