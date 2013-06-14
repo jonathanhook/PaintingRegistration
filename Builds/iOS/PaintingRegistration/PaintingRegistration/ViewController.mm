@@ -50,6 +50,7 @@ CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
 CGFloat twX = 1.0f;
 CGFloat twY = 1.0f;
+int lastRender = 0;
 uchar *frameData;
 PaintingRegistration::App *app;
 unsigned int frameWidth = 0;
@@ -185,6 +186,8 @@ bool loaded = false;
             lastProcessingRender = CrossPlatformTime::getTimeMillis();
         }
     }
+    
+    lastRender = CrossPlatformTime::getTimeMillis();
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -203,9 +206,13 @@ bool loaded = false;
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSSet *allTouches = [event allTouches];
+    int now = CrossPlatformTime::getTimeMillis();
+    if(now - lastRender > 16)
+    {
+        return;
+    }
     
-    // todo: multiple touches
+    NSSet *allTouches = [event allTouches];
     UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
     CGPoint p = [touch locationInView:(self.view)];
     
@@ -218,8 +225,6 @@ bool loaded = false;
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSSet *allTouches = [event allTouches];
-    
-    // todo: multiple touches
     UITouch *touch = [[allTouches allObjects] objectAtIndex:(0)];
     CGPoint p = [touch locationInView:(self.view)];
     

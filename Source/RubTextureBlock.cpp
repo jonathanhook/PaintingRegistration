@@ -27,7 +27,9 @@
 namespace PaintingRegistration
 {
     /* Static */
-    const float RubTextureBlock::RUB_DECREMENT = 0.001f;
+    const float RubTextureBlock::RUB_DECREMENT = 0.01f;
+    const float RubTextureBlock::SPEED_MULTIPLIER = 10.0f;
+    const float RubTextureBlock::MAX_SPEED = 2.0f;
     
     /* Public */
     RubTextureBlock::RubTextureBlock(std::string format, unsigned int start, unsigned int end) :
@@ -74,13 +76,19 @@ namespace PaintingRegistration
         updatePixels(0, 0, dimensions.getX(), dimensions.getY());
     }
     
-    void RubTextureBlock::update(float fx, float fy, float fcs, bool mode)
+    void RubTextureBlock::update(float fx, float fy, float fcs, bool mode, float fingerSpeed)
     {
         int x = (int)(fx * (float)dimensions.getX());
         int y = (int)(fy * (float)dimensions.getY());
         
         if(x > 0 && x < dimensions.getX() && y > 0 && y < dimensions.getY())
         {
+            float speed = fingerSpeed * SPEED_MULTIPLIER;
+            if(speed > MAX_SPEED)
+            {
+                speed = MAX_SPEED;
+            }
+
             int cursorSize = (int)(fcs * (float)dimensions.getX());
             int limit = cursorSize / 2;
             
@@ -102,11 +110,11 @@ namespace PaintingRegistration
                         float v = 0.0f;
                         if(mode)
                         {
-                            v = mask[index] - RUB_DECREMENT;
+                            v = mask[index] - (RUB_DECREMENT * speed);
                         }
                         else
                         {
-                            v = mask[index] + RUB_DECREMENT;
+                            v = mask[index] + (RUB_DECREMENT * speed);
                         }
                         
                         if(v < 0.0f)
@@ -193,7 +201,7 @@ namespace PaintingRegistration
             {
                 if(i < imageHeight && j < imageWidth)
                 {
-//#define LERP
+#define LERP
 #ifndef LERP
                     float m = mask[j + (i * imageWidth)];
                     unsigned int tId = (unsigned int)(m * (float)(textures.size() - 1));
@@ -215,11 +223,7 @@ namespace PaintingRegistration
                     float ceilM = ceil(mIndex);
                     
                     unsigned int f_tId = (unsigned int)floorM;
-                    unsigned char *f_t = textures[f_tId];
-                    
-                    unsigned int c_tId = (unsigned int)ceilM;
-                    unsigned char *c_t = textures[c_tId];
-                    
+                    unsigned char *f_t = textures[f_tId];                    
                     unsigned int index = (j * bpp) + (i * imageWidth * bpp);
                     
                     if(ceilM == floorM)
@@ -235,32 +239,35 @@ namespace PaintingRegistration
                     }
                     else
                     {
-                        unsigned short f_r = f_t[index];
-                        unsigned short f_g = f_t[index + 1];
-                        unsigned short f_b = f_t[index + 2];
+                        unsigned int c_tId = (unsigned int)ceilM;
+                        unsigned char *c_t = textures[c_tId];
+                        
+                        float f_r = (float)f_t[index];
+                        float f_g = (float)f_t[index + 1];
+                        float f_b = (float)f_t[index + 2];
                     
-                        unsigned short c_r = c_t[index];
-                        unsigned short c_g = c_t[index + 1];
-                        unsigned short c_b = c_t[index + 2];
+                        float c_r = (float)c_t[index];
+                        float c_g = (float)c_t[index + 1];
+                        float c_b = (float)c_t[index + 2];
                     
-                        float fd = 1.0f -(mIndex - floorM);
+                        float fd = 1.0f - (mIndex - floorM);
                         float cd = 1.0f - (ceilM - mIndex);
                         
-                        float fr = (float)f_r * fd;
-                        float fg = (float)f_g * fd;
-                        float fb = (float)f_b * fd;
+                        float fr = f_r * fd;
+                        float fg = f_g * fd;
+                        float fb = f_b * fd;
 
-                        float cr = (float)c_r * cd;
-                        float cg = (float)c_g * cd;
-                        float cb = (float)c_b * cd;
+                        float cr = c_r * cd;
+                        float cg = c_g * cd;
+                        float cb = c_b * cd;
                         
-                        unsigned short r = (unsigned char)(fr + cr);
-                        unsigned short g = (unsigned char)(fg + cg);
-                        unsigned short b = (unsigned char)(fb + cb);
-                    
-                        data[ptr] = (unsigned char)r;
-                        data[ptr + 1] = (unsigned char)g;
-                        data[ptr + 2] = (unsigned char)b;
+                        unsigned char r = (unsigned char)(fr + cr);
+                        unsigned char g = (unsigned char)(fg + cg);
+                        unsigned char b = (unsigned char)(fb + cb);
+
+                        data[ptr] = r;
+                        data[ptr + 1] = g;
+                        data[ptr + 2] = b;
                         ptr += 3;
                     }
 #endif

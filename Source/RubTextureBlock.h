@@ -33,10 +33,12 @@ namespace PaintingRegistration
         void bind(void) const;
         void reset(void);
         void unbind(void) const;
-        void update(float x, float y, float cursorSize, bool mode);
+        void update(float x, float y, float cursorSize, bool mode, float fingerSpeed);
         
     private:
         static const float RUB_DECREMENT;
+        static const float SPEED_MULTIPLIER;
+        static const float MAX_SPEED;
         
         float *mask;
         GLuint texture;

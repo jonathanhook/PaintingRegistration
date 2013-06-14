@@ -29,6 +29,7 @@ namespace PaintingRegistration
         RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims, bool mode = true);
         ~RubPaintingRenderer(void);
         
+        void fingerAdded(const FingerEventArgs &e);
         void fingerUpdated(const FingerEventArgs &e);
         void reset(void);
         void setMatrixInverse(const Matrixf *matrix);
@@ -41,8 +42,9 @@ namespace PaintingRegistration
         
         const Matrixf *inverse;
         float paintingArea;
+        float lx;
+        float ly;
+        float averageSpeed;
         bool mode;
-        int lastUpdated;
-
     };
 }
