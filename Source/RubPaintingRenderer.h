@@ -37,10 +37,12 @@ namespace PaintingRegistration
         
     private:
         static const float CURSOR_SIZE;
+        static const int UPDATE_RATE;
         
         const Matrixf *inverse;
         float paintingArea;
         bool mode;
+        int lastUpdated;
 
     };
 }

@@ -27,7 +27,7 @@
 namespace PaintingRegistration
 {
     /* Static */
-    const float RubTextureBlock::RUB_DECREMENT = 0.025f;
+    const float RubTextureBlock::RUB_DECREMENT = 0.001f;
     
     /* Public */
     RubTextureBlock::RubTextureBlock(std::string format, unsigned int start, unsigned int end) :
@@ -193,19 +193,77 @@ namespace PaintingRegistration
             {
                 if(i < imageHeight && j < imageWidth)
                 {
+//#define LERP
+#ifndef LERP
                     float m = mask[j + (i * imageWidth)];
                     unsigned int tId = (unsigned int)(m * (float)(textures.size() - 1));
                     unsigned char *t = textures[tId];
-                
+                    
                     unsigned int index = (j * bpp) + (i * imageWidth * bpp);
                     unsigned char r = t[index];
                     unsigned char g = t[index + 1];
                     unsigned char b = t[index + 2];
-                
+                    
                     data[ptr] = r;
                     data[ptr + 1] = g;
                     data[ptr + 2] = b;
                     ptr += 3;
+#else
+                    float m = mask[j + (i * imageWidth)];
+                    float mIndex = m  *(float)(textures.size() - 1);
+                    float floorM = floor(mIndex);
+                    float ceilM = ceil(mIndex);
+                    
+                    unsigned int f_tId = (unsigned int)floorM;
+                    unsigned char *f_t = textures[f_tId];
+                    
+                    unsigned int c_tId = (unsigned int)ceilM;
+                    unsigned char *c_t = textures[c_tId];
+                    
+                    unsigned int index = (j * bpp) + (i * imageWidth * bpp);
+                    
+                    if(ceilM == floorM)
+                    {
+                        unsigned char r = f_t[index];
+                        unsigned char g = f_t[index + 1];
+                        unsigned char b = f_t[index + 2];
+                        
+                        data[ptr] = r;
+                        data[ptr + 1] = g;
+                        data[ptr + 2] = b;
+                        ptr += 3;
+                    }
+                    else
+                    {
+                        unsigned short f_r = f_t[index];
+                        unsigned short f_g = f_t[index + 1];
+                        unsigned short f_b = f_t[index + 2];
+                    
+                        unsigned short c_r = c_t[index];
+                        unsigned short c_g = c_t[index + 1];
+                        unsigned short c_b = c_t[index + 2];
+                    
+                        float fd = 1.0f -(mIndex - floorM);
+                        float cd = 1.0f - (ceilM - mIndex);
+                        
+                        float fr = (float)f_r * fd;
+                        float fg = (float)f_g * fd;
+                        float fb = (float)f_b * fd;
+
+                        float cr = (float)c_r * cd;
+                        float cg = (float)c_g * cd;
+                        float cb = (float)c_b * cd;
+                        
+                        unsigned short r = (unsigned char)(fr + cr);
+                        unsigned short g = (unsigned char)(fg + cg);
+                        unsigned short b = (unsigned char)(fb + cb);
+                    
+                        data[ptr] = (unsigned char)r;
+                        data[ptr + 1] = (unsigned char)g;
+                        data[ptr + 2] = (unsigned char)b;
+                        ptr += 3;
+                    }
+#endif
                 }
             }
         }
