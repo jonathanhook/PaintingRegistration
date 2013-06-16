@@ -27,6 +27,7 @@ namespace PaintingRegistration
 {
     /* Static */
     const float RubTextureBlock::RUB_DECREMENT = 0.01f;
+    //const float RubTextureBlock::RUB_DECREMENT = 0.025f;
     const float RubTextureBlock::SPEED_MULTIPLIER = 10.0f;
     const float RubTextureBlock::MAX_SPEED = 2.0f;
     

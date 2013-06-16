@@ -121,7 +121,17 @@ bool loaded = false;
         app = new PaintingRegistration::App(winX, winY, camWidth, camHeight, [resourcePath UTF8String], [documentsPath UTF8String], textureFilenameFormat);
         
 #if TARGET_IPHONE_SIMULATOR
-        std::string path = FileLocationUtility::getFileInResourcePath("debug_frame.png");
+        std::string path;
+        
+        if([deviceType isEqualToString:@"iPhone Simulator"])
+        {
+            path = FileLocationUtility::getFileInResourcePath("iphone_debug_frame.png");
+        }
+        else
+        {
+            path = FileLocationUtility::getFileInResourcePath("ipad_debug_frame.png");
+        }
+    
         int x, y, n;
         unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 0);
         memcpy(frameData, data, sizeof(unsigned char) * bufferSize);
