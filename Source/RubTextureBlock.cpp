@@ -26,8 +26,12 @@
 namespace PaintingRegistration
 {
     /* Static */
+#ifdef TRANSAMERICA
+    const float RubTextureBlock::RUB_DECREMENT = 0.038f;
+#elif FLATIRON
     const float RubTextureBlock::RUB_DECREMENT = 0.01f;
-    //const float RubTextureBlock::RUB_DECREMENT = 0.025f;
+#endif
+    
     const float RubTextureBlock::SPEED_MULTIPLIER = 10.0f;
     const float RubTextureBlock::MAX_SPEED = 2.0f;
     
