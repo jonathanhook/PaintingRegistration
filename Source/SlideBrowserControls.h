@@ -34,10 +34,12 @@ namespace PaintingRegistration
         SlideBrowserControls(const Point2i &position, const Point2i &dimensions);
         ~SlideBrowserControls(void);
         
+        float getSliderPosition(void) const;
         void render(void) const;
         void setPositionChangedCallback(PositionChangedCallback positionChanged);
         
     private:
+        float sliderPosition;
         Slider *slider;
         PositionChangedCallback positionChanged;
         

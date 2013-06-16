@@ -30,9 +30,7 @@ namespace PaintingRegistration
         RubTextureBlock(std::string format, unsigned int start, unsigned int end);
         ~RubTextureBlock(void);
         
-        void bind(void) const;
         void reset(void);
-        void unbind(void) const;
         void update(float x, float y, float cursorSize, bool mode, float fingerSpeed);
         
     private:
@@ -41,13 +39,8 @@ namespace PaintingRegistration
         static const float MAX_SPEED;
         
         float *mask;
-        GLuint texture;
-        std::vector<unsigned char *> textures;
-        unsigned int bpp;
 
-        void initMask(void);
-        void initTexture(void);
-        void loadTexture(unsigned int i);
+        void initMask(void); 
         bool isWithinPainting(int x, int y) const;
         void updatePixels(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
     };

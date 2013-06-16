@@ -28,7 +28,6 @@ namespace PaintingRegistration
         this->position = position;
         
         setPosition(position);
-        loadAll();
     }
     
     SlideTextureBlock::~SlideTextureBlock(void)
@@ -36,33 +35,20 @@ namespace PaintingRegistration
         
     }
     
-    void SlideTextureBlock::bind(void) const
-    {
-        const GLTexture &t = textures[currentTexture];
-        t.bind(GL_REPLACE);
-    }
-    
     void SlideTextureBlock::setPosition(float position)
     {
         this->position = position;
         currentTexture = (unsigned int)(position * (float)(end - start));
-    }
-    
-    void SlideTextureBlock::unbind(void) const
-    {
-        const GLTexture &t = textures[currentTexture];
-        t.unbind();
-    }
-    
-    /* Private */
-    void SlideTextureBlock::loadTexture(unsigned int i)
-    {
-        char buffer[1024];
-        sprintf(buffer, format.c_str(), i, i);
         
-        GLTexture t(buffer);
-        dimensions.setX(t.getWidth());
-        dimensions.setY(t.getHeight());
-        textures.push_back(t);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, dimensions.getX(), dimensions.getY(), bpp == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, textures[currentTexture]);
+        glBindTexture(GL_TEXTURE_2D, NULL);
+        glDisable(GL_TEXTURE_2D);
     }
 }

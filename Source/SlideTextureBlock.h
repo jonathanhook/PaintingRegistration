@@ -29,15 +29,10 @@ namespace PaintingRegistration
         SlideTextureBlock(std::string format, unsigned int start, unsigned int end, float position);
         ~SlideTextureBlock(void);
         
-        void bind(void) const;
         void setPosition(float position);
-        void unbind(void) const;
         
     private:
         unsigned int currentTexture;
         float position;
-        std::vector<GLTexture> textures;
-        
-        void loadTexture(unsigned int i);
     };
 }

@@ -29,20 +29,24 @@ namespace PaintingRegistration
     class TextureBlock
     {
     public:
-        TextureBlock(std::string format, unsigned int start, unsigned int end);
+        TextureBlock(const std::string &format, unsigned int start, unsigned int end);
         ~TextureBlock(void);
         
-        virtual void bind(void) const = 0;
+        void bind(void) const;
         const Point2i &getDimensions(void) const;
-        virtual void unbind(void) const = 0;
+        void unbind(void) const;
         
     protected:
-        Point2i dimensions;
-        unsigned int start;
-        unsigned int end;
-        std::string format;
+        static std::vector<unsigned char *> textures;
+        static bool texturesLoaded;
+        static unsigned int start;
+        static unsigned int end;
+        static Point2i dimensions;
+        static unsigned int bpp;
+        static GLuint texture;
         
-        void loadAll(void);
-        virtual void loadTexture(unsigned int i) = 0;
+        static void loadAll(const std::string &format);
+        static void loadTexture(unsigned int i, const std::string &format);
+        static void initTexture(void);
     };
 }

@@ -21,7 +21,6 @@
 #include <math.h>
 #include "JDHUtility/FileLocationUtility.h"
 #include "JDHUtility/Ndelete.h"
-#include "JDHUtility/stb_image.h"
 #include "RubTextureBlock.h"
 
 namespace PaintingRegistration
@@ -34,40 +33,14 @@ namespace PaintingRegistration
     /* Public */
     RubTextureBlock::RubTextureBlock(std::string format, unsigned int start, unsigned int end) :
     TextureBlock(format, start, end)
-    {
-        loadAll();
-        initTexture();
-        
+    {        
         mask = new float[dimensions.getX() * dimensions.getY()];
         initMask();
     }
     
     RubTextureBlock::~RubTextureBlock(void)
-    {
-        for(unsigned int i = 0; i < textures.size(); i++)
-        {
-            free(textures[i]);
-        }
-        textures.clear();
-        
+    {        
         NDELETE_ARRAY(mask);
-    }
-    
-    void RubTextureBlock::bind(void) const
-    {
-        glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-    }
-    
-    void RubTextureBlock::unbind(void) const
-    {
-        glDisable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, NULL);
     }
     
     void RubTextureBlock::reset(void)
@@ -145,40 +118,6 @@ namespace PaintingRegistration
         }
     }
     
-    void RubTextureBlock::initTexture(void)
-    {
-        unsigned char *initialData = textures[textures.size() - 1];
-        
-        glEnable(GL_TEXTURE_2D);
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexImage2D(GL_TEXTURE_2D, 0, bpp == 4 ? GL_RGBA : GL_RGB, dimensions.getX(), dimensions.getY(), 0, bpp == 4 ? GL_RGBA : GL_RGB, GL_UNSIGNED_BYTE, initialData);
-        glDisable(GL_TEXTURE_2D);
-    }
-    
-    void RubTextureBlock::loadTexture(unsigned int i)
-    {
-        char buffer[1024];
-        sprintf(buffer, format.c_str(), i, i);
-        std::string resPath = FileLocationUtility::getFileInResourcePath(buffer);
-        
-#ifdef IOS_WINDOWING
-        stbi_convert_iphone_png_to_rgb(1);
-#endif
-        int x, y, n;
-        unsigned char *data = stbi_load(resPath.c_str(), &x, &y, &n, 0);
-        textures.push_back(data);
-        
-        dimensions.setX(x);
-        dimensions.setY(y);
-        bpp = n;
-    }
-    
     bool RubTextureBlock::isWithinPainting(int x, int y) const
     {
         return x >= 0 &&
@@ -218,7 +157,9 @@ namespace PaintingRegistration
                     ptr += 3;
 #else
                     float m = mask[j + (i * imageWidth)];
-                    float mIndex = m  *(float)(textures.size() - 1);
+                    unsigned int tSize = textures.size();
+                    
+                    float mIndex = m  *(float)(tSize - 1);
                     float floorM = floor(mIndex);
                     float ceilM = ceil(mIndex);
                     

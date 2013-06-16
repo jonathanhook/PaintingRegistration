@@ -47,7 +47,7 @@ namespace PaintingRegistration
     
     void SlideBrowser::reset(void)
     {
-        
+        painting->setPosition(((SlideBrowserControls *)controls)->getSliderPosition());
     }
     
     /* Private */

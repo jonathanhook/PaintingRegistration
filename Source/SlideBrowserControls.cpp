@@ -44,11 +44,18 @@ namespace PaintingRegistration
         exit = new ExitButton(Point2i(px, py), Point2i(dy, dy));
         exit->setClickedCallback(MakeDelegate(this, &SlideBrowserControls::exit_Clicked));
         registerEventHandler(exit);
+        
+        sliderPosition = slider->getValue();
     }
     
     SlideBrowserControls::~SlideBrowserControls(void)
     {
         NDELETE(slider);
+    }
+    
+    float SlideBrowserControls::getSliderPosition(void) const
+    {
+        return sliderPosition;
     }
     
     void SlideBrowserControls::render(void) const
@@ -65,6 +72,8 @@ namespace PaintingRegistration
     /* Private */    
     void SlideBrowserControls::slider_ValueChanged(float value)
     {
+        sliderPosition = value;
+        
         if(positionChanged != NULL)
         {
             positionChanged(value);
