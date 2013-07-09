@@ -78,6 +78,7 @@
 		500C1EF6176B083E00620F3F /* iphone_0024_24.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 500C1E8D176B083E00620F3F /* iphone_0024_24.jpg */; };
 		500C1EF8176B083E00620F3F /* iphone_0025_25.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 500C1E8E176B083E00620F3F /* iphone_0025_25.jpg */; };
 		500C1EFA176B083E00620F3F /* target.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 500C1E8F176B083E00620F3F /* target.jpg */; };
+		5029977A178C17D700507C64 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50299779178C17D700507C64 /* CoreFoundation.framework */; };
 		5043DD47176B30BE00723860 /* ipad_0000_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5043DD13176B30BE00723860 /* ipad_0000_0.jpg */; };
 		5043DD48176B30BE00723860 /* ipad_0001_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5043DD14176B30BE00723860 /* ipad_0001_1.jpg */; };
 		5043DD49176B30BE00723860 /* ipad_0002_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5043DD15176B30BE00723860 /* ipad_0002_2.jpg */; };
@@ -330,6 +331,7 @@
 		500C1E8D176B083E00620F3F /* iphone_0024_24.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iphone_0024_24.jpg; sourceTree = "<group>"; };
 		500C1E8E176B083E00620F3F /* iphone_0025_25.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iphone_0025_25.jpg; sourceTree = "<group>"; };
 		500C1E8F176B083E00620F3F /* target.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = target.jpg; sourceTree = "<group>"; };
+		50299779178C17D700507C64 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5043DD13176B30BE00723860 /* ipad_0000_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipad_0000_0.jpg; sourceTree = "<group>"; };
 		5043DD14176B30BE00723860 /* ipad_0001_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipad_0001_1.jpg; sourceTree = "<group>"; };
 		5043DD15176B30BE00723860 /* ipad_0002_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ipad_0002_2.jpg; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5029977A178C17D700507C64 /* CoreFoundation.framework in Frameworks */,
 				50810EB61769FDAE00D28853 /* CoreMedia.framework in Frameworks */,
 				50810EB71769FDAE00D28853 /* CoreVideo.framework in Frameworks */,
 				50810EB81769FDAE00D28853 /* AVFoundation.framework in Frameworks */,
@@ -895,6 +898,7 @@
 		FC33FEA816555EDC00B1FC69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50299779178C17D700507C64 /* CoreFoundation.framework */,
 				50810E871769FC8C00D28853 /* opencv2.framework */,
 				FC33FEE21655645B00B1FC69 /* CoreMedia.framework */,
 				FC33FEE01655645300B1FC69 /* CoreVideo.framework */,
