@@ -32,9 +32,6 @@
 #include "JDHUtility/Matrixf.h"
 #include "PaintingTracker.h"
 
-#include <CoreFoundation/CFURL.h>
-#include <CoreFoundation/CFNumber.h>
-
 using namespace JDHUtility;
 
 namespace PaintingRegistration
@@ -266,17 +263,6 @@ namespace PaintingRegistration
         fs << KEY_POINT_LABEL << targetKeyPoints;
         fs << DESCRIPTOR_LABEL << targetDescriptors;
         fs.release();
-        
-        std::string absPath = "";
-        absPath.append(path);
-        
-        CFStringRef cfStr = CFStringCreateWithCString(kCFAllocatorDefault, absPath.c_str(), kCFStringEncodingUTF8);
-        CFStringRef escaped = CFURLCreateStringByAddingPercentEscapes(NULL, cfStr, NULL, NULL, kCFStringEncodingUTF8);
-        
-        CFURLRef url = CFURLCreateWithString(kCFAllocatorDefault, escaped, NULL);
-        
-        CFErrorRef *error = NULL;
-        CFURLSetResourcePropertyForKey(url, kCFURLIsExcludedFromBackupKey, kCFBooleanTrue, error);
     }
     
     void PaintingTracker::setCompletedCallback(CompletedCallback completed)

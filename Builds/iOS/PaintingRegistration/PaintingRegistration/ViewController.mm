@@ -98,6 +98,11 @@ bool loaded = false;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsPath = [paths objectAtIndex:0];
         
+#define USE_PREGENERATED_MODEL // store model in resources to avoid iCloud backup
+#if defined(USE_PREGENERATED_MODEL)
+        documentsPath = resourcePath;
+#endif
+        
         unsigned int camWidth = 0;
         unsigned int camHeight = 0;
         std::string textureFilenameFormat = "";
