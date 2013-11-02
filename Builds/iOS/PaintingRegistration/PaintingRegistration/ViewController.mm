@@ -38,13 +38,15 @@
 
 @implementation ViewController
 
-const unsigned int CAM_WIDTH_IPHONE = 480;
-const unsigned int CAM_HEIGHT_IPHONE = 360;
-const unsigned int CAM_WIDTH_IPAD = 640;
-const unsigned int CAM_HEIGHT_IPAD = 480;
+const unsigned int CAM_WIDTH_IPHONE = 192;
+const unsigned int CAM_HEIGHT_IPHONE = 144;
+const unsigned int CAM_WIDTH_IPAD = 480;
+const unsigned int CAM_HEIGHT_IPAD = 360;
 const unsigned int PROCESSING_RENDER_RATE = 1000;
-const std::string TEXTURE_FORMAT_IPHONE = "iphone_%04d_%d.jpg";
-const std::string TEXTURE_FORMAT_IPAD = "ipad_%04d_%d.jpg";
+const std::string TEXTURE_FORMAT_IPHONE = "iphone_%d.jpg";
+const std::string TEXTURE_FORMAT_IPAD = "ipad_%d.jpg";
+const int NUM_TEXTURES_IPHONE = 32;
+const int NUM_TEXTURES_IPAD = 32;
 
 CGFloat winX = 1.0f;
 CGFloat winY = 1.0f;
@@ -106,6 +108,7 @@ bool loaded = false;
         unsigned int camWidth = 0;
         unsigned int camHeight = 0;
         std::string textureFilenameFormat = "";
+        int numTextures = 0;
         
         NSString *deviceType = [UIDevice currentDevice].model;
         if([deviceType isEqualToString:@"iPhone"] || [deviceType isEqualToString:@"iPhone Simulator"])
@@ -113,17 +116,19 @@ bool loaded = false;
             camWidth = CAM_WIDTH_IPHONE;
             camHeight = CAM_HEIGHT_IPHONE;
             textureFilenameFormat = TEXTURE_FORMAT_IPHONE;
+            numTextures = NUM_TEXTURES_IPHONE;
         }
         else
         {
             camWidth = CAM_WIDTH_IPAD;
             camHeight = CAM_HEIGHT_IPAD;
             textureFilenameFormat = TEXTURE_FORMAT_IPAD;
+            numTextures = NUM_TEXTURES_IPAD;
         }
     
         bufferSize = camWidth * camHeight * 4;
         frameData = new uchar[bufferSize];
-        app = new PaintingRegistration::App(winX, winY, camWidth, camHeight, [resourcePath UTF8String], [documentsPath UTF8String], textureFilenameFormat);
+        app = new PaintingRegistration::App(winX, winY, camWidth, camHeight, [resourcePath UTF8String], [documentsPath UTF8String], textureFilenameFormat, numTextures);
         
 #if TARGET_IPHONE_SIMULATOR
         std::string path;
@@ -258,11 +263,11 @@ bool loaded = false;
     NSString *deviceType = [UIDevice currentDevice].model;
     if([deviceType isEqualToString:@"iPhone"] || [deviceType isEqualToString:@"iPhone Simulator"])
     {
-        session.sessionPreset = AVCaptureSessionPresetMedium;
+        session.sessionPreset = AVCaptureSessionPresetLow;
     }
     else
     {
-        session.sessionPreset = AVCaptureSessionPreset640x480;
+        session.sessionPreset = AVCaptureSessionPresetMedium;
     }
     
     AVCaptureDevice *device = [self findBackFacingCamera];

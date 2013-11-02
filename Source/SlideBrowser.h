@@ -26,7 +26,7 @@ namespace PaintingRegistration
         public Browser
     {
     public:
-        SlideBrowser(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims);
+        SlideBrowser(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims, int numTextures);
         ~SlideBrowser(void);
         
         void reset(void);

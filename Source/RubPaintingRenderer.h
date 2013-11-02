@@ -26,7 +26,7 @@ namespace PaintingRegistration
         public PaintingRenderer
     {
     public:
-        RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims, bool mode = true);
+        RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims, int numTextures, bool mode = true);
         ~RubPaintingRenderer(void);
         
         void fingerAdded(const FingerEventArgs &e);

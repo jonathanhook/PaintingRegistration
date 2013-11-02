@@ -39,8 +39,8 @@ namespace PaintingRegistration
     protected:
         static std::vector<unsigned char *> textures;
         static bool texturesLoaded;
-        static unsigned int start;
-        static unsigned int end;
+        static int start;
+        static int end;
         static Point2i dimensions;
         static unsigned int bpp;
         static GLuint texture;

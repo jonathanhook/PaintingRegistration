@@ -23,10 +23,10 @@
 namespace PaintingRegistration
 {
     /* Public */
-    SlidePaintingRenderer::SlidePaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims) :
-        PaintingRenderer(textureFilenameFormat, position, dims, frameDims, textureDims, layerDims)
+    SlidePaintingRenderer::SlidePaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &layerDims, int numTextures) :
+        PaintingRenderer(textureFilenameFormat, position, dims, frameDims, textureDims, layerDims, numTextures)
     {
-        textureBlock = new SlideTextureBlock(textureFilenameFormat, 1, NUM_TEXTURES, 1.0f);
+        textureBlock = new SlideTextureBlock(textureFilenameFormat, 0, numTextures, 1.0f);
     }
     
     SlidePaintingRenderer::~SlidePaintingRenderer(void)

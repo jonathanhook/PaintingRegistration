@@ -38,7 +38,7 @@ namespace PaintingRegistration
     void SlideTextureBlock::setPosition(float position)
     {
         this->position = position;
-        currentTexture = (unsigned int)(position * (float)(end - start));
+        currentTexture = (unsigned int)(position * (float)(end - start - 1));
         
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texture);

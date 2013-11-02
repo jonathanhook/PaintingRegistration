@@ -31,12 +31,12 @@ namespace PaintingRegistration
     const int RubPaintingRenderer::UPDATE_RATE = 10;
     
     /* Public */
-    RubPaintingRenderer::RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims, bool mode) :
-        PaintingRegistration::PaintingRenderer(textureFilenameFormat, position, dims, frameDims, textureDims, targetDims)
+    RubPaintingRenderer::RubPaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims, int numTextures, bool mode) :
+        PaintingRegistration::PaintingRenderer(textureFilenameFormat, position, dims, frameDims, textureDims, targetDims, numTextures)
     {
         this->mode = mode;
         
-        textureBlock = new RubTextureBlock(textureFilenameFormat, 1, NUM_TEXTURES);
+        textureBlock = new RubTextureBlock(textureFilenameFormat, 1, numTextures);
     }
     
     RubPaintingRenderer::~RubPaintingRenderer(void)

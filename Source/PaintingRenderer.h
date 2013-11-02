@@ -37,7 +37,7 @@ namespace PaintingRegistration
         public UIElement
     {
     public:
-        PaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions, const Point2i &targetDims);
+        PaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dimensions, const Point2i &frameDimensions, const Point2i &textureDimensions, const Point2i &targetDims, int numTextures);
         ~PaintingRenderer(void);
         
         const Matrixf *getMatrix(void) const;
@@ -46,9 +46,7 @@ namespace PaintingRegistration
         void setMatrix(const Matrixf *matrix);
         void setPosition(float position);
         
-    protected:
-        static const unsigned int NUM_TEXTURES;
-        
+    protected:        
         Point2i frameDimensions;
         const Matrixf *matrix;
         Point2i targetDimensions;
@@ -59,6 +57,7 @@ namespace PaintingRegistration
         GLuint cameraTexture;
         GLVbo *camVbo;
         const Point2f *vertices;
+        int numTextures;
         
         void renderCameraImage(void) const;
         virtual void renderPerspective(void) const;

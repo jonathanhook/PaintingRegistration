@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>20A45A89-A8A3-4393-9024-E9C7D431E51D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Repentir</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C018B4FD-7CF0-4C0F-BFBE-F7D39E9F295A</key>
+		<string>https://github.com/jonathanhook/PaintingRegistration.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Builds/iOS/PaintingRegistration/Repentir.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C018B4FD-7CF0-4C0F-BFBE-F7D39E9F295A</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jonathanhook/PaintingRegistration.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C018B4FD-7CF0-4C0F-BFBE-F7D39E9F295A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C018B4FD-7CF0-4C0F-BFBE-F7D39E9F295A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PaintingRegistration</string>
+		</dict>
+	</array>
+</dict>
+</plist>

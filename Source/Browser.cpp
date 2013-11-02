@@ -27,7 +27,7 @@
 namespace PaintingRegistration
 {
     /* Public */
-    Browser::Browser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+    Browser::Browser(const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims, int numTextures) :
         UIElement(position, dims)
     {
         clicked = NULL;

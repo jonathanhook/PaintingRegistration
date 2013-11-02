@@ -34,7 +34,7 @@
 namespace PaintingRegistration
 {
     /* Public */
-    App::App(unsigned int width, unsigned height, unsigned int cameraWidth, unsigned int cameraHeight, std::string resourcePath, std::string documentsPath, std::string textureFilenameFormat)
+    App::App(unsigned int width, unsigned height, unsigned int cameraWidth, unsigned int cameraHeight, std::string resourcePath, std::string documentsPath, std::string textureFilenameFormat, int numTextures)
     {
         this->cameraWidth = cameraWidth;
         this->cameraHeight = cameraHeight;
@@ -60,7 +60,7 @@ namespace PaintingRegistration
         }
 
         initScene(width, height);
-        initUI(textureFilenameFormat, width, height);
+        initUI(textureFilenameFormat, width, height, numTextures);
         initTextureHandle();
     }
     
@@ -160,7 +160,7 @@ namespace PaintingRegistration
         glLoadIdentity();
     }
     
-    void App::initUI(const std::string &textureFilenameFormat, unsigned int width, unsigned int height)
+    void App::initUI(const std::string &textureFilenameFormat, unsigned int width, unsigned int height, int numTextures)
     {
         uiMode = CAMERA;
         
@@ -169,10 +169,10 @@ namespace PaintingRegistration
         camera->setClickedCallback(MakeDelegate(this, &App::camera_Clicked));
         registerEventHandler(camera);
 
-        slideBrowser = new SlideBrowser(textureFilenameFormat, Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim), tracker->getTargetDimensions());
+        slideBrowser = new SlideBrowser(textureFilenameFormat, Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim), tracker->getTargetDimensions(), numTextures);
         slideBrowser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
         
-        rubBrowser = new RubBrowser(textureFilenameFormat, Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim), tracker->getTargetDimensions());
+        rubBrowser = new RubBrowser(textureFilenameFormat, Point2i(0, 0), Point2i(width, height), Point2i(cameraWidth, cameraHeight), Point2i(textureDim, textureDim), tracker->getTargetDimensions(), numTextures);
         rubBrowser->setClickedCallback(MakeDelegate(this, &App::browser_Clicked));
     }
     

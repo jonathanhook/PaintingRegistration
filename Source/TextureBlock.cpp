@@ -28,15 +28,15 @@ namespace PaintingRegistration
     /* Static */
     std::vector<unsigned char *> TextureBlock::textures;
     bool TextureBlock::texturesLoaded = false;
-    unsigned int TextureBlock::end = 0;
-    unsigned int TextureBlock::start = 0;
+    int TextureBlock::end = 0;
+    int TextureBlock::start = 0;
     unsigned int TextureBlock::bpp = 0;
     Point2i TextureBlock::dimensions(0, 0);
     GLuint TextureBlock::texture = 0;
     
     void TextureBlock::loadAll(const std::string &format)
     {
-        for(unsigned int i = end; i >= start; i--)
+        for(int i = start; i < end; i++)
         {
             loadTexture(i, format);
         }

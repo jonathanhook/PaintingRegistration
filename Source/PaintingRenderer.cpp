@@ -31,16 +31,14 @@
 
 namespace PaintingRegistration
 {
-    /* Constants */
-    const unsigned int PaintingRenderer::NUM_TEXTURES = 25;
-    
     /* Public */
-    PaintingRenderer::PaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims) :
+    PaintingRenderer::PaintingRenderer(const std::string textureFilenameFormat, const Point2i &position, const Point2i &dims, const Point2i &frameDims, const Point2i &textureDims, const Point2i &targetDims, int numTextures) :
         UIElement(position, dims)
     {
         this->textureFilenameFormat = textureFilenameFormat;
         this->frameDimensions = frameDims;
         this->targetDimensions = targetDims;
+        this->numTextures = numTextures;
         
         GLfloat camData[12] =
 		{
