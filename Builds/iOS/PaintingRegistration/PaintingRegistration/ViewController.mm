@@ -157,18 +157,6 @@ bool loaded = false;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-
-    if ([self isViewLoaded] && ([[self view] window] == nil))
-    {
-        self.view = nil;
-        [self tearDownGL];
-        
-        if ([EAGLContext currentContext] == self.context)
-        {
-            [EAGLContext setCurrentContext:nil];
-        }
-        self.context = nil;
-    }
 }
 
 - (void)setupGL

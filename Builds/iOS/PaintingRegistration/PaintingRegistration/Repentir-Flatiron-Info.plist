@@ -14,6 +14,8 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>T_Icon-72@2x_iOS7</string>
+				<string>Icon</string>
 				<string>T_Spotlight_iPhone_61</string>
 				<string>T_Spotlight_iPhoneRetina_61</string>
 				<string>T_Spotlight_iPhoneRetina</string>
@@ -39,6 +41,8 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>Icon-72</string>
+				<string>Icon</string>
 				<string>T_Spotlight_iPhoneRetina_61</string>
 				<string>T_Spotlight_iPhone_61</string>
 				<string>T_Spotlight_iPad_61</string>
@@ -88,6 +92,16 @@
 	<string>Default</string>
 	<key>UILaunchImages~ipad</key>
 	<array>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default-Portrait</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{768, 1024}</string>
+		</dict>
 		<dict>
 			<key>UILaunchImageMinimumOSVersion</key>
 			<string>7.0</string>
